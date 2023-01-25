@@ -1,0 +1,61 @@
+---
+title: "Introduction"
+---
+
+## Summary
+
+Sensors:
+
+-   Passive (Sun energy reflection in EM wave, don't emit EM waves)
+
+    -   Example: human eyes, satellite
+
+    -   Con: Atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather
+
+-   Active (emit and receive EM wave / energy)
+
+    -   Example: radar, x-ray, LiDAR
+
+    -   Pro: can pass clouds
+
+Four resolutions:
+
+1.  Spatial
+
+    -   Pro: fast
+
+    -   Con: costly
+
+2.  Spectral
+
+    -   Spectral signature (EM): Objects on Earth have difference wavelengths = Bands
+
+        -   Multi-spectral data / image
+
+        -   Hyperspectral data / image: stack all colour bands
+
+    -   True colour (human eye can see) and false colour (human cant see)
+
+    -   Con: atmospheric window (atmospheric transmission / opacity, e.g. water vapour, ozone, CO...)
+
+    -   Spectroradiometer
+
+3.  Radiometric
+
+    -   Cell/ pixel
+
+    -   Increase bit -\> increase possible values
+
+    -   8-bit
+
+4.  Temporal
+
+    -   Revisit time of sensor
+
+    -   High resolution / pixel -\> low revisit = low cost and number \[graph\]
+
+Trade off between resolution and time (and cost)
+
+## Application
+
+## Reflection

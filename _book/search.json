@@ -1,0 +1,107 @@
+[
+  {
+    "objectID": "1_intro.html#summary",
+    "href": "1_intro.html#summary",
+    "title": "2  Introduction",
+    "section": "2.1 Summary",
+    "text": "2.1 Summary\nSensors:\n\nPassive (Sun energy reflection in EM wave, don’t emit EM waves)\n\nExample: human eyes, satellite\nCon: Atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather\n\nActive (emit and receive EM wave / energy)\n\nExample: radar, x-ray, LiDAR\nPro: can pass clouds\n\n\nFour resolutions:\n\nSpatial\n\nPro: fast\nCon: costly\n\nSpectral\n\nSpectral signature (EM): Objects on Earth have difference wavelengths = Bands\n\nMulti-spectral data / image\nHyperspectral data / image: stack all colour bands\n\nTrue colour (human eye can see) and false colour (human cant see)\nCon: atmospheric window (atmospheric transmission / opacity, e.g. water vapour, ozone, CO…)\nSpectroradiometer\n\nRadiometric\n\nCell/ pixel\nIncrease bit -> increase possible values\n8-bit\n\nTemporal\n\nRevisit time of sensor\nHigh resolution / pixel -> low revisit = low cost and number [graph]\n\n\nTrade off between resolution and time (and cost)"
+  },
+  {
+    "objectID": "1_intro.html#application",
+    "href": "1_intro.html#application",
+    "title": "2  Introduction",
+    "section": "2.2 Application",
+    "text": "2.2 Application"
+  },
+  {
+    "objectID": "1_intro.html#reflection",
+    "href": "1_intro.html#reflection",
+    "title": "2  Introduction",
+    "section": "2.3 Reflection",
+    "text": "2.3 Reflection"
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "2_portfolio.html",
+    "href": "2_portfolio.html",
+    "title": "3  Sensor-WorldView3",
+    "section": "",
+    "text": "A basic introduction on WorldView-3."
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "4  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "2_portfolio.html#summary-application-and-reflection",
+    "href": "2_portfolio.html#summary-application-and-reflection",
+    "title": "3  Sensor-WorldView3",
+    "section": "3.1 Summary, Application and Reflection",
+    "text": "3.1 Summary, Application and Reflection\nA basic introduction on WorldView-3."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CASA0023_LD",
+    "section": "",
+    "text": "Preface\nThis diary is for CASA0023 Remote Sensing Cities and Environments 22/23.\nemail: zcfther@ucl.ac.uk"
+  },
+  {
+    "objectID": "index.html#content",
+    "href": "index.html#content",
+    "title": "CASA0023_LD",
+    "section": "Content",
+    "text": "Content\n\nIntroduction\n\n\nRemote sensing intro / sensors / resolutions\n\n\nSensor - WorldView3\nCorrections"
+  },
+  {
+    "objectID": "index.html#structure-of-each-chapter",
+    "href": "index.html#structure-of-each-chapter",
+    "title": "CASA0023_LD",
+    "section": "Structure (of each chapter)",
+    "text": "Structure (of each chapter)\n\nSummary:\nContent summary (outputs from the practical, small code chunks with relevant explanation and flow charts)\nQuestions (data, methods, or applications)\nApplications:\nApplication of data / concepts / methods in literature / policy (largely sourced from weekly reading).\nReflection:\nA personal reflection on the presented content (e.g. what was interesting, why and why might the data or tools presented this week be useful in the future to you or perhaps they won’t be useful but something similar might be)"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "CASA0023_LD",
+    "section": "Education",
+    "text": "Education\nUniversity College London"
+  },
+  {
+    "objectID": "index.html#professional-experience",
+    "href": "index.html#professional-experience",
+    "title": "CASA0023_LD",
+    "section": "Professional experience",
+    "text": "Professional experience"
+  },
+  {
+    "objectID": "index.html#interests",
+    "href": "index.html#interests",
+    "title": "CASA0023_LD",
+    "section": "Interests",
+    "text": "Interests"
+  },
+  {
+    "objectID": "index.html#what-i-hope-to-get-from-the-module",
+    "href": "index.html#what-i-hope-to-get-from-the-module",
+    "title": "CASA0023_LD",
+    "section": "What I hope to get from the module",
+    "text": "What I hope to get from the module"
+  }
+]
