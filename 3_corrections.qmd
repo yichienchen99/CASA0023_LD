@@ -47,9 +47,8 @@ title: "3_corrections"
 
         :   spectral signature
 
-    ```{=html}
     <!-- -->
-    ```
+
     -   Relative
 
         1.  DOS
@@ -80,12 +79,11 @@ title: "3_corrections"
 
     -   Should be done after atmospheric corrections
 
-    ```{=html}
     <!-- -->
-    ```
+
     -   Cosine Function: $LH=LT\frac{cosθO}{cosi}$
 
-        Cosine Function 
+        Cosine Function
 
         :   tst
 
@@ -93,7 +91,7 @@ title: "3_corrections"
 
         :   the
 
-        Azimuth 
+        Azimuth
 
         :   ths
 
@@ -113,7 +111,7 @@ title: "3_corrections"
 
     -   Apparent reflectance
 
-### Enhancement 
+### Enhancement
 
 1.  Feathering / joining
 
