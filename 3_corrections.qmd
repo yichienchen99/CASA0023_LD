@@ -39,7 +39,7 @@ title: "Corrections"
 
 2.  Atmospheric Corrections
 
-    -   Scattering
+    -   To mitigate the effect of scattering and absorption & to avoid loss of reflectance & signiture extension thorough space and time [@jensen2015]
 
     -   Point Spread Function
 
@@ -47,8 +47,9 @@ title: "Corrections"
 
         :   spectral signature
 
+    ```{=html}
     <!-- -->
-
+    ```
     -   Relative
 
         1.  DOS

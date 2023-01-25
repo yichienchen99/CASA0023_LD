@@ -1,25 +1,29 @@
 # Content {.unnumbered}
 
 1.  Introduction
+    -   Remote sensing intro / sensors / resolutions
 
--   Remote sensing intro / sensors / resolutions
-
+```{=html}
+<!-- -->
+```
 2.  Sensor - WorldView3
 
 3.  Corrections
+
+    -   Corrections / Enhancement
 
 ## Structure (of each chapter)
 
 -   Summary:
 
--   Content summary (outputs from the practical, small code chunks with relevant explanation and flow charts)
+    -   Content summary (outputs from the practical, small code chunks with relevant explanation and flow charts)
 
--   Questions (data, methods, or applications)
+    -   Questions (data, methods, or applications)
 
 -   Applications:
 
--   Application of data / concepts / methods in literature / policy (largely sourced from weekly reading).
+    -   Application of data / concepts / methods in literature / policy (largely sourced from weekly reading).
 
 -   Reflection:
 
--   A personal reflection on the presented content (e.g. what was interesting, why and why might the data or tools presented this week be useful in the future to you or perhaps they won't be useful but something similar might be)
+    -   A personal reflection on the presented content (e.g. what was interesting, why and why might the data or tools presented this week be useful in the future to you or perhaps they won't be useful but something similar might be)

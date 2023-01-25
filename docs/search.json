@@ -81,7 +81,7 @@
     "href": "intro.html#structure-of-each-chapter",
     "title": "Content",
     "section": "Structure (of each chapter)",
-    "text": "Structure (of each chapter)\n\nSummary:\nContent summary (outputs from the practical, small code chunks with relevant explanation and flow charts)\nQuestions (data, methods, or applications)\nApplications:\nApplication of data / concepts / methods in literature / policy (largely sourced from weekly reading).\nReflection:\nA personal reflection on the presented content (e.g. what was interesting, why and why might the data or tools presented this week be useful in the future to you or perhaps they won’t be useful but something similar might be)"
+    "text": "Structure (of each chapter)\n\nSummary:\n\nContent summary (outputs from the practical, small code chunks with relevant explanation and flow charts)\nQuestions (data, methods, or applications)\n\nApplications:\n\nApplication of data / concepts / methods in literature / policy (largely sourced from weekly reading).\n\nReflection:\n\nA personal reflection on the presented content (e.g. what was interesting, why and why might the data or tools presented this week be useful in the future to you or perhaps they won’t be useful but something similar might be)"
   },
   {
     "objectID": "1_intro.html",
@@ -109,7 +109,7 @@
     "href": "3_corrections.html#summary",
     "title": "3  Corrections",
     "section": "3.1 Summary",
-    "text": "3.1 Summary\n\n3.1.1 Corrections\n\nGeometric Corrections\n\nGround central point: GCP\n\nObjects (e.g. building) on the image that do not move, as the reference point of corrections.\n\n\n\nCoordinates of each GCP -> linear regression\nForward mapping\n\nForward mapping\n\nX: original image -> Y: target image\n\n\n❌possibility of points outside ‘gold standard’ (the rectified/targeted image)\nBackward mapping\n\nBackward mapping\n\nX: target image -> Y: original image\n\n\n✔️ use points on ‘gold standard’ to match point on original data\nReduce error <- increase GCP\nRequirement for corrections:\n\nsame resolution (resampling)\nsame CRS (reprojecting)\n\n\nAtmospheric Corrections\n\nScattering\nPoint Spread Function\n\nPoint Spread Function\n\nspectral signature\n\n\n\n\n\nRelative\n\nDOS\n❌ assuming unusual brightness of darkest pixel as atmosphere\nPIFs\nUse middle of years, Y: base image\n\nAbsolute\n❌ High data requirement (fieldwork/…); High software requirement (costy)\nELC\nfield data\nsurface reflectance\ntotal irradiance\ntotal radiance\n\nTopographic Corrections (Orthorectification)\n\nRequire: sensor geometry & elevation model\nShould be done after atmospheric corrections\n\n\n\nCosine Function: \\(LH=LT\\frac{cosθO}{cosi}\\)\n\nCosine Function\n\ntst\n\nZenith\n\nthe\n\nAzimuth\n\nths\n\n\n\nRadiometric Corrections\n\nDigital number of each pixel = raw, unitless\nRegression = unit\nReflectance (BOA) = comparable\nTOA radiance -> TOA reflectance = no light\nSurface reflectance = no light, no atmosphere\nHemispherical reflectance (e.g. in Labs)\nApparent reflectance\n\n\n\n\n3.1.2 Enhancement\n\nFeathering / joining\n\nGEE: median\nsurface reflectance data not comparable -> standardization, normalization\n\nImage Enhancement\n\nContract enhancement (QGIS)\nnot changing data, but changing display\nRatioing\ndivide / compare bands with each other, normalized surface reflectance\nFiltering\nPCA\nTexture analysis\n1st order occurrence: ✔️classification\nEdge of building enhanced via 1st order variance\n2nd order co-occurrence: ✔️classification improvement and additional info (to other bands)\ncan then be used in PCA\nFusion\nCombine bands from different sensors / texture analysis layer\nResampling - different pixel/location\n\nDecision\nObject\nImage\nPan sharpen: for better visualization\n\n\n\n\n\n3.1.3 Questions"
+    "text": "3.1 Summary\n\n3.1.1 Corrections\n\nGeometric Corrections\n\nGround central point: GCP\n\nObjects (e.g. building) on the image that do not move, as the reference point of corrections.\n\n\n\nCoordinates of each GCP -> linear regression\nForward mapping\n\nForward mapping\n\nX: original image -> Y: target image\n\n\n❌possibility of points outside ‘gold standard’ (the rectified/targeted image)\nBackward mapping\n\nBackward mapping\n\nX: target image -> Y: original image\n\n\n✔️ use points on ‘gold standard’ to match point on original data\nReduce error <- increase GCP\nRequirement for corrections:\n\nsame resolution (resampling)\nsame CRS (reprojecting)\n\n\nAtmospheric Corrections\n\nTo mitigate the effect of scattering and absorption & to avoid loss of reflectance & signiture extension thorough space and time (Jensen 2015)\nPoint Spread Function\n\nPoint Spread Function\n\nspectral signature\n\n\n\n\n\nRelative\n\nDOS\n❌ assuming unusual brightness of darkest pixel as atmosphere\nPIFs\nUse middle of years, Y: base image\n\nAbsolute\n❌ High data requirement (fieldwork/…); High software requirement (costy)\nELC\nfield data\nsurface reflectance\ntotal irradiance\ntotal radiance\n\nTopographic Corrections (Orthorectification)\n\nRequire: sensor geometry & elevation model\nShould be done after atmospheric corrections\n\n\n\nCosine Function: \\(LH=LT\\frac{cosθO}{cosi}\\)\n\nCosine Function\n\ntst\n\nZenith\n\nthe\n\nAzimuth\n\nths\n\n\n\nRadiometric Corrections\n\nDigital number of each pixel = raw, unitless\nRegression = unit\nReflectance (BOA) = comparable\nTOA radiance -> TOA reflectance = no light\nSurface reflectance = no light, no atmosphere\nHemispherical reflectance (e.g. in Labs)\nApparent reflectance\n\n\n\n\n3.1.2 Enhancement\n\nFeathering / joining\n\nGEE: median\nsurface reflectance data not comparable -> standardization, normalization\n\nImage Enhancement\n\nContract enhancement (QGIS)\nnot changing data, but changing display\nRatioing\ndivide / compare bands with each other, normalized surface reflectance\nFiltering\nPCA\nTexture analysis\n1st order occurrence: ✔️classification\nEdge of building enhanced via 1st order variance\n2nd order co-occurrence: ✔️classification improvement and additional info (to other bands)\ncan then be used in PCA\nFusion\nCombine bands from different sensors / texture analysis layer\nResampling - different pixel/location\n\nDecision\nObject\nImage\nPan sharpen: for better visualization\n\n\n\n\n\n3.1.3 Questions"
   },
   {
     "objectID": "3_corrections.html#application",
@@ -123,7 +123,7 @@
     "href": "3_corrections.html#reflection",
     "title": "3  Corrections",
     "section": "3.3 Reflection",
-    "text": "3.3 Reflection"
+    "text": "3.3 Reflection\n\n\n\n\nJensen, John R. 2015. Introductory Digital Image Processing. 4th ed. A Remote Sensing Perspective. Pearson Higher Education US."
   },
   {
     "objectID": "summary.html",
@@ -137,6 +137,6 @@
     "href": "dictionary.html",
     "title": "5  Dictionary",
     "section": "",
-    "text": "6 Dictionary / Terminology"
+    "text": "6 Dictionary / Terminology\nGround central point: GCP"
   }
 ]
