@@ -4,8 +4,8 @@ project:
 
 book:
   title: "CASA0023_LD"
-  author: "Jane Doe"
-  date: "25/01/2023"
+  author: "Yi-Chien Chen"
+  date: "19/01/2023 (updated: `r Sys.Date()`)"
   chapters:
     - index.qmd
     - intro.qmd

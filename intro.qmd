@@ -1,9 +1,25 @@
-# Introduction
+# Content
 
-This is a book created from markdown and executable code.
+1.  Introduction
 
-See @knuth84 for additional discussion of literate programming.
+-   Remote sensing intro / sensors / resolutions
 
-```{r}
-1 + 1
-```
+2.  Sensor - WorldView3
+
+3.  Corrections
+
+## Structure (of each chapter)
+
+-   Summary:
+
+-   Content summary (outputs from the practical, small code chunks with relevant explanation and flow charts)
+
+-   Questions (data, methods, or applications)
+
+-   Applications:
+
+-   Application of data / concepts / methods in literature / policy (largely sourced from weekly reading).
+
+-   Reflection:
+
+-   A personal reflection on the presented content (e.g. what was interesting, why and why might the data or tools presented this week be useful in the future to you or perhaps they won't be useful but something similar might be)
