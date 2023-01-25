@@ -8,27 +8,17 @@ title: "Corrections"
 
 1.  Geometric Corrections
 
+    -   To reduce geometric distortion
+
+    -   Off-Nadir -\> Nadir
+
     Ground central point: GCP
 
-    :   Objects (e.g. building) on the image that do not move, as the reference point of corrections.
+    :   A ground control point (GCP) is a location on the surface of the Earth (e.g., a road intersection) that can be identified on the imagery and located accurately on a map.
+
+        (Objects (e.g. building) on the image that do not move, as the reference point of corrections.)
 
     -   Coordinates of each GCP -\> linear regression
-
-    -   Forward mapping
-
-        Forward mapping
-
-        :   X: original image -\> Y: target image
-
-        ❌possibility of points outside 'gold standard' (the rectified/targeted image)
-
-    -   Backward mapping
-
-        Backward mapping
-
-        :   X: target image -\> Y: original image
-
-        ✔️ use points on 'gold standard' to match point on original data
 
     -   Reduce error \<- increase GCP
 
@@ -36,6 +26,39 @@ title: "Corrections"
 
         1.  same resolution (resampling)
         2.  same CRS (reprojecting)
+
+    1.  Image-to-map rectification (rectify remotely sensed data to a standard map projection)
+    2.  Image-to-image registration (remotely sensed data used in conjunction with other spatial information in a GIS)
+
+    -   Forward (input-to-output) mapping
+
+        Forward mapping
+
+        :   X: original image -\> Y: target image
+
+        -   ✔️rectify the location of discrete coordinates found along a linear feature such as a road in a vector map
+
+        -   ❌possibility of points outside 'gold standard' (the rectified/targeted image) -\> output matrix pixel with no output value
+
+    -   Inverse (output-to-input) mapping
+
+        Backward mapping
+
+        :   X: target image -\> Y: original image
+
+        ✔️ use points on 'gold standard' to match point on original data
+
+    [![Forward and inverse mapping (Jensen, 2015)](image/geometriccorrection.png)](%5B@jensen2015%5D)
+
+    -   Moisaicking
+
+        Mosaicking
+
+        :   Moisaicking is the process of combining multiple images into a single seamless composite image.
+
+        -   cut-line feathering: offset the edge of images by certain distance
+
+        -   edge feathering: specify objects (e.g. roads/rivers) as edge
 
 2.  Atmospheric Corrections
 
@@ -45,18 +68,21 @@ title: "Corrections"
 
         Point Spread Function
 
-        :   spectral signature
+        :   Measured and modeled point spread functions (PSF) of sensor systems indicate that a significant portion of the recorded signal of each pixel of a satellite image originates from outside the area represented by that pixel. This hinders the ability to derive surface information from satellite images on a per-pixel basis [@huang2002].
 
-    ```{=html}
-    <!-- -->
-    ```
     -   Relative
 
-        1.  DOS
+    -   1\) to normalize the intensities among the different bands within a single-date remotely sensed image, and 2) to normalize the intensities of bands of remote sensor data in multiple dates of imagery to a standard scene selected by the analyst.
+
+        1.  Dark object subtraction (DOS)
 
             ❌ assuming unusual brightness of darkest pixel as atmosphere
 
-        2.  PIFs
+        2.  Multiple-date image normalization using regression
+
+            -   Pseudo-Invariant Features (PIFs) selection = radiometric GCP
+
+            -   Requirements of PIF: 1) little changes through time; 2) similar elevation as other land in scene; 3) minimal vegetation; 4) in a relatively flat area.
 
             Use middle of years, Y: base image
 
@@ -64,39 +90,44 @@ title: "Corrections"
 
         ❌ High data requirement (fieldwork/...); High software requirement (costy)
 
-    -   ELC
+        ✔️Digital counts in satellite / aircraft image data -\> scaled surface reflectance
 
-        field data
+        1.  Empirical Line Calibration (ELC)
+            -   Requirements:
 
-        surface reflectance
-
-        total irradiance
-
-        total radiance
+                1.  Two or more areas in the scene with different albedos (e.g., one bright target such as sand and one dark target such as a deep, nonturbid water body) & as homogeneous as possible \<- difficult.
+                2.  Sensor calibration coefficients
+                3.  Radiative transfer code (knowledge of sensor spectral profile & atmospheric properties at the time of data collection) [@jensen2015]
 
 3.  Topographic Corrections (Orthorectification)
 
-    -   Require: sensor geometry & elevation model
+    -   To remove topographically induced illumination variation
+
+        Illumination
+
+        :   the cosine of the incident solar angle, thus representing the proportion of the direct solar radiation hitting a pixel.
+
+    -   Requirements: sensor geometry & elevation model
 
     -   Should be done after atmospheric corrections
 
-    <!-- -->
-
     -   Cosine Function: $LH=LT\frac{cosθO}{cosi}$
-
-        Cosine Function
-
-        :   tst
 
         Zenith
 
-        :   the
+        :   The solar zenith angle is the zenith angle of the sun, i.e., the angle between the sun's rays and the vertical direction. Solar zenith angle is normally used in combination with the solar azimuth angle to determine the position of the Sun as observed from a given location on the surface of the Earth.
 
         Azimuth
 
-        :   ths
+        :   The solar azimuth angle is the azimuth (horizontal angle with respect to north) of the Sun's position.
 
-4.  Radiometric Corrections
+    ![Zenith angle and cosine function (Jensen, 2015)](image/cosinefunction.png){width="300"}
+
+    -   ❌ not considering diffuse skylight / light reflected from surrounding mountainsides
+
+    -   smaller cos i -\> greater over-correction [@jensen2015]
+
+4.  Radiometric Calibrations
 
     -   Digital number of each pixel = raw, unitless
 
@@ -171,3 +202,5 @@ title: "Corrections"
     [![Redlining historic map corrections](image/redlining.png)](https://dsl.richmond.edu/panorama/redlining/#loc=11/42.366/-71.262&city=cambridge-ma)
 
 ## Reflection
+
+Different methods of corrections are interlinked, finding some reference points/signatures to rectify the image. The detailed processes (like regressions and data collection methods) are difficult to digest (probably because not being practiced) while the software is available for corrections.

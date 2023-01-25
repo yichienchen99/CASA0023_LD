@@ -202,23 +202,43 @@ div.csl-indent {
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="corrections"><span class="header-section-number">3.1.1</span> Corrections</h3>
 <ol type="1">
 <li><p>Geometric Corrections</p>
+<ul>
+<li><p>To reduce geometric distortion</p></li>
+<li><p>Off-Nadir -&gt; Nadir</p></li>
+</ul>
 <dl>
 <dt>Ground central point: GCP</dt>
 <dd>
-<p>Objects (e.g.&nbsp;building) on the image that do not move, as the reference point of corrections.</p>
+<p>A ground control point (GCP) is a location on the surface of the Earth (e.g., a road intersection) that can be identified on the imagery and located accurately on a map.</p>
+<p>(Objects (e.g.&nbsp;building) on the image that do not move, as the reference point of corrections.)</p>
 </dd>
 </dl>
 <ul>
 <li><p>Coordinates of each GCP -&gt; linear regression</p></li>
-<li><p>Forward mapping</p>
+<li><p>Reduce error &lt;- increase GCP</p></li>
+<li><p>Requirement for corrections:</p>
+<ol type="1">
+<li>same resolution (resampling)</li>
+<li>same CRS (reprojecting)</li>
+</ol></li>
+</ul>
+<ol type="1">
+<li>Image-to-map rectification (rectify remotely sensed data to a standard map projection)</li>
+<li>Image-to-image registration (remotely sensed data used in conjunction with other spatial information in a GIS)</li>
+</ol>
+<ul>
+<li><p>Forward (input-to-output) mapping</p>
 <dl>
 <dt>Forward mapping</dt>
 <dd>
 <p>X: original image -&gt; Y: target image</p>
 </dd>
 </dl>
-<p>❌possibility of points outside ‘gold standard’ (the rectified/targeted image)</p></li>
-<li><p>Backward mapping</p>
+<ul>
+<li><p>✔️rectify the location of discrete coordinates found along a linear feature such as a road in a vector map</p></li>
+<li><p>❌possibility of points outside ‘gold standard’ (the rectified/targeted image) -&gt; output matrix pixel with no output value</p></li>
+</ul></li>
+<li><p>Inverse (output-to-input) mapping</p>
 <dl>
 <dt>Backward mapping</dt>
 <dd>
@@ -226,12 +246,25 @@ div.csl-indent {
 </dd>
 </dl>
 <p>✔️ use points on ‘gold standard’ to match point on original data</p></li>
-<li><p>Reduce error &lt;- increase GCP</p></li>
-<li><p>Requirement for corrections:</p>
-<ol type="1">
-<li>same resolution (resampling)</li>
-<li>same CRS (reprojecting)</li>
-</ol></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="[@jensen2015]"><img src="image/geometriccorrection.png" class="img-fluid figure-img"></a></p>
+<p></p><figcaption class="figure-caption">Forward and inverse mapping (Jensen, 2015)</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><p>Moisaicking</p>
+<dl>
+<dt>Mosaicking</dt>
+<dd>
+<p>Moisaicking is the process of combining multiple images into a single seamless composite image.</p>
+</dd>
+</dl>
+<ul>
+<li><p>cut-line feathering: offset the edge of images by certain distance</p></li>
+<li><p>edge feathering: specify objects (e.g.&nbsp;roads/rivers) as edge</p></li>
+</ul></li>
 </ul></li>
 <li><p>Atmospheric Corrections</p>
 <ul>
@@ -240,51 +273,70 @@ div.csl-indent {
 <dl>
 <dt>Point Spread Function</dt>
 <dd>
-<p>spectral signature</p>
+<p>Measured and modeled point spread functions (PSF) of sensor systems indicate that a significant portion of the recorded signal of each pixel of a satellite image originates from outside the area represented by that pixel. This hinders the ability to derive surface information from satellite images on a per-pixel basis <span class="citation" data-cites="huang2002">(<a href="references.html#ref-huang2002" role="doc-biblioref">Huang et al. 2002</a>)</span>.</p>
 </dd>
 </dl></li>
-</ul>
-<!-- -->
-<ul>
-<li><p>Relative</p>
+<li><p>Relative</p></li>
+<li><p>1) to normalize the intensities among the different bands within a single-date remotely sensed image, and 2) to normalize the intensities of bands of remote sensor data in multiple dates of imagery to a standard scene selected by the analyst.</p>
 <ol type="1">
-<li><p>DOS</p>
+<li><p>Dark object subtraction (DOS)</p>
 <p>❌ assuming unusual brightness of darkest pixel as atmosphere</p></li>
-<li><p>PIFs</p>
+<li><p>Multiple-date image normalization using regression</p>
+<ul>
+<li><p>Pseudo-Invariant Features (PIFs) selection = radiometric GCP</p></li>
+<li><p>Requirements of PIF: 1) little changes through time; 2) similar elevation as other land in scene; 3) minimal vegetation; 4) in a relatively flat area.</p></li>
+</ul>
 <p>Use middle of years, Y: base image</p></li>
 </ol></li>
 <li><p>Absolute</p>
-<p>❌ High data requirement (fieldwork/…); High software requirement (costy)</p></li>
-<li><p>ELC</p>
-<p>field data</p>
-<p>surface reflectance</p>
-<p>total irradiance</p>
-<p>total radiance</p></li>
+<p>❌ High data requirement (fieldwork/…); High software requirement (costy)</p>
+<p>✔️Digital counts in satellite / aircraft image data -&gt; scaled surface reflectance</p>
+<ol type="1">
+<li>Empirical Line Calibration (ELC)
+<ul>
+<li><p>Requirements:</p>
+<ol type="1">
+<li>Two or more areas in the scene with different albedos (e.g., one bright target such as sand and one dark target such as a deep, nonturbid water body) &amp; as homogeneous as possible &lt;- difficult.</li>
+<li>Sensor calibration coefficients</li>
+<li>Radiative transfer code (knowledge of sensor spectral profile &amp; atmospheric properties at the time of data collection) <span class="citation" data-cites="jensen2015">(<a href="references.html#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span></li>
+</ol></li>
+</ul></li>
+</ol></li>
 </ul></li>
 <li><p>Topographic Corrections (Orthorectification)</p>
 <ul>
-<li><p>Require: sensor geometry &amp; elevation model</p></li>
+<li><p>To remove topographically induced illumination variation</p>
+<dl>
+<dt>Illumination</dt>
+<dd>
+<p>the cosine of the incident solar angle, thus representing the proportion of the direct solar radiation hitting a pixel.</p>
+</dd>
+</dl></li>
+<li><p>Requirements: sensor geometry &amp; elevation model</p></li>
 <li><p>Should be done after atmospheric corrections</p></li>
-</ul>
-<!-- -->
-<ul>
 <li><p>Cosine Function: <span class="math inline">\(LH=LT\frac{cosθO}{cosi}\)</span></p>
 <dl>
-<dt>Cosine Function</dt>
-<dd>
-<p>tst</p>
-</dd>
 <dt>Zenith</dt>
 <dd>
-<p>the</p>
+<p>The solar zenith angle is the zenith angle of the sun, i.e., the angle between the sun’s rays and the vertical direction. Solar zenith angle is normally used in combination with the solar azimuth angle to determine the position of the Sun as observed from a given location on the surface of the Earth.</p>
 </dd>
 <dt>Azimuth</dt>
 <dd>
-<p>ths</p>
+<p>The solar azimuth angle is the azimuth (horizontal angle with respect to north) of the Sun’s position.</p>
 </dd>
 </dl></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/cosinefunction.png" class="img-fluid figure-img" width="300"></p>
+<p></p><figcaption class="figure-caption">Zenith angle and cosine function (Jensen, 2015)</figcaption><p></p>
+</figure>
+</div>
+<ul>
+<li><p>❌ not considering diffuse skylight / light reflected from surrounding mountainsides</p></li>
+<li><p>smaller cos i -&gt; greater over-correction <span class="citation" data-cites="jensen2015">(<a href="references.html#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span></p></li>
 </ul></li>
-<li><p>Radiometric Corrections</p>
+<li><p>Radiometric Calibrations</p>
 <ul>
 <li><p>Digital number of each pixel = raw, unitless</p></li>
 <li><p>Regression = unit</p></li>
@@ -351,9 +403,13 @@ div.csl-indent {
 </section>
 <section id="reflection" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="reflection"><span class="header-section-number">3.3</span> Reflection</h2>
+<p>Different methods of corrections are interlinked, finding some reference points/signatures to rectify the image. The detailed processes (like regressions and data collection methods) are difficult to digest (probably because not being practiced) while the software is available for corrections.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-huang2002" class="csl-entry" role="doc-biblioentry">
+Huang, Chengquan, John R. G. Townshend, Shunlin Liang, Satya N. V. Kalluri, and Ruth S. DeFries. 2002. <span>“Impact of Sensor’s Point Spread Function on Land Cover Characterization: Assessment and Deconvolution.”</span> <em>Remote Sensing of Environment</em> 80 (2): 203–12. <a href="https://doi.org/10.1016/S0034-4257(01)00298-X">https://doi.org/10.1016/S0034-4257(01)00298-X</a>.
+</div>
 <div id="ref-jensen2015" class="csl-entry" role="doc-biblioentry">
 Jensen, John R. 2015. <em>Introductory Digital Image Processing</em>. 4th ed. A Remote Sensing Perspective. Pearson Higher Education US.
 </div>

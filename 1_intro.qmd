@@ -8,23 +8,25 @@ title: "Introduction"
 
 -   Passive (Sun energy reflection in EM wave, don't emit EM waves)
 
-    -   Example: human eyes, satellite
+    -   Example: human eyes, satellite (e.g. Wk2 sensor summary - WorldView-3)
 
-    -   Con: Atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather
+    -   ❌ Influenced by atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather
+
+    -   ✔️does not disturb the object or area of interest
 
 -   Active (emit and receive EM wave / energy)
 
     -   Example: radar, x-ray, LiDAR
 
-    -   Pro: can pass clouds
+    -   ✔️ can pass clouds
 
 ### Four resolutions
 
 1.  Spatial
 
-    -   Pro: fast
+    -   the size of the raster grid per pixel (e.g. 20cm or 30m)
 
-    -   Con: costly
+    -   Low spatial resolution: fast (short revisit time); High spatial resolution: costly
 
 2.  Spectral
 
@@ -36,17 +38,17 @@ title: "Introduction"
 
     -   True colour (human eye can see) and false colour (human cant see)
 
-    -   Con: atmospheric window (atmospheric transmission / opacity, e.g. water vapour, ozone, CO...)
+    -   ❌ atmospheric window (atmospheric transmission / opacity, e.g. water vapour, ozone, CO...)
 
     -   Spectroradiometer
 
 3.  Radiometric
 
-    -   Cell/ pixel
+    -   identify differences in light or reflectance, in practice this is the range of possible values.
 
     -   Increase bit -\> increase possible values
 
-    -   8-bit
+    -   8-bit sensor: 0-255; 11-bit sensor: 0-2047
 
 4.  Temporal
 
@@ -56,8 +58,22 @@ title: "Introduction"
 
 Trade off between resolution and time (and cost)
 
-### Questions
+|     | Sentinel |     | Landsat |
+|-----|----------|-----|---------|
+|     |          |     |         |
+|     |          |     |         |
+|     |          |     |         |
+|     |          |     |         |
+|     |          |     |         |
+|     |          |     |         |
+|     |          |     |         |
+|     |          |     |         |
+|     |          |     |         |
+|     |          |     |         |
 
+: Sentinel and Landsat
+
+### Questions
 
 ## Application
 

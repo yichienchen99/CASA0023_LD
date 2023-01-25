@@ -18,6 +18,8 @@
 
     -   Content summary (outputs from the practical, small code chunks with relevant explanation and flow charts)
 
+        -   ✔️&❌: indicate Pros and Cons of specific idea / concept / object...
+
     -   Questions (data, methods, or applications)
 
 -   Applications:
