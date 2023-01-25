@@ -2,23 +2,23 @@
   {
     "objectID": "1_intro.html#summary",
     "href": "1_intro.html#summary",
-    "title": "2  Introduction",
-    "section": "2.1 Summary",
-    "text": "2.1 Summary\nSensors:\n\nPassive (Sun energy reflection in EM wave, don’t emit EM waves)\n\nExample: human eyes, satellite\nCon: Atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather\n\nActive (emit and receive EM wave / energy)\n\nExample: radar, x-ray, LiDAR\nPro: can pass clouds\n\n\nFour resolutions:\n\nSpatial\n\nPro: fast\nCon: costly\n\nSpectral\n\nSpectral signature (EM): Objects on Earth have difference wavelengths = Bands\n\nMulti-spectral data / image\nHyperspectral data / image: stack all colour bands\n\nTrue colour (human eye can see) and false colour (human cant see)\nCon: atmospheric window (atmospheric transmission / opacity, e.g. water vapour, ozone, CO…)\nSpectroradiometer\n\nRadiometric\n\nCell/ pixel\nIncrease bit -> increase possible values\n8-bit\n\nTemporal\n\nRevisit time of sensor\nHigh resolution / pixel -> low revisit = low cost and number [graph]\n\n\nTrade off between resolution and time (and cost)"
+    "title": "1  Introduction",
+    "section": "1.1 Summary",
+    "text": "1.1 Summary\n\n1.1.1 Sensors\n\nPassive (Sun energy reflection in EM wave, don’t emit EM waves)\n\nExample: human eyes, satellite\nCon: Atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather\n\nActive (emit and receive EM wave / energy)\n\nExample: radar, x-ray, LiDAR\nPro: can pass clouds\n\n\n\n\n1.1.2 Four resolutions\n\nSpatial\n\nPro: fast\nCon: costly\n\nSpectral\n\nSpectral signature (EM): Objects on Earth have difference wavelengths = Bands\n\nMulti-spectral data / image\nHyperspectral data / image: stack all colour bands\n\nTrue colour (human eye can see) and false colour (human cant see)\nCon: atmospheric window (atmospheric transmission / opacity, e.g. water vapour, ozone, CO…)\nSpectroradiometer\n\nRadiometric\n\nCell/ pixel\nIncrease bit -> increase possible values\n8-bit\n\nTemporal\n\nRevisit time of sensor\nHigh resolution / pixel -> low revisit = low cost and number [graph]\n\n\nTrade off between resolution and time (and cost)\n\n\n1.1.3 Questions"
   },
   {
     "objectID": "1_intro.html#application",
     "href": "1_intro.html#application",
-    "title": "2  Introduction",
-    "section": "2.2 Application",
-    "text": "2.2 Application"
+    "title": "1  Introduction",
+    "section": "1.2 Application",
+    "text": "1.2 Application"
   },
   {
     "objectID": "1_intro.html#reflection",
     "href": "1_intro.html#reflection",
-    "title": "2  Introduction",
-    "section": "2.3 Reflection",
-    "text": "2.3 Reflection"
+    "title": "1  Introduction",
+    "section": "1.3 Reflection",
+    "text": "1.3 Reflection"
   },
   {
     "objectID": "index.html",
@@ -72,9 +72,9 @@
   {
     "objectID": "2_portfolio.html#summary-application-and-reflection",
     "href": "2_portfolio.html#summary-application-and-reflection",
-    "title": "3  Sensor-WorldView3",
-    "section": "3.1 Summary, Application and Reflection",
-    "text": "3.1 Summary, Application and Reflection\nA basic introduction on WorldView-3."
+    "title": "2  Sensor-WorldView3",
+    "section": "2.1 Summary, Application and Reflection",
+    "text": "2.1 Summary, Application and Reflection\nA basic introduction on WorldView-3."
   },
   {
     "objectID": "intro.html#structure-of-each-chapter",
@@ -82,5 +82,61 @@
     "title": "Content",
     "section": "Structure (of each chapter)",
     "text": "Structure (of each chapter)\n\nSummary:\nContent summary (outputs from the practical, small code chunks with relevant explanation and flow charts)\nQuestions (data, methods, or applications)\nApplications:\nApplication of data / concepts / methods in literature / policy (largely sourced from weekly reading).\nReflection:\nA personal reflection on the presented content (e.g. what was interesting, why and why might the data or tools presented this week be useful in the future to you or perhaps they won’t be useful but something similar might be)"
+  },
+  {
+    "objectID": "1_intro.html",
+    "href": "1_intro.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "2 Summary"
+  },
+  {
+    "objectID": "1_intro.html#sensors",
+    "href": "1_intro.html#sensors",
+    "title": "1  Introduction",
+    "section": "2.1 Sensors",
+    "text": "2.1 Sensors\n\nPassive (Sun energy reflection in EM wave, don’t emit EM waves)\n\nExample: human eyes, satellite\nCon: Atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather\n\nActive (emit and receive EM wave / energy)\n\nExample: radar, x-ray, LiDAR\nPro: can pass clouds"
+  },
+  {
+    "objectID": "1_intro.html#four-resolutions",
+    "href": "1_intro.html#four-resolutions",
+    "title": "1  Introduction",
+    "section": "2.2 Four resolutions",
+    "text": "2.2 Four resolutions\n\nSpatial\n\nPro: fast\nCon: costly\n\nSpectral\n\nSpectral signature (EM): Objects on Earth have difference wavelengths = Bands\n\nMulti-spectral data / image\nHyperspectral data / image: stack all colour bands\n\nTrue colour (human eye can see) and false colour (human cant see)\nCon: atmospheric window (atmospheric transmission / opacity, e.g. water vapour, ozone, CO…)\nSpectroradiometer\n\nRadiometric\n\nCell/ pixel\nIncrease bit -> increase possible values\n8-bit\n\nTemporal\n\nRevisit time of sensor\nHigh resolution / pixel -> low revisit = low cost and number [graph]\n\n\nTrade off between resolution and time (and cost)\n\n2.2.1 Questions"
+  },
+  {
+    "objectID": "3_corrections.html#summary",
+    "href": "3_corrections.html#summary",
+    "title": "3  3_corrections",
+    "section": "3.1 Summary",
+    "text": "3.1 Summary\n\n3.1.1 Corrections\n\nGeometric Corrections\n\nGround central point: GCP\n\nObjects (e.g. building) on the image that do not move, as the reference point of corrections.\n\n\n\nCoordinates of each GCP -> linear regression\nForward mapping\n\nForward mapping\n\nX: original image -> Y: target image\n\n\n❌possibility of points outside ‘gold standard’ (the rectified/targeted image)\nBackward mapping\n\nBackward mapping\n\nX: target image -> Y: original image\n\n\n✔️ use points on ‘gold standard’ to match point on original data\nReduce error <- increase GCP\nRequirement for corrections:\n\nsame resolution (resampling)\nsame CRS (reprojecting)\n\n\nAtmospheric Corrections\n\nScattering\nPoint Spread Function\n\nPoint Spread Function\n\nspectral signature\n\n\n\n\n\nRelative\n\nDOS\n❌ assuming unusual brightness of darkest pixel as atmosphere\nPIFs\nUse middle of years, Y: base image\n\nAbsolute\n❌ High data requirement (fieldwork/…); High software requirement (costy)\nELC\nfield data\nsurface reflectance\ntotal irradiance\ntotal radiance\n\nTopographic Corrections (Orthorectification)\n\nRequire: sensor geometry & elevation model\nShould be done after atmospheric corrections\n\n\n\nCosine Function: \\(LH=LT\\frac{cosθO}{cosi}\\)\n\nCosine Function\n\ntst\n\nZenith\n\nthe\n\nAzimuth\n\nths\n\n\n\nRadiometric Corrections\n\nDigital number of each pixel = raw, unitless\nRegression = unit\nReflectance (BOA) = comparable\nTOA radiance -> TOA reflectance = no light\nSurface reflectance = no light, no atmosphere\nHemispherical reflectance (e.g. in Labs)\nApparent reflectance\n\n\n\n\n3.1.2 Enhancement\n\nFeathering / joining\n\nGEE: median\nsurface reflectance data not comparable -> standardization, normalization\n\nImage Enhancement\n\nContract enhancement (QGIS)\nnot changing data, but changing display\nRatioing\ndivide / compare bands with each other, normalized surface reflectance\nFiltering\nPCA\nTexture analysis\n1st order occurrence: ✔️classification\nEdge of building enhanced via 1st order variance\n2nd order co-occurrence: ✔️classification improvement and additional info (to other bands)\ncan then be used in PCA\nFusion\nCombine bands from different sensors / texture analysis layer\nResampling - different pixel/location\n\nDecision\nObject\nImage\nPan sharpen: for better visualization\n\n\n\n\n\n3.1.3 Questions"
+  },
+  {
+    "objectID": "3_corrections.html#application",
+    "href": "3_corrections.html#application",
+    "title": "3  3_corrections",
+    "section": "3.2 Application",
+    "text": "3.2 Application\n\n3.2.1 Corrections\n\nGeometric Corrections: Redlining in the US.\nThe historical maps/plans were drawn by hands. Those maps were digitized through geometric corrections, allowing the research/manipulation of this database on housing policy relating to socio-economic wellbeing and zoning.\n\n\n\nRedlining historic map corrections"
+  },
+  {
+    "objectID": "3_corrections.html#reflection",
+    "href": "3_corrections.html#reflection",
+    "title": "3  3_corrections",
+    "section": "3.3 Reflection",
+    "text": "3.3 Reflection"
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "4  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "dictionary.html",
+    "href": "dictionary.html",
+    "title": "5  Dictionary",
+    "section": "",
+    "text": "6 Dictionary / Terminology"
   }
 ]

@@ -1,0 +1,7 @@
+---
+title: "Dictionary"
+---
+
+# Dictionary / Terminology
+
+Ground central point: GCP

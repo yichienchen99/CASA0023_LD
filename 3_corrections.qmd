@@ -1,0 +1,174 @@
+---
+title: "3_corrections"
+---
+
+## Summary
+
+### Corrections
+
+1.  Geometric Corrections
+
+    Ground central point: GCP
+
+    :   Objects (e.g. building) on the image that do not move, as the reference point of corrections.
+
+    -   Coordinates of each GCP -\> linear regression
+
+    -   Forward mapping
+
+        Forward mapping
+
+        :   X: original image -\> Y: target image
+
+        ❌possibility of points outside 'gold standard' (the rectified/targeted image)
+
+    -   Backward mapping
+
+        Backward mapping
+
+        :   X: target image -\> Y: original image
+
+        ✔️ use points on 'gold standard' to match point on original data
+
+    -   Reduce error \<- increase GCP
+
+    -   Requirement for corrections:
+
+        1.  same resolution (resampling)
+        2.  same CRS (reprojecting)
+
+2.  Atmospheric Corrections
+
+    -   Scattering
+
+    -   Point Spread Function
+
+        Point Spread Function
+
+        :   spectral signature
+
+    ```{=html}
+    <!-- -->
+    ```
+    -   Relative
+
+        1.  DOS
+
+            ❌ assuming unusual brightness of darkest pixel as atmosphere
+
+        2.  PIFs
+
+            Use middle of years, Y: base image
+
+    -   Absolute
+
+        ❌ High data requirement (fieldwork/...); High software requirement (costy)
+
+    -   ELC
+
+        field data
+
+        surface reflectance
+
+        total irradiance
+
+        total radiance
+
+3.  Topographic Corrections (Orthorectification)
+
+    -   Require: sensor geometry & elevation model
+
+    -   Should be done after atmospheric corrections
+
+    ```{=html}
+    <!-- -->
+    ```
+    -   Cosine Function: $LH=LT\frac{cosθO}{cosi}$
+
+        Cosine Function 
+
+        :   tst
+
+        Zenith
+
+        :   the
+
+        Azimuth 
+
+        :   ths
+
+4.  Radiometric Corrections
+
+    -   Digital number of each pixel = raw, unitless
+
+    -   Regression = unit
+
+    -   Reflectance (BOA) = comparable
+
+    -   TOA radiance -\> TOA reflectance = no light
+
+    -   Surface reflectance = no light, no atmosphere
+
+    -   Hemispherical reflectance (e.g. in Labs)
+
+    -   Apparent reflectance
+
+### Enhancement 
+
+1.  Feathering / joining
+
+    -   GEE: median
+
+    -   surface reflectance data not comparable -\> standardization, normalization
+
+2.  Image Enhancement
+
+    1.  Contract enhancement (QGIS)
+
+        not changing data, but changing display
+
+    2.  Ratioing
+
+        divide / compare bands with each other, normalized surface reflectance
+
+    3.  Filtering
+
+    4.  PCA
+
+    5.  Texture analysis
+
+        1st order occurrence: ✔️classification
+
+        Edge of building enhanced via 1st order variance
+
+        2nd order co-occurrence: ✔️classification improvement and additional info (to other bands)
+
+        can then be used in PCA
+
+    6.  Fusion
+
+        Combine bands from different sensors / texture analysis layer
+
+        Resampling - different pixel/location
+
+        -   Decision
+
+        -   Object
+
+        -   Image
+
+            Pan sharpen: for better visualization
+
+### Questions
+
+## Application
+
+### Corrections
+
+1.  Geometric Corrections: [Redlining in the US](https://dsl.richmond.edu/panorama/redlining/#loc=11/42.366/-71.262&city=cambridge-ma).
+
+    The historical maps/plans were drawn by hands. Those maps were digitized through geometric corrections, allowing the research/manipulation of this database on housing policy relating to socio-economic wellbeing and zoning.
+
+    [![Redlining historic map corrections](image/redlining.png)](https://dsl.richmond.edu/panorama/redlining/#loc=11/42.366/-71.262&city=cambridge-ma)
+
+## Reflection
