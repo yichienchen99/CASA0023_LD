@@ -116,15 +116,16 @@ Trade off between resolution and time (and cost)
 
 ### QGIS vs. SNAP
 
-o QGIS:
+QGIS:
 
 -   easy to check stuff
 
-o SNAP: pre-processing and analysing remotely sensed / raster data. For sentinel and other sensors comparison
+SNAP: pre-processing and analysing remotely sensed / raster data. For sentinel and other sensors comparison
 
 -   Easier to recreate TCC
 -   Can manually set the histogram / contract enhancement as in QGIS
--   having data from multiple sensors in the same software that can be explored together
+-   Having data from multiple sensors in the same software that can be explored together
+-   but it's a pain to reopen a project
 
 ### Questions
 
