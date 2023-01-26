@@ -102,13 +102,15 @@ Trade off between resolution and time (and cost)
 
 -   cropping: to the extent, the rectangular parameter of the geo boundary
 
+::: {layout-nrow="2"}
 ![a) Natural colour](image/Natural_colour.png){width="522"}
 
 ![b) false colour composite](image/false_colour_composite.png){width="522"}
 
 ![c) Atmospheric penetration composite](image/Atmospheric_penetration_composite.png){width="522"}
 
-![d) Scatter plot (B4 Red - B8 NIR)](image/scatterplot.png){width="522"}
+![d) Scatter plot (B4 Red - B8 NIR)](image/scatterplot.png){width="345"}
+:::
 
 ![e) PCA / Tasseled Cap function transformed](image/scatterplot_brightness_greeness_b11b12.png)
 
@@ -127,7 +129,12 @@ o SNAP: pre-processing and analysing remotely sensed / raster data. For sentinel
 ### Questions
 
 1.  why in the practical book before Landsat when resampling Sentinel, the equation for brightness does not include B11 and B12 (but using 0.5082 and 0.1863)?
+
+    A: It should be B11 and B12.
+
 2.  Fig e looks different in terms of colour scheme? Since the majority of the city is coloured in blue, what do the blueish areas represent/mean (physically those areas are vegetations/forests, shouldn't those be in green)?
+
+    A: It depends on the colour gun set by the RGB.
 
 ## Application
 
