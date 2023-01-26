@@ -6,19 +6,14 @@ title: "Introduction"
 
 ### Sensors
 
--   Passive (Sun energy reflection in EM wave, don't emit EM waves)
+|           | Passive                                                                                                                                                                                      | Active                            |
+|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------|
+| Attribute | Sun energy reflection in EM wave, don't emit EM waves                                                                                                                                        | Emit and receive EM wave / energy |
+| Example   | human eyes, satellite (e.g. Wk2 sensor summary - WorldView-3)                                                                                                                                | radar, x-ray, LiDAR               |
+| ❌        | Influenced by atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather |                                   |
+| ✔️        | does not disturb the object or area of interest                                                                                                                                              | can pass clouds                   |
 
-    -   Example: human eyes, satellite (e.g. Wk2 sensor summary - WorldView-3)
-
-    -   ❌ Influenced by atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather
-
-    -   ✔️does not disturb the object or area of interest
-
--   Active (emit and receive EM wave / energy)
-
-    -   Example: radar, x-ray, LiDAR
-
-    -   ✔️ can pass clouds
+: Passive and active sensors
 
 ### Four resolutions
 
@@ -66,17 +61,17 @@ Overview/Workflow (SNAP):
 
 Download -\> New project in SNAP -\> Save downloaded file in a Data folder in the same directory as the project -\> Open product/zipped data -\> Select RGB-image channel (on product explorer panel right click product) **=\> Fig. a,b,c**
 
-To inspect/change image display: -\> Colour Manipulation panel (View -\> Tool Windows) -\> Change the range of histogram
+**To inspect/change image display**: -\> Colour Manipulation panel (View -\> Tool Windows) -\> Change the range of histogram
 
-To analyse spectral feature space: -\> Scatter plot (under Analysis tab) **=\> Fig. d**
+**To analyse spectral feature space**: -\> Scatter plot (under Analysis tab) **=\> Fig. d**
 
-To mask the study area: -\> Resampling to 20m (since both masking and the Tasseled Cap function require same resolution while B2/B3/B4/B8 are 10m and B11/B12 are 20m) -\> Import vector (ESRI shapefile) -\> Select the imported layer in layer manager -\> Masking under Raster - Masks - Land/Sea Mask (select bands that would be used)
+**To mask the study area**: -\> Resampling to 20m (since both masking and the Tasseled Cap function require same resolution while B2/B3/B4/B8 are 10m and B11/B12 are 20m) -\> Import vector (ESRI shapefile) -\> Select the imported layer in layer manager -\> Masking under Raster - Masks - Land/Sea Mask (select bands that would be used)
 
-To reduce dimensionality via Tasseled Cap transformation : -\> Apply transformation functions in Band Math -\> Select RGB-image channel **=\> Fig. e,f**
+**To reduce dimensionality via Tasseled Cap transformation** : -\> Apply transformation functions in Band Math -\> Select RGB-image channel **=\> Fig. e,f**
 
 Since Landsat has different spatial resolution than Sentinel, the latter will be resampled again (upscale). And since the Sentinel data has been masked/selected useful bands for Tasseled cap, it will be masked again to select B1-B7.
 
-To compare spectral signature: -\> Make sure both data in the same resolution with the same bands -\> Add polygons by land cover -\> Export polygons as shapefiles -\> Export both dataset as GeoTIFF -\> Check in QGIS -\> Compare in R using terra (or stars)
+**To compare spectral reflectance**: -\> Make sure both data in the same resolution with the same bands -\> Add polygons by land cover -\> Export polygons as shapefiles -\> Export both dataset as GeoTIFF -\> Check in QGIS -\> Compare in R using terra (or stars) **=\> Fig. g,h & Table 1**
 
 #### Sentinel and Landsat
 
@@ -185,16 +180,16 @@ To mitigate the atmospheric effects (cloudy and foggy from April to May and rain
 ##### Compare spectral signatures
 
 ::: {layout-nrow="1"}
-![Spectral reflectance Sentinel](image/spectral_reflectance_sen.png){fig-align="center"}
+![g) Spectral reflectance Sentinel](image/spectral_reflectance_sen.png){fig-align="center"}
 
-![Spectral reflectance Landsat](image/spectral_reflectance_lsat.png){fig-align="center"}
+![h) Spectral reflectance Landsat](image/spectral_reflectance_lsat.png){fig-align="center"}
 :::
 
 The ranges of the datasets are different visually. Landsat has higher mean reflectance for all land cover in all bands.
 
 For both sensors, the relationship between each land cover is similar, with water, forest and grass having lowest reflectance, and albeit less visible in Sentinel, bare earth having highest reflectance.
 
-Then, t-test is conducted to test the difference in average of the land cover reflectance between sensors.
+Then, t-test is conducted to test the difference in average of the land cover reflectance between two sensors.
 
 | landcover  | t       | df     | p-value    |
 |------------|---------|--------|------------|
@@ -205,7 +200,7 @@ Then, t-test is conducted to test the difference in average of the land cover re
 | forest     | -269.72 | 7087.8 | \< 2.2e-16 |
 | water      | -157.95 | 348.97 | \< 2.2e-16 |
 
-: Welch two sample t-test (Sentinel and Landsat)
+: Table 1. Welch two sample t-test (Sentinel and Landsat)
 
 Since p-values are all below 0.05, the difference in average reflectance of Landsat and of Sentinel data is statistically significant.
 

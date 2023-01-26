@@ -178,19 +178,43 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="1.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">1.1</span> Summary</h2>
 <section id="sensors" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="sensors"><span class="header-section-number">1.1.1</span> Sensors</h3>
-<ul>
-<li><p>Passive (Sun energy reflection in EM wave, don’t emit EM waves)</p>
-<ul>
-<li><p>Example: human eyes, satellite (e.g.&nbsp;Wk2 sensor summary - WorldView-3)</p></li>
-<li><p>❌ Influenced by atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g.&nbsp;blue sky and orange sunset)), clouds and weather</p></li>
-<li><p>✔️does not disturb the object or area of interest</p></li>
-</ul></li>
-<li><p>Active (emit and receive EM wave / energy)</p>
-<ul>
-<li><p>Example: radar, x-ray, LiDAR</p></li>
-<li><p>✔️ can pass clouds</p></li>
-</ul></li>
-</ul>
+<table class="table">
+<caption>Passive and active sensors</caption>
+<colgroup>
+<col style="width: 4%">
+<col style="width: 80%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Passive</th>
+<th>Active</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Attribute</td>
+<td>Sun energy reflection in EM wave, don’t emit EM waves</td>
+<td>Emit and receive EM wave / energy</td>
+</tr>
+<tr class="even">
+<td>Example</td>
+<td>human eyes, satellite (e.g.&nbsp;Wk2 sensor summary - WorldView-3)</td>
+<td>radar, x-ray, LiDAR</td>
+</tr>
+<tr class="odd">
+<td>❌</td>
+<td>Influenced by atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g.&nbsp;blue sky and orange sunset)), clouds and weather</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>✔️</td>
+<td>does not disturb the object or area of interest</td>
+<td>can pass clouds</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="four-resolutions" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="four-resolutions"><span class="header-section-number">1.1.2</span> Four resolutions</h3>
@@ -230,12 +254,12 @@ ul.task-list li input[type="checkbox"] {
 <h3 data-number="1.1.3" class="anchored" data-anchor-id="practical"><span class="header-section-number">1.1.3</span> Practical</h3>
 <p>Overview/Workflow (SNAP):</p>
 <p>Download -&gt; New project in SNAP -&gt; Save downloaded file in a Data folder in the same directory as the project -&gt; Open product/zipped data -&gt; Select RGB-image channel (on product explorer panel right click product) <strong>=&gt; Fig. a,b,c</strong></p>
-<p>To inspect/change image display: -&gt; Colour Manipulation panel (View -&gt; Tool Windows) -&gt; Change the range of histogram</p>
-<p>To analyse spectral feature space: -&gt; Scatter plot (under Analysis tab) <strong>=&gt; Fig. d</strong></p>
-<p>To mask the study area: -&gt; Resampling to 20m (since both masking and the Tasseled Cap function require same resolution while B2/B3/B4/B8 are 10m and B11/B12 are 20m) -&gt; Import vector (ESRI shapefile) -&gt; Select the imported layer in layer manager -&gt; Masking under Raster - Masks - Land/Sea Mask (select bands that would be used)</p>
-<p>To reduce dimensionality via Tasseled Cap transformation : -&gt; Apply transformation functions in Band Math -&gt; Select RGB-image channel <strong>=&gt; Fig. e,f</strong></p>
+<p><strong>To inspect/change image display</strong>: -&gt; Colour Manipulation panel (View -&gt; Tool Windows) -&gt; Change the range of histogram</p>
+<p><strong>To analyse spectral feature space</strong>: -&gt; Scatter plot (under Analysis tab) <strong>=&gt; Fig. d</strong></p>
+<p><strong>To mask the study area</strong>: -&gt; Resampling to 20m (since both masking and the Tasseled Cap function require same resolution while B2/B3/B4/B8 are 10m and B11/B12 are 20m) -&gt; Import vector (ESRI shapefile) -&gt; Select the imported layer in layer manager -&gt; Masking under Raster - Masks - Land/Sea Mask (select bands that would be used)</p>
+<p><strong>To reduce dimensionality via Tasseled Cap transformation</strong> : -&gt; Apply transformation functions in Band Math -&gt; Select RGB-image channel <strong>=&gt; Fig. e,f</strong></p>
 <p>Since Landsat has different spatial resolution than Sentinel, the latter will be resampled again (upscale). And since the Sentinel data has been masked/selected useful bands for Tasseled cap, it will be masked again to select B1-B7.</p>
-<p>To compare spectral signature: -&gt; Make sure both data in the same resolution with the same bands -&gt; Add polygons by land cover -&gt; Export polygons as shapefiles -&gt; Export both dataset as GeoTIFF -&gt; Check in QGIS -&gt; Compare in R using terra (or stars)</p>
+<p><strong>To compare spectral reflectance</strong>: -&gt; Make sure both data in the same resolution with the same bands -&gt; Add polygons by land cover -&gt; Export polygons as shapefiles -&gt; Export both dataset as GeoTIFF -&gt; Check in QGIS -&gt; Compare in R using terra (or stars) <strong>=&gt; Fig. g,h &amp; Table 1</strong></p>
 <section id="sentinel-and-landsat" class="level4" data-number="1.1.3.1">
 <h4 data-number="1.1.3.1" class="anchored" data-anchor-id="sentinel-and-landsat"><span class="header-section-number">1.1.3.1</span> Sentinel and Landsat</h4>
 <ul>
@@ -419,7 +443,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="image/spectral_reflectance_sen.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Spectral reflectance Sentinel</figcaption><p></p>
+<p></p><figcaption class="figure-caption">g) Spectral reflectance Sentinel</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -427,7 +451,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="image/spectral_reflectance_lsat.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Spectral reflectance Landsat</figcaption><p></p>
+<p></p><figcaption class="figure-caption">h) Spectral reflectance Landsat</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -435,9 +459,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <p>The ranges of the datasets are different visually. Landsat has higher mean reflectance for all land cover in all bands.</p>
 <p>For both sensors, the relationship between each land cover is similar, with water, forest and grass having lowest reflectance, and albeit less visible in Sentinel, bare earth having highest reflectance.</p>
-<p>Then, t-test is conducted to test the difference in average of the land cover reflectance between sensors.</p>
+<p>Then, t-test is conducted to test the difference in average of the land cover reflectance between two sensors.</p>
 <table class="table">
-<caption>Welch two sample t-test (Sentinel and Landsat)</caption>
+<caption>Table 1. Welch two sample t-test (Sentinel and Landsat)</caption>
 <thead>
 <tr class="header">
 <th>landcover</th>
