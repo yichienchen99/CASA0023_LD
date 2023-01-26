@@ -50,6 +50,8 @@ title: "Introduction"
 
     -   8-bit sensor: 0-255; 11-bit sensor: 0-2047
 
+    -   Sentinel-2 is 12-bit (brightness levels from 0 -- 4095) (beyond True Colour Image (TCI) values)
+
 4.  Temporal
 
     -   Revisit time of sensor
@@ -58,74 +60,171 @@ title: "Introduction"
 
 Trade off between resolution and time (and cost)
 
-### Practical: Sentinel and Landsat
+### Practical
 
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-|                        | Sentinel                                                                                                                     |                                                                                                                                                                                                  | Landsat        |
-+========================+==============================================================================================================================+==================================================================================================================================================================================================+================+
-| Download               | Data availability depends on cloud cover, time, weather (sometimes study area may not have data under the filtered criteria) |                                                                                                                                                                                                  |                |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-|                        | Sentinel-2 is 12-bit (brightness levels from 0 -- 4095) (beyond True Colour Image (TCI) values)                              |                                                                                                                                                                                                  | 30m resolution |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-| Software               | QGIS                                                                                                                         | SNAP                                                                                                                                                                                             |                |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-| Colour composite       | merge the BOA bands (B2, B3, B4, B8) to make true colour composite (B1=Blue, B2=Green, B3=Red)                               | recreate by changing RBG channels (Fig. a, b, c)                                                                                                                                                 |                |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-| Enhancement            | Contract enhancement                                                                                                         | Image histogram                                                                                                                                                                                  |                |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-| Spectral feature space |                                                                                                                              | Scatter plot (Fig. d)                                                                                                                                                                            |                |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-| Resampling             |                                                                                                                              | B11 and B12 are at a 20m resolution whereas all the others at a 10m resolution. -\> resample others to 20m (upscale) Sentinel 2 resampling toolbox                                               |                |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-|                        |                                                                                                                              | A\) Traditional resample: considers the neighbouring pixels (time-efficient?)                                                                                                                    |                |
-|                        |                                                                                                                              |                                                                                                                                                                                                  |                |
-|                        |                                                                                                                              | B\) Sentinel 2 products resample: account for the particularities of the angle (satellite viewing) bands                                                                                         |                |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-| Masking                |                                                                                                                              | Can only mask bands on the same resolution                                                                                                                                                       |                |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-| Tasseled Cap function  |                                                                                                                              | Band Maths,                                                                                                                                                                                      |                |
-|                        |                                                                                                                              |                                                                                                                                                                                                  |                |
-|                        |                                                                                                                              | Reduce dimensionality: (similar to PCA) spectral index combining two or more bands to highlight certain features of an image. Then change RGB channel to those new data to show results (Fig. e) |                |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-| New vector POI         |                                                                                                                              |                                                                                                                                                                                                  |                |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-| Export                 |                                                                                                                              |                                                                                                                                                                                                  |                |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
-| Comparison             |                                                                                                                              |                                                                                                                                                                                                  |                |
-+------------------------+------------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------+
+Overview/Workflow (SNAP):
+
+Download -\> New project in SNAP -\> Save downloaded file in a Data folder in the same directory as the project -\> Open product/zipped data -\> Select RGB-image channel (on product explorer panel right click product) **=\> Fig. a,b,c**
+
+To inspect/change image display: -\> Colour Manipulation panel (View -\> Tool Windows) -\> Change the range of histogram
+
+To analyse spectral feature space: -\> Scatter plot (under Analysis tab) **=\> Fig. d**
+
+To mask the study area: -\> Resampling to 20m (since both masking and the Tasseled Cap function require same resolution while B2/B3/B4/B8 are 10m and B11/B12 are 20m) -\> Import vector (ESRI shapefile) -\> Select the imported layer in layer manager -\> Masking under Raster - Masks - Land/Sea Mask (select bands that would be used)
+
+To reduce dimensionality via Tasseled Cap transformation : -\> Apply transformation functions in Band Math -\> Select RGB-image channel **=\> Fig. e,f**
+
+Since Landsat has different spatial resolution than Sentinel, the latter will be resampled again (upscale). And since the Sentinel data has been masked/selected useful bands for Tasseled cap, it will be masked again to select B1-B7.
+
+To compare spectral signature: -\> Make sure both data in the same resolution with the same bands -\> Add polygons by land cover -\> Export polygons as shapefiles -\> Export both dataset as GeoTIFF -\> Check in QGIS -\> Compare in R using terra (or stars)
+
+#### Sentinel and Landsat
+
+-   Data availability depends on cloud cover, time, weather (sometimes study area may not have data under the filtered criteria)
+-   Sentinel tends to have shorter download time than Landsat.
+-   Landsat has less available data in a given time range (due to slightly longer revisit time).
+
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                                                                                                   | [Sentinel](https://scihub.copernicus.eu/dhus/#/home)                                           | [Landsat](https://earthexplorer.usgs.gov/)                                                                                                                                                       |
++===================================================================================================================+================================================================================================+==================================================================================================================================================================================================+
+| Spatial resolution                                                                                                | Resolutions varied for each bands. (E.g. 10m resolution for Band 2)                            | 30m resolution                                                                                                                                                                                   |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Temporal resolution                                                                                               | 10 days (5 days for combined constellation 2A & 2B)                                            | 16 days                                                                                                                                                                                          |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| [Central wavelength](https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-2-msi/resolutions/spatial) | B1 443nm = Band 1 has central wavelength of 442 nm                                             |                                                                                                                                                                                                  |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Process by Software**                                                                                           | **QGIS**                                                                                       | **SNAP**                                                                                                                                                                                         |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Colour composite                                                                                                  | merge the BOA bands (B2, B3, B4, B8) to make true colour composite (B1=Blue, B2=Green, B3=Red) | recreate by changing RBG channels (Fig. a, b, c)                                                                                                                                                 |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Enhancement                                                                                                       | Contrast enhancement                                                                           | Image histogram                                                                                                                                                                                  |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Spectral feature space                                                                                            |                                                                                                | Scatter plot (Fig. d)                                                                                                                                                                            |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Resampling                                                                                                        |                                                                                                | B11 and B12 are at a 20m resolution whereas all the others at a 10m resolution. -\> resample others to 20m (upscale) Sentinel 2 resampling toolbox                                               |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                                                                                                   |                                                                                                | A\) Traditional resample: considers the neighbouring pixels (time-efficient?)                                                                                                                    |
+|                                                                                                                   |                                                                                                |                                                                                                                                                                                                  |
+|                                                                                                                   |                                                                                                | B\) Sentinel 2 products resample: account for the particularities of the angle (satellite viewing) bands                                                                                         |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Masking                                                                                                           |                                                                                                | Masks. Land/sea mask.                                                                                                                                                                            |
+|                                                                                                                   |                                                                                                |                                                                                                                                                                                                  |
+|                                                                                                                   |                                                                                                | Can only mask bands on the same resolution                                                                                                                                                       |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Tasseled Cap function                                                                                             |                                                                                                | Band Maths.                                                                                                                                                                                      |
+|                                                                                                                   |                                                                                                |                                                                                                                                                                                                  |
+|                                                                                                                   |                                                                                                | Reduce dimensionality: (similar to PCA) spectral index combining two or more bands to highlight certain features of an image. Then change RGB channel to those new data to show results (Fig. e) |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 : Sentinel and Landsat data in QGIS and SNAP
 
-### Masking vs cropping:
+#### Masking vs. cropping
 
 -   masking: the outline of the geo boundary
 
 -   cropping: to the extent, the rectangular parameter of the geo boundary
 
+#### Example: Processing of Sentinel and Landsat data of Kinmen County
+
+I've chosen Kinmen County in Taiwan as my case study area for practical. It consists of several islands and is in close proximity to Xiamen, China. The main/largest island is the H-shaped one at the lower end of the first few maps (or see Fig. e).
+
+This is where i spent the majority of summer in 2022 so i've got some knowledge of the city/island's land use. I also cycled a lot on this island (so having some sense of the topography). It is really enjoyable to cycle here as there is less traffic and more greenery. However, it tends to be slightly cloudy/rainy in certain months which may constrain the analysis. Anyhow, let's see how it goes.
+
+##### Sentinel
+
+The initial exploration using Sentinel data:
+
 ::: {layout-nrow="2"}
-![a) Natural colour](image/Natural_colour.png){width="522"}
+![a) Natural colour](image/Natural_colour.png){fig-align="center" width="522"}
 
-![b) false colour composite](image/false_colour_composite.png){width="522"}
+![b) False colour composite](image/false_colour_composite.png){fig-align="center" width="522"}
 
-![c) Atmospheric penetration composite](image/Atmospheric_penetration_composite.png){width="522"}
+![c) Atmospheric penetration composite](image/Atmospheric_penetration_composite.png){fig-align="center" width="522"}
 
-![d) Scatter plot (B4 Red - B8 NIR)](image/scatterplot.png){width="345"}
+![d) Scatter plot (B4 Red - B8 NIR)](image/scatterplot.png){fig-align="center" width="345"}
 :::
 
-![e) PCA / Tasseled Cap function transformed](image/scatterplot_brightness_greeness_b11b12.png)
+-   False colour composite: B8, B4, B3. Plants reflect near-infrared and green light whilst absorbing red.
 
-### QGIS vs. SNAP
+-   Atmospheric penetration composite: B12, B11, B8A with no visible bands to penetrate atmospheric particles. Vegetation = blue, urban area = white, gray cyan or purple.
+
+Basically, Fig a,b,c show that the coastal city Xiamen's built-up areas are mostly close to the seashore. This is mainly due to its historical ports that are open to international trades and thus becoming more urbanized. Kinmen Islands are less populous compared to Xiamen and the majority of land is bare soil / vegetation. Fig d shows that the dry bare soil is prominent in some areas (black dots at high B4 and high B8), while the image has large ratio of biomass (yellow peak at low B4 and high B8).
+
+##### Tasseled Cap function
+
+[ArcPro](https://pro.arcgis.com/en/pro-app/latest/help/analysis/raster-functions/tasseled-cap-function.htm#ESRI_SECTION1_6B9B732A91344B8782F925E4BE4ACA4F)'s explanation:
+
+The function is originally designed to monitor crop's life cycle / changes through time.
+
+-   Brightness = bare or partially covered soil, man-made, and natural features such as concrete, asphalt, gravel, rock outcrops, and other bare areas
+
+-   Greenness = green vegetation
+
+-   Wetness = soil moisture, water, and other moist features.
+
+✔️ Those three components of imagery contain about 97% of the meaningful information available in the image (removing noise and atmospheric effects).
+
+::: {layout-nrow="1"}
+![e) PCA / Tasseled Cap function transformed (May 2022)](image/scatterplot_brightness_greeness_b11b12.png){fig-align="center"}
+
+![f) PCA / Tasseled Cap function transformed (November 2022)](image/Tasseled_Cap_function_transformed2.png){fig-align="center"}
+:::
+
+(Darker) blue and red areas are generally unchanged - representing water (lakes/reservoir/sea), soil and built-up area. The pink areas are built-up areas / concrete / asphalt / human-made (e.g. southern inner bay's long linear shape is the airport, and western area on the main island is the most populous town)
+
+Greenness in Fig. e is less than that in Fig. f, indicating the vegetation is less in May. During May (or generally spring time), there should be roughly similar amount of vegetation / crops, compared to November (autumn), while the crops during autumn reach maturity leading to more greenness in the latter figure.
+
+It might also be the case that the light blue areas are soil moisture / higher humidity. As can be seen from both figures, the shaded blue areas in the central/slightly eastern-central location of the largest island is mountainous. The humidity can be higher there.
+
+Another difference between the two images is that the redness is more intense in the first figure (more NIR?), while more organgy in the second. This indicates that the those areas are soil or bare areas. During autumn, the vegetation on those land increase, so the yellowness/greenness overlays.
+
+##### Landsat
+
+To mitigate the atmospheric effects (cloudy and foggy from April to May and rainy during summer) (and also due to data availability), the sensing time for Landsat is in December.
+
+##### Compare spectral signatures
+
+::: {layout-nrow="1"}
+![Spectral reflectance Sentinel](image/spectral_reflectance_sen.png){fig-align="center"}
+
+![Spectral reflectance Landsat](image/spectral_reflectance_lsat.png){fig-align="center"}
+:::
+
+The ranges of the datasets are different visually. Landsat has higher mean reflectance for all land cover in all bands.
+
+For both sensors, the relationship between each land cover is similar, with water, forest and grass having lowest reflectance, and albeit less visible in Sentinel, bare earth having highest reflectance.
+
+Then, t-test is conducted to test the difference in average of the land cover reflectance between sensors.
+
+| landcover  | t       | df     | p-value    |
+|------------|---------|--------|------------|
+| low_urban  | -136.65 | 2024.3 | \< 2.2e-16 |
+| high_urban | -299.51 | 6706.5 | \< 2.2e-16 |
+| bare_earth | -238.64 | 6347.2 | \< 2.2e-16 |
+| grass      | -76.054 | 601.63 | \< 2.2e-16 |
+| forest     | -269.72 | 7087.8 | \< 2.2e-16 |
+| water      | -157.95 | 348.97 | \< 2.2e-16 |
+
+: Welch two sample t-test (Sentinel and Landsat)
+
+Since p-values are all below 0.05, the difference in average reflectance of Landsat and of Sentinel data is statistically significant.
+
+#### QGIS vs. SNAP
 
 QGIS:
 
--   easy to check stuff
+-   easy to check stuff / visualize outputs
 
 SNAP: pre-processing and analysing remotely sensed / raster data. For sentinel and other sensors comparison
 
 -   Easier to recreate TCC
 -   Can manually set the histogram / contract enhancement as in QGIS
 -   Having data from multiple sensors in the same software that can be explored together
--   but it's a pain to reopen a project
+-   but it's a pain to reopen a project.. and I found when setting up the project, it's more straightforward to create a new project before opening up a product.
+
+Two software can work together (using QGIS to check everything as did in CASA0005).
+
+-   when i checked GeoTIFFs and shapefiles in QGIS, nothing is shown.. so probably something went wrong when selecting POIs.
 
 ### Questions
 

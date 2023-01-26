@@ -146,10 +146,8 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#sensors" id="toc-sensors" class="nav-link" data-scroll-target="#sensors"><span class="toc-section-number">1.1.1</span>  Sensors</a></li>
   <li><a href="#four-resolutions" id="toc-four-resolutions" class="nav-link" data-scroll-target="#four-resolutions"><span class="toc-section-number">1.1.2</span>  Four resolutions</a></li>
-  <li><a href="#practical-sentinel-and-landsat" id="toc-practical-sentinel-and-landsat" class="nav-link" data-scroll-target="#practical-sentinel-and-landsat"><span class="toc-section-number">1.1.3</span>  Practical: Sentinel and Landsat</a></li>
-  <li><a href="#masking-vs-cropping" id="toc-masking-vs-cropping" class="nav-link" data-scroll-target="#masking-vs-cropping"><span class="toc-section-number">1.1.4</span>  Masking vs cropping:</a></li>
-  <li><a href="#qgis-vs.-snap" id="toc-qgis-vs.-snap" class="nav-link" data-scroll-target="#qgis-vs.-snap"><span class="toc-section-number">1.1.5</span>  QGIS vs.&nbsp;SNAP</a></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="toc-section-number">1.1.6</span>  Questions</a></li>
+  <li><a href="#practical" id="toc-practical" class="nav-link" data-scroll-target="#practical"><span class="toc-section-number">1.1.3</span>  Practical</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="toc-section-number">1.1.4</span>  Questions</a></li>
   </ul></li>
   <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="toc-section-number">1.2</span>  Application</a></li>
   <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection"><span class="toc-section-number">1.3</span>  Reflection</a></li>
@@ -218,6 +216,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p>identify differences in light or reflectance, in practice this is the range of possible values.</p></li>
 <li><p>Increase bit -&gt; increase possible values</p></li>
 <li><p>8-bit sensor: 0-255; 11-bit sensor: 0-2047</p></li>
+<li><p>Sentinel-2 is 12-bit (brightness levels from 0 – 4095) (beyond True Colour Image (TCI) values)</p></li>
 </ul></li>
 <li><p>Temporal</p>
 <ul>
@@ -227,114 +226,108 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <p>Trade off between resolution and time (and cost)</p>
 </section>
-<section id="practical-sentinel-and-landsat" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="practical-sentinel-and-landsat"><span class="header-section-number">1.1.3</span> Practical: Sentinel and Landsat</h3>
+<section id="practical" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="practical"><span class="header-section-number">1.1.3</span> Practical</h3>
+<p>Overview/Workflow (SNAP):</p>
+<p>Download -&gt; New project in SNAP -&gt; Save downloaded file in a Data folder in the same directory as the project -&gt; Open product/zipped data -&gt; Select RGB-image channel (on product explorer panel right click product) <strong>=&gt; Fig. a,b,c</strong></p>
+<p>To inspect/change image display: -&gt; Colour Manipulation panel (View -&gt; Tool Windows) -&gt; Change the range of histogram</p>
+<p>To analyse spectral feature space: -&gt; Scatter plot (under Analysis tab) <strong>=&gt; Fig. d</strong></p>
+<p>To mask the study area: -&gt; Resampling to 20m (since both masking and the Tasseled Cap function require same resolution while B2/B3/B4/B8 are 10m and B11/B12 are 20m) -&gt; Import vector (ESRI shapefile) -&gt; Select the imported layer in layer manager -&gt; Masking under Raster - Masks - Land/Sea Mask (select bands that would be used)</p>
+<p>To reduce dimensionality via Tasseled Cap transformation : -&gt; Apply transformation functions in Band Math -&gt; Select RGB-image channel <strong>=&gt; Fig. e,f</strong></p>
+<p>Since Landsat has different spatial resolution than Sentinel, the latter will be resampled again (upscale). And since the Sentinel data has been masked/selected useful bands for Tasseled cap, it will be masked again to select B1-B7.</p>
+<p>To compare spectral signature: -&gt; Make sure both data in the same resolution with the same bands -&gt; Add polygons by land cover -&gt; Export polygons as shapefiles -&gt; Export both dataset as GeoTIFF -&gt; Check in QGIS -&gt; Compare in R using terra (or stars)</p>
+<section id="sentinel-and-landsat" class="level4" data-number="1.1.3.1">
+<h4 data-number="1.1.3.1" class="anchored" data-anchor-id="sentinel-and-landsat"><span class="header-section-number">1.1.3.1</span> Sentinel and Landsat</h4>
+<ul>
+<li>Data availability depends on cloud cover, time, weather (sometimes study area may not have data under the filtered criteria)</li>
+<li>Sentinel tends to have shorter download time than Landsat.</li>
+<li>Landsat has less available data in a given time range (due to slightly longer revisit time).</li>
+</ul>
 <table class="table">
 <caption>Sentinel and Landsat data in QGIS and SNAP</caption>
-<colgroup>
-<col style="width: 6%">
-<col style="width: 34%">
-<col style="width: 53%">
-<col style="width: 4%">
-</colgroup>
 <thead>
 <tr class="header">
 <th></th>
-<th>Sentinel</th>
-<th></th>
-<th>Landsat</th>
+<th><a href="https://scihub.copernicus.eu/dhus/#/home">Sentinel</a></th>
+<th><a href="https://earthexplorer.usgs.gov/">Landsat</a></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Download</td>
-<td>Data availability depends on cloud cover, time, weather (sometimes study area may not have data under the filtered criteria)</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Sentinel-2 is 12-bit (brightness levels from 0 – 4095) (beyond True Colour Image (TCI) values)</td>
-<td></td>
+<td>Spatial resolution</td>
+<td>Resolutions varied for each bands. (E.g. 10m resolution for Band 2)</td>
 <td>30m resolution</td>
 </tr>
+<tr class="even">
+<td>Temporal resolution</td>
+<td>10 days (5 days for combined constellation 2A &amp; 2B)</td>
+<td>16 days</td>
+</tr>
 <tr class="odd">
-<td>Software</td>
-<td>QGIS</td>
-<td>SNAP</td>
+<td><a href="https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-2-msi/resolutions/spatial">Central wavelength</a></td>
+<td>B1 443nm = Band 1 has central wavelength of 442 nm</td>
 <td></td>
 </tr>
 <tr class="even">
+<td><strong>Process by Software</strong></td>
+<td><strong>QGIS</strong></td>
+<td><strong>SNAP</strong></td>
+</tr>
+<tr class="odd">
 <td>Colour composite</td>
 <td>merge the BOA bands (B2, B3, B4, B8) to make true colour composite (B1=Blue, B2=Green, B3=Red)</td>
 <td>recreate by changing RBG channels (Fig. a, b, c)</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Enhancement</td>
-<td>Contract enhancement</td>
-<td>Image histogram</td>
-<td></td>
 </tr>
 <tr class="even">
+<td>Enhancement</td>
+<td>Contrast enhancement</td>
+<td>Image histogram</td>
+</tr>
+<tr class="odd">
 <td>Spectral feature space</td>
 <td></td>
 <td>Scatter plot (Fig. d)</td>
-<td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Resampling</td>
 <td></td>
 <td>B11 and B12 are at a 20m resolution whereas all the others at a 10m resolution. -&gt; resample others to 20m (upscale) Sentinel 2 resampling toolbox</td>
-<td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td></td>
 <td></td>
 <td><p>A) Traditional resample: considers the neighbouring pixels (time-efficient?)</p>
 <p>B) Sentinel 2 products resample: account for the particularities of the angle (satellite viewing) bands</p></td>
-<td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>Masking</td>
 <td></td>
-<td>Can only mask bands on the same resolution</td>
-<td></td>
+<td><p>Masks. Land/sea mask.</p>
+<p>Can only mask bands on the same resolution</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>Tasseled Cap function</td>
 <td></td>
-<td><p>Band Maths,</p>
+<td><p>Band Maths.</p>
 <p>Reduce dimensionality: (similar to PCA) spectral index combining two or more bands to highlight certain features of an image. Then change RGB channel to those new data to show results (Fig. e)</p></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>New vector POI</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Export</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>Comparison</td>
-<td></td>
-<td></td>
-<td></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="masking-vs-cropping" class="level3" data-number="1.1.4">
-<h3 data-number="1.1.4" class="anchored" data-anchor-id="masking-vs-cropping"><span class="header-section-number">1.1.4</span> Masking vs cropping:</h3>
+<section id="masking-vs.-cropping" class="level4" data-number="1.1.3.2">
+<h4 data-number="1.1.3.2" class="anchored" data-anchor-id="masking-vs.-cropping"><span class="header-section-number">1.1.3.2</span> Masking vs.&nbsp;cropping</h4>
 <ul>
 <li><p>masking: the outline of the geo boundary</p></li>
 <li><p>cropping: to the extent, the rectangular parameter of the geo boundary</p></li>
 </ul>
+</section>
+<section id="example-processing-of-sentinel-and-landsat-data-of-kinmen-county" class="level4" data-number="1.1.3.3">
+<h4 data-number="1.1.3.3" class="anchored" data-anchor-id="example-processing-of-sentinel-and-landsat-data-of-kinmen-county"><span class="header-section-number">1.1.3.3</span> Example: Processing of Sentinel and Landsat data of Kinmen County</h4>
+<p>I’ve chosen Kinmen County in Taiwan as my case study area for practical. It consists of several islands and is in close proximity to Xiamen, China. The main/largest island is the H-shaped one at the lower end of the first few maps (or see Fig. e).</p>
+<p>This is where i spent the majority of summer in 2022 so i’ve got some knowledge of the city/island’s land use. I also cycled a lot on this island (so having some sense of the topography). It is really enjoyable to cycle here as there is less traffic and more greenery. However, it tends to be slightly cloudy/rainy in certain months which may constrain the analysis. Anyhow, let’s see how it goes.</p>
+<section id="sentinel" class="level5" data-number="1.1.3.3.1">
+<h5 data-number="1.1.3.3.1" class="anchored" data-anchor-id="sentinel"><span class="header-section-number">1.1.3.3.1</span> Sentinel</h5>
+<p>The initial exploration using Sentinel data:</p>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -349,7 +342,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="image/false_colour_composite.png" class="img-fluid figure-img" width="522"></p>
-<p></p><figcaption class="figure-caption">b) false colour composite</figcaption><p></p>
+<p></p><figcaption class="figure-caption">b) False colour composite</figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -373,28 +366,149 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
+<ul>
+<li><p>False colour composite: B8, B4, B3. Plants reflect near-infrared and green light whilst absorbing red.</p></li>
+<li><p>Atmospheric penetration composite: B12, B11, B8A with no visible bands to penetrate atmospheric particles. Vegetation = blue, urban area = white, gray cyan or purple.</p></li>
+</ul>
+<p>Basically, Fig a,b,c show that the coastal city Xiamen’s built-up areas are mostly close to the seashore. This is mainly due to its historical ports that are open to international trades and thus becoming more urbanized. Kinmen Islands are less populous compared to Xiamen and the majority of land is bare soil / vegetation. Fig d shows that the dry bare soil is prominent in some areas (black dots at high B4 and high B8), while the image has large ratio of biomass (yellow peak at low B4 and high B8).</p>
+</section>
+<section id="tasseled-cap-function" class="level5" data-number="1.1.3.3.2">
+<h5 data-number="1.1.3.3.2" class="anchored" data-anchor-id="tasseled-cap-function"><span class="header-section-number">1.1.3.3.2</span> Tasseled Cap function</h5>
+<p><a href="https://pro.arcgis.com/en/pro-app/latest/help/analysis/raster-functions/tasseled-cap-function.htm#ESRI_SECTION1_6B9B732A91344B8782F925E4BE4ACA4F">ArcPro</a>’s explanation:</p>
+<p>The function is originally designed to monitor crop’s life cycle / changes through time.</p>
+<ul>
+<li><p>Brightness = bare or partially covered soil, man-made, and natural features such as concrete, asphalt, gravel, rock outcrops, and other bare areas</p></li>
+<li><p>Greenness = green vegetation</p></li>
+<li><p>Wetness = soil moisture, water, and other moist features.</p></li>
+</ul>
+<p>✔️ Those three components of imagery contain about 97% of the meaningful information available in the image (removing noise and atmospheric effects).</p>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="image/scatterplot_brightness_greeness_b11b12.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">e) PCA / Tasseled Cap function transformed</figcaption><p></p>
+<p></p><figcaption class="figure-caption">e) PCA / Tasseled Cap function transformed (May 2022)</figcaption><p></p>
 </figure>
 </div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/Tasseled_Cap_function_transformed2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">f) PCA / Tasseled Cap function transformed (November 2022)</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>(Darker) blue and red areas are generally unchanged - representing water (lakes/reservoir/sea), soil and built-up area. The pink areas are built-up areas / concrete / asphalt / human-made (e.g.&nbsp;southern inner bay’s long linear shape is the airport, and western area on the main island is the most populous town)</p>
+<p>Greenness in Fig. e is less than that in Fig. f, indicating the vegetation is less in May. During May (or generally spring time), there should be roughly similar amount of vegetation / crops, compared to November (autumn), while the crops during autumn reach maturity leading to more greenness in the latter figure.</p>
+<p>It might also be the case that the light blue areas are soil moisture / higher humidity. As can be seen from both figures, the shaded blue areas in the central/slightly eastern-central location of the largest island is mountainous. The humidity can be higher there.</p>
+<p>Another difference between the two images is that the redness is more intense in the first figure (more NIR?), while more organgy in the second. This indicates that the those areas are soil or bare areas. During autumn, the vegetation on those land increase, so the yellowness/greenness overlays.</p>
 </section>
-<section id="qgis-vs.-snap" class="level3" data-number="1.1.5">
-<h3 data-number="1.1.5" class="anchored" data-anchor-id="qgis-vs.-snap"><span class="header-section-number">1.1.5</span> QGIS vs.&nbsp;SNAP</h3>
-<p>o QGIS:</p>
+<section id="landsat" class="level5" data-number="1.1.3.3.3">
+<h5 data-number="1.1.3.3.3" class="anchored" data-anchor-id="landsat"><span class="header-section-number">1.1.3.3.3</span> Landsat</h5>
+<p>To mitigate the atmospheric effects (cloudy and foggy from April to May and rainy during summer) (and also due to data availability), the sensing time for Landsat is in December.</p>
+</section>
+<section id="compare-spectral-signatures" class="level5" data-number="1.1.3.3.4">
+<h5 data-number="1.1.3.3.4" class="anchored" data-anchor-id="compare-spectral-signatures"><span class="header-section-number">1.1.3.3.4</span> Compare spectral signatures</h5>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/spectral_reflectance_sen.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Spectral reflectance Sentinel</figcaption><p></p>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/spectral_reflectance_lsat.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Spectral reflectance Landsat</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>The ranges of the datasets are different visually. Landsat has higher mean reflectance for all land cover in all bands.</p>
+<p>For both sensors, the relationship between each land cover is similar, with water, forest and grass having lowest reflectance, and albeit less visible in Sentinel, bare earth having highest reflectance.</p>
+<p>Then, t-test is conducted to test the difference in average of the land cover reflectance between sensors.</p>
+<table class="table">
+<caption>Welch two sample t-test (Sentinel and Landsat)</caption>
+<thead>
+<tr class="header">
+<th>landcover</th>
+<th>t</th>
+<th>df</th>
+<th>p-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>low_urban</td>
+<td>-136.65</td>
+<td>2024.3</td>
+<td>&lt; 2.2e-16</td>
+</tr>
+<tr class="even">
+<td>high_urban</td>
+<td>-299.51</td>
+<td>6706.5</td>
+<td>&lt; 2.2e-16</td>
+</tr>
+<tr class="odd">
+<td>bare_earth</td>
+<td>-238.64</td>
+<td>6347.2</td>
+<td>&lt; 2.2e-16</td>
+</tr>
+<tr class="even">
+<td>grass</td>
+<td>-76.054</td>
+<td>601.63</td>
+<td>&lt; 2.2e-16</td>
+</tr>
+<tr class="odd">
+<td>forest</td>
+<td>-269.72</td>
+<td>7087.8</td>
+<td>&lt; 2.2e-16</td>
+</tr>
+<tr class="even">
+<td>water</td>
+<td>-157.95</td>
+<td>348.97</td>
+<td>&lt; 2.2e-16</td>
+</tr>
+</tbody>
+</table>
+<p>Since p-values are all below 0.05, the difference in average reflectance of Landsat and of Sentinel data is statistically significant.</p>
+</section>
+</section>
+<section id="qgis-vs.-snap" class="level4" data-number="1.1.3.4">
+<h4 data-number="1.1.3.4" class="anchored" data-anchor-id="qgis-vs.-snap"><span class="header-section-number">1.1.3.4</span> QGIS vs.&nbsp;SNAP</h4>
+<p>QGIS:</p>
 <ul>
-<li>easy to check stuff</li>
+<li>easy to check stuff / visualize outputs</li>
 </ul>
-<p>o SNAP: pre-processing and analysing remotely sensed / raster data. For sentinel and other sensors comparison</p>
+<p>SNAP: pre-processing and analysing remotely sensed / raster data. For sentinel and other sensors comparison</p>
 <ul>
 <li>Easier to recreate TCC</li>
 <li>Can manually set the histogram / contract enhancement as in QGIS</li>
-<li>having data from multiple sensors in the same software that can be explored together</li>
+<li>Having data from multiple sensors in the same software that can be explored together</li>
+<li>but it’s a pain to reopen a project.. and I found when setting up the project, it’s more straightforward to create a new project before opening up a product.</li>
+</ul>
+<p>Two software can work together (using QGIS to check everything as did in CASA0005).</p>
+<ul>
+<li>when i checked GeoTIFFs and shapefiles in QGIS, nothing is shown.. so probably something went wrong when selecting POIs.</li>
 </ul>
 </section>
-<section id="questions" class="level3" data-number="1.1.6">
-<h3 data-number="1.1.6" class="anchored" data-anchor-id="questions"><span class="header-section-number">1.1.6</span> Questions</h3>
+</section>
+<section id="questions" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="questions"><span class="header-section-number">1.1.4</span> Questions</h3>
 <ol type="1">
 <li><p>why in the practical book before Landsat when resampling Sentinel, the equation for brightness does not include B11 and B12 (but using 0.5082 and 0.1863)?</p>
 <p>A: It should be B11 and B12.</p></li>
