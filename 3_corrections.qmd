@@ -60,7 +60,7 @@ Ground central point: GCP
 
     -   edge feathering: specify objects (e.g. roads/rivers) as edge
 
-#### Practical: Merging imagery 
+#### Practical: Merging imagery
 
 Although Kinmen County is rather a small area, covered sufficiently within one tile of the Landsat imagery, another adjacent tile would be chosen to practice merging.
 
