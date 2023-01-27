@@ -6,17 +6,17 @@ title: "Introduction"
 
 ### Sensors
 
-+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+
-|           | Passive                                                                                                                                                                                      | Active                            |
-+===========+==============================================================================================================================================================================================+===================================+
-| Attribute | Sun energy reflection in EM wave, don't emit EM waves                                                                                                                                        | Emit and receive EM wave / energy |
-+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+
-| Example   | human eyes, satellite (e.g. Wk2 sensor summary - WorldView-3)                                                                                                                                | radar, x-ray, LiDAR               |
-+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+
-| ❌        | Influenced by atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather |                                   |
-+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+
-| ✔️        | does not disturb the object or area of interest                                                                                                                                              | can pass clouds                   |
-+-----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+
++-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+
+|                                                                             | Passive                                                                                                                                                                                      | Active                            |
++=============================================================================+==============================================================================================================================================================================================+===================================+
+| Attribute                                                                   | Sun energy reflection in EM wave, don't emit EM waves                                                                                                                                        | Emit and receive EM wave / energy |
++-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+
+| Example                                                                     | human eyes, satellite (e.g. Wk2 sensor summary - WorldView-3)                                                                                                                                | radar, x-ray, LiDAR               |
++-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+
+| ❌                                                                          | Influenced by atmosphere Haze (require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather |                                   |
++-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+
+| ✔️ \| does not disturb the object or area of interest \| can pass clouds \| |                                                                                                                                                                                              |                                   |
++-----------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+
 
 : Passive and active sensors
 
@@ -200,21 +200,21 @@ For both sensors, the relationship between each land cover is similar, with wate
 
 Then, t-test is conducted to test the difference in average of the land cover reflectance between two sensors.
 
-+---------------+------------------+---------------+---------------+
-| landcover     | t                | df            | p-value       |
-+===============+==================+===============+===============+
-| low_urban     | -129.55          | 2224.5        | \< 2.2e-16    |
-+---------------+------------------+---------------+---------------+
-| high_urban    | -289.79          | 7115.3        | \< 2.2e-16    |
-+---------------+------------------+---------------+---------------+
-| bare_earth    | -223.36          | 7141.2        | \< 2.2e-16    |
-+---------------+------------------+---------------+---------------+
-| grass         | -71.533          | 674.71        | \< 2.2e-16    |
-+---------------+------------------+---------------+---------------+
-| forest        | -256.12          | 7799.9        | \< 2.2e-16    |
-+---------------+------------------+---------------+---------------+
-| water         | -175.3           | 270.91        | \< 2.2e-16    |
-+---------------+------------------+---------------+---------------+
++---------------+----------------+---------------+---------------+
+| landcover     | t              | df            | p-value       |
++===============+================+===============+===============+
+| low_urban     | -129.55        | 2224.5        | \< 2.2e-16    |
++---------------+----------------+---------------+---------------+
+| high_urban    | -289.79        | 7115.3        | \< 2.2e-16    |
++---------------+----------------+---------------+---------------+
+| bare_earth    | -223.36        | 7141.2        | \< 2.2e-16    |
++---------------+----------------+---------------+---------------+
+| grass         | -71.533        | 674.71        | \< 2.2e-16    |
++---------------+----------------+---------------+---------------+
+| forest        | -256.12        | 7799.9        | \< 2.2e-16    |
++---------------+----------------+---------------+---------------+
+| water         | -175.3         | 270.91        | \< 2.2e-16    |
++---------------+----------------+---------------+---------------+
 
 : Table 1. Welch two sample t-test (Sentinel and Landsat)
 
@@ -255,7 +255,9 @@ Two software can work together (using QGIS to check everything as did in CASA000
 
 One more question would be what possible factors contribute to the difference in mean reflectance analysed above and how to mitigate the difference. Apart from the atmospheric window discussed above, the temporal difference in the sensing date (19th November 2022 for Sentinel and 19th December 2022 for Landsat) might contribute to difference in atmospheric effects and in path radiance / noise from sky irradiance and radiance from surrounding areas. Hence, to increase data consistency and reduce reflectance difference for similar sensors, removing atmospheric effects and noise is needed this could be done through linear regression methods (e.g. to get surface reflectance for Sentinel using radiometric calibration method) (see Week 3). Moreover, Time-series-based Reflectance Adjustment (TRA) approach is developed to mitigate the drawbacks of fixed/global band transformation coefficients by considering difference in land cover type and locations [@shang2019a].
 
-(However, if just using one sensor for analysis, there would be no/less concerns on the consistency issue?)
+::: callout-note
+However, if just using one sensor for analysis, there would be no/less concerns on the consistency issue?
+:::
 
 ## Reflection
 
