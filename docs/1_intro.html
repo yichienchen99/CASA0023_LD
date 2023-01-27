@@ -20,6 +20,25 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -272,8 +291,8 @@ ul.task-list li input[type="checkbox"] {
 <thead>
 <tr class="header">
 <th></th>
-<th><a href="https://scihub.copernicus.eu/dhus/#/home">Sentinel</a></th>
-<th><a href="https://earthexplorer.usgs.gov/">Landsat</a></th>
+<th><a href="https://scihub.copernicus.eu/dhus/#/home">Sentinel</a>-2</th>
+<th><a href="https://earthexplorer.usgs.gov/">Landsat</a> (<strong>8-9 Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS)</strong>)</th>
 </tr>
 </thead>
 <tbody>
@@ -288,8 +307,18 @@ ul.task-list li input[type="checkbox"] {
 <td>16 days</td>
 </tr>
 <tr class="odd">
+<td>Spectral resolution</td>
+<td>13 spectral bands</td>
+<td>9 spectral bands</td>
+</tr>
+<tr class="even">
 <td><a href="https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-2-msi/resolutions/spatial">Central wavelength</a></td>
 <td>B1 443nm = Band 1 has central wavelength of 442 nm</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
 <td></td>
 </tr>
 <tr class="even">
@@ -435,8 +464,8 @@ ul.task-list li input[type="checkbox"] {
 <h5 data-number="1.1.3.3.3" class="anchored" data-anchor-id="landsat"><span class="header-section-number">1.1.3.3.3</span> Landsat</h5>
 <p>To mitigate the atmospheric effects (cloudy and foggy from April to May and rainy during summer) (and also due to data availability), the sensing time for Landsat is in December.</p>
 </section>
-<section id="compare-spectral-signatures" class="level5" data-number="1.1.3.3.4">
-<h5 data-number="1.1.3.3.4" class="anchored" data-anchor-id="compare-spectral-signatures"><span class="header-section-number">1.1.3.3.4</span> Compare spectral signatures</h5>
+<section id="compare-spectral-reflectance" class="level5" data-number="1.1.3.3.4">
+<h5 data-number="1.1.3.3.4" class="anchored" data-anchor-id="compare-spectral-reflectance"><span class="header-section-number">1.1.3.3.4</span> Compare spectral reflectance</h5>
 <div class="quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -462,6 +491,12 @@ ul.task-list li input[type="checkbox"] {
 <p>Then, t-test is conducted to test the difference in average of the land cover reflectance between two sensors.</p>
 <table class="table">
 <caption>Table 1. Welch two sample t-test (Sentinel and Landsat)</caption>
+<colgroup>
+<col style="width: 22%">
+<col style="width: 29%">
+<col style="width: 22%">
+<col style="width: 22%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>landcover</th>
@@ -473,43 +508,50 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td>low_urban</td>
-<td>-136.65</td>
-<td>2024.3</td>
+<td>-129.55</td>
+<td>2224.5</td>
 <td>&lt; 2.2e-16</td>
 </tr>
 <tr class="even">
 <td>high_urban</td>
-<td>-299.51</td>
-<td>6706.5</td>
+<td>-289.79</td>
+<td>7115.3</td>
 <td>&lt; 2.2e-16</td>
 </tr>
 <tr class="odd">
 <td>bare_earth</td>
-<td>-238.64</td>
-<td>6347.2</td>
+<td>-223.36</td>
+<td>7141.2</td>
 <td>&lt; 2.2e-16</td>
 </tr>
 <tr class="even">
 <td>grass</td>
-<td>-76.054</td>
-<td>601.63</td>
+<td>-71.533</td>
+<td>674.71</td>
 <td>&lt; 2.2e-16</td>
 </tr>
 <tr class="odd">
 <td>forest</td>
-<td>-269.72</td>
-<td>7087.8</td>
+<td>-256.12</td>
+<td>7799.9</td>
 <td>&lt; 2.2e-16</td>
 </tr>
 <tr class="even">
 <td>water</td>
-<td>-157.95</td>
-<td>348.97</td>
+<td>-175.3</td>
+<td>270.91</td>
 <td>&lt; 2.2e-16</td>
 </tr>
 </tbody>
 </table>
 <p>Since p-values are all below 0.05, the difference in average reflectance of Landsat and of Sentinel data is statistically significant.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/Landsat.v.Sentinel-2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">i) Landsat vs.&nbsp;Sentinel (NASA, 2015)</figcaption><p></p>
+</figure>
+</div>
+<p>Fig. i from <a href="https://landsat.gsfc.nasa.gov/wp-content/uploads/2015/06/Landsat.v.Sentinel-2.png">NASA</a> shows that spectral bands are similar between Landsat 8 and Sentinel-2, except TIRS. Hence, the comparison above is possible. However, the atmospheric transmission varies. Sentinel bands have higher atmospheric transmission rate (white areas) and relatively low reflectance across all land cover type. Conversely, most Landsat bands are in atmospheric windows (gery areas), which allow energy to pass through the atmosphere, thus resulting in higher reflectance.&nbsp;</p>
 </section>
 </section>
 <section id="qgis-vs.-snap" class="level4" data-number="1.1.3.4">
@@ -543,11 +585,22 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="application" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="application"><span class="header-section-number">1.2</span> Application</h2>
+<p>One more question would be what possible factors contribute to the difference in mean reflectance analysed above and how to mitigate the difference. Apart from the atmospheric window discussed above, the temporal difference in the sensing date (19th November 2022 for Sentinel and 19th December 2022 for Landsat) might contribute to difference in atmospheric effects and in path radiance / noise from sky irradiance and radiance from surrounding areas. Hence, to increase data consistency and reduce reflectance difference for similar sensors, removing atmospheric effects and noise is needed this could be done through linear regression methods (e.g.&nbsp;to get surface reflectance for Sentinel using radiometric calibration method) (see Week 3). Moreover, Time-series-based Reflectance Adjustment (TRA) approach is developed to mitigate the drawbacks of fixed/global band transformation coefficients by considering difference in land cover type and locations <span class="citation" data-cites="shang2019a">(<a href="references.html#ref-shang2019a" role="doc-biblioref">Shang and Zhu 2019a</a>)</span>.</p>
+<p>(However, if just using one sensor for analysis, there would be no/less concerns on the consistency issue?)</p>
 </section>
 <section id="reflection" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="reflection"><span class="header-section-number">1.3</span> Reflection</h2>
+<p>There are so many wrong decisions made when producing this analysis. And without solid understanding of concepts/theories, the practical is like a maze 👾. It would be more efficient to do the practical after fully understanding every concept and data (although it is also rewarding to discover and learn from mistakes..). For instance, when comparing the spectral reflectance of Landsat and Sentinel, i selected band 1 to 7 for both sensors at first. However, after reading the paper by Shang and Zhu <span class="citation" data-cites="shang2019">(<a href="references.html#ref-shang2019" role="doc-biblioref">2019b</a>)</span>, i realized the wavelengths ranges/band numbers are different for both sensors (e.g.&nbsp;NIR is band 5 in Landsat while 8A for Sentinel.) After modifying this mistake, the overall patterns do not change much, albeit slight difference in t-statistics.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
+<div id="ref-shang2019" class="csl-entry" role="doc-biblioentry">
+Shang, Rong, and Zhe Zhu. 2019b. <span>“Harmonizing Landsat 8 and Sentinel-2: A Time-Series-Based Reflectance Adjustment Approach.”</span> <em>Remote Sensing of Environment</em> 235 (December): 111439. <a href="https://doi.org/10.1016/j.rse.2019.111439">https://doi.org/10.1016/j.rse.2019.111439</a>.
+</div>
+<div id="ref-shang2019a" class="csl-entry" role="doc-biblioentry">
+———. 2019a. <span>“Harmonizing Landsat 8 and Sentinel-2: A Time-Series-Based Reflectance Adjustment Approach.”</span> <em>Remote Sensing of Environment</em> 235 (December): 111439. <a href="https://doi.org/10.1016/j.rse.2019.111439">https://doi.org/10.1016/j.rse.2019.111439</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

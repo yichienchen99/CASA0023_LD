@@ -6,188 +6,196 @@ title: "Corrections"
 
 ### Corrections
 
-1.  Geometric Corrections
+#### Geometric Corrections
 
-    -   To reduce geometric distortion
+-   To reduce geometric distortion
 
-    -   Off-Nadir -\> Nadir
+-   Off-Nadir -\> Nadir
 
-    Ground central point: GCP
+Ground central point: GCP
 
-    :   A ground control point (GCP) is a location on the surface of the Earth (e.g., a road intersection) that can be identified on the imagery and located accurately on a map.
+:   A ground control point (GCP) is a location on the surface of the Earth (e.g., a road intersection) that can be identified on the imagery and located accurately on a map.
 
-        (Objects (e.g. building) on the image that do not move, as the reference point of corrections.)
+    (Objects (e.g. building) on the image that do not move, as the reference point of corrections.)
 
-    -   Coordinates of each GCP -\> linear regression
+-   Coordinates of each GCP -\> linear regression
 
-    -   Reduce error \<- increase GCP
+-   Reduce error \<- increase GCP
 
-    -   Requirement for corrections:
+-   Requirement for corrections:
 
-        1.  same resolution (resampling)
-        2.  same CRS (reprojecting)
+    1.  same resolution (resampling)
+    2.  same CRS (reprojecting)
 
-    1.  Image-to-map rectification (rectify remotely sensed data to a standard map projection)
-    2.  Image-to-image registration (remotely sensed data used in conjunction with other spatial information in a GIS)
+1.  Image-to-map rectification (rectify remotely sensed data to a standard map projection)
+2.  Image-to-image registration (remotely sensed data used in conjunction with other spatial information in a GIS)
 
-    -   Forward (input-to-output) mapping
+-   Forward (input-to-output) mapping
 
-        Forward mapping
+    Forward mapping
 
-        :   X: original image -\> Y: target image
+    :   X: original image -\> Y: target image
 
-        -   ✔️rectify the location of discrete coordinates found along a linear feature such as a road in a vector map
+    -   ✔️rectify the location of discrete coordinates found along a linear feature such as a road in a vector map
 
-        -   ❌possibility of points outside 'gold standard' (the rectified/targeted image) -\> output matrix pixel with no output value
+    -   ❌possibility of points outside 'gold standard' (the rectified/targeted image) -\> output matrix pixel with no output value
 
-    -   Inverse (output-to-input) mapping
+-   Inverse (output-to-input) mapping
 
-        Backward mapping
+    Backward mapping
 
-        :   X: target image -\> Y: original image
+    :   X: target image -\> Y: original image
 
-        ✔️ use points on 'gold standard' to match point on original data
+    ✔️ use points on 'gold standard' to match point on original data
 
-    [![Forward and inverse mapping (Jensen, 2015)](image/geometriccorrection.png)](%5B@jensen2015%5D)
+[![Forward and inverse mapping (Jensen, 2015)](image/geometriccorrection.png)](%5B@jensen2015%5D)
 
-    -   Moisaicking
+-   Moisaicking
 
-        Mosaicking
+    Mosaicking
 
-        :   Moisaicking is the process of combining multiple images into a single seamless composite image.
+    :   Moisaicking is the process of combining multiple images into a single seamless composite image.
 
-        -   cut-line feathering: offset the edge of images by certain distance
+    -   cut-line feathering: offset the edge of images by certain distance
 
-        -   edge feathering: specify objects (e.g. roads/rivers) as edge
+    -   edge feathering: specify objects (e.g. roads/rivers) as edge
 
-2.  Atmospheric Corrections
+#### Practical: Merging imagery 
 
-    -   To mitigate the effect of scattering and absorption & to avoid loss of reflectance & signiture extension thorough space and time [@jensen2015]
+Although Kinmen County is rather a small area, covered sufficiently within one tile of the Landsat imagery, another adjacent tile would be chosen to practice merging.
 
-    -   Point Spread Function
+#### Atmospheric Corrections
 
-        Point Spread Function
+-   To mitigate the effect of scattering and absorption & to avoid loss of reflectance & signiture extension thorough space and time [@jensen2015]
 
-        :   Measured and modeled point spread functions (PSF) of sensor systems indicate that a significant portion of the recorded signal of each pixel of a satellite image originates from outside the area represented by that pixel. This hinders the ability to derive surface information from satellite images on a per-pixel basis [@huang2002].
+-   Point Spread Function
 
-    -   Relative
+    Point Spread Function
 
-    -   1\) to normalize the intensities among the different bands within a single-date remotely sensed image, and 2) to normalize the intensities of bands of remote sensor data in multiple dates of imagery to a standard scene selected by the analyst.
+    :   Measured and modeled point spread functions (PSF) of sensor systems indicate that a significant portion of the recorded signal of each pixel of a satellite image originates from outside the area represented by that pixel. This hinders the ability to derive surface information from satellite images on a per-pixel basis [@huang2002].
 
-        1.  Dark object subtraction (DOS)
+-   Relative
 
-            ❌ assuming unusual brightness of darkest pixel as atmosphere
+-   1\) to normalize the intensities among the different bands within a single-date remotely sensed image, and 2) to normalize the intensities of bands of remote sensor data in multiple dates of imagery to a standard scene selected by the analyst.
 
-        2.  Multiple-date image normalization using regression
+    1.  Dark object subtraction (DOS)
 
-            -   Pseudo-Invariant Features (PIFs) selection = radiometric GCP
+        ❌ assuming unusual brightness of darkest pixel as atmosphere
 
-            -   Requirements of PIF: 1) little changes through time; 2) similar elevation as other land in scene; 3) minimal vegetation; 4) in a relatively flat area.
+    2.  Multiple-date image normalization using regression
 
-            Use middle of years, Y: base image
+        -   Pseudo-Invariant Features (PIFs) selection = radiometric GCP
 
-    -   Absolute
+        -   Requirements of PIF: 1) little changes through time; 2) similar elevation as other land in scene; 3) minimal vegetation; 4) in a relatively flat area.
 
-        ❌ High data requirement (fieldwork/...); High software requirement (costy)
+        Use middle of years, Y: base image
 
-        ✔️Digital counts in satellite / aircraft image data -\> scaled surface reflectance
+-   Absolute
 
-        1.  Empirical Line Calibration (ELC)
-            -   Requirements:
+    ❌ High data requirement (fieldwork/...); High software requirement (costy)
 
-                1.  Two or more areas in the scene with different albedos (e.g., one bright target such as sand and one dark target such as a deep, nonturbid water body) & as homogeneous as possible \<- difficult.
-                2.  Sensor calibration coefficients
-                3.  Radiative transfer code (knowledge of sensor spectral profile & atmospheric properties at the time of data collection) [@jensen2015]
+    ✔️Digital counts in satellite / aircraft image data -\> scaled surface reflectance
 
-3.  Topographic Corrections (Orthorectification)
+    1.  Empirical Line Calibration (ELC)
+        -   Requirements:
 
-    -   To remove topographically induced illumination variation
+            1.  Two or more areas in the scene with different albedos (e.g., one bright target such as sand and one dark target such as a deep, nonturbid water body) & as homogeneous as possible \<- difficult.
+            2.  Sensor calibration coefficients
+            3.  Radiative transfer code (knowledge of sensor spectral profile & atmospheric properties at the time of data collection) [@jensen2015]
 
-        Illumination
+#### Topographic Corrections (Orthorectification)
 
-        :   the cosine of the incident solar angle, thus representing the proportion of the direct solar radiation hitting a pixel.
+-   To remove topographically induced illumination variation
 
-    -   Requirements: sensor geometry & elevation model
+    Illumination
 
-    -   Should be done after atmospheric corrections
+    :   the cosine of the incident solar angle, thus representing the proportion of the direct solar radiation hitting a pixel.
 
-    -   Cosine Function: $LH=LT\frac{cosθO}{cosi}$
+-   Requirements: sensor geometry & elevation model
 
-        Zenith
+-   Should be done after atmospheric corrections
 
-        :   The solar zenith angle is the zenith angle of the sun, i.e., the angle between the sun's rays and the vertical direction. Solar zenith angle is normally used in combination with the solar azimuth angle to determine the position of the Sun as observed from a given location on the surface of the Earth.
+-   Cosine Function: $LH=LT\frac{cosθO}{cosi}$
 
-        Azimuth
+    Zenith
 
-        :   The solar azimuth angle is the azimuth (horizontal angle with respect to north) of the Sun's position.
+    :   The solar zenith angle is the zenith angle of the sun, i.e., the angle between the sun's rays and the vertical direction. Solar zenith angle is normally used in combination with the solar azimuth angle to determine the position of the Sun as observed from a given location on the surface of the Earth.
 
-    ![Zenith angle and cosine function (Jensen, 2015)](image/cosinefunction.png){width="300"}
+    Azimuth
 
-    -   ❌ not considering diffuse skylight / light reflected from surrounding mountainsides
+    :   The solar azimuth angle is the azimuth (horizontal angle with respect to north) of the Sun's position.
 
-    -   smaller cos i -\> greater over-correction [@jensen2015]
+![Zenith angle and cosine function (Jensen, 2015)](image/cosinefunction.png){width="300"}
 
-4.  Radiometric Calibrations
+-   ❌ not considering diffuse skylight / light reflected from surrounding mountainsides
 
-    -   Digital number of each pixel = raw, unitless
+-   smaller cos i -\> greater over-correction [@jensen2015]
 
-    -   Regression = unit
+#### Radiometric Calibrations
 
-    -   Reflectance (BOA) = comparable
+-   Digital number of each pixel = raw, unitless
 
-    -   TOA radiance -\> TOA reflectance = no light
+-   Regression = unit
 
-    -   Surface reflectance = no light, no atmosphere
+-   Reflectance (BOA) = comparable
 
-    -   Hemispherical reflectance (e.g. in Labs)
+-   TOA radiance -\> TOA reflectance = no light
 
-    -   Apparent reflectance
+-   Surface reflectance = no light, no atmosphere
+
+-   Hemispherical reflectance (e.g. in Labs)
+
+-   Apparent reflectance
 
 ### Enhancement
 
-1.  Feathering / joining
+#### Feathering / joining
 
-    -   GEE: median
+-   GEE: median
 
-    -   surface reflectance data not comparable -\> standardization, normalization
+-   surface reflectance data not comparable -\> standardization, normalization
 
-2.  Image Enhancement
+#### Image Enhancement
 
-    1.  Contract enhancement (QGIS)
+1.  Contract enhancement (QGIS)
 
-        not changing data, but changing display
+    ✔️ not changing data, but the display
 
-    2.  Ratioing
+2.  Ratioing
 
-        divide / compare bands with each other, normalized surface reflectance
+    divide / compare bands with each other, normalized surface reflectance
 
-    3.  Filtering
+    ✔️ identify a certain landscape feature
 
-    4.  PCA
+    Example: Normalised Difference Vegetation Index (NDVI)
 
-    5.  Texture analysis
+3.  Filtering
 
-        1st order occurrence: ✔️classification
+4.  PCA
 
-        Edge of building enhanced via 1st order variance
+5.  Texture analysis
 
-        2nd order co-occurrence: ✔️classification improvement and additional info (to other bands)
+    1st order occurrence: ✔️classification
 
-        can then be used in PCA
+    Edge of building enhanced via 1st order variance
 
-    6.  Fusion
+    2nd order co-occurrence: ✔️classification improvement and additional info (to other bands)
 
-        Combine bands from different sensors / texture analysis layer
+    can then be used in PCA
 
-        Resampling - different pixel/location
+6.  Fusion
 
-        -   Decision
+    Combine bands from different sensors / texture analysis layer
 
-        -   Object
+    Resampling - different pixel/location
 
-        -   Image
+    -   Decision
 
-            Pan sharpen: for better visualization
+    -   Object
+
+    -   Image
+
+        Pan sharpen: for better visualization
 
 ### Questions
 

@@ -80,13 +80,17 @@ Since Landsat has different spatial resolution than Sentinel, the latter will be
 -   Landsat has less available data in a given time range (due to slightly longer revisit time).
 
 +-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                                                                                                                   | [Sentinel](https://scihub.copernicus.eu/dhus/#/home)                                           | [Landsat](https://earthexplorer.usgs.gov/)                                                                                                                                                       |
+|                                                                                                                   | [Sentinel](https://scihub.copernicus.eu/dhus/#/home)-2                                         | [Landsat](https://earthexplorer.usgs.gov/) (**8-9 Operational Land Imager (OLI) and Thermal Infrared Sensor (TIRS)**)                                                                            |
 +===================================================================================================================+================================================================================================+==================================================================================================================================================================================================+
 | Spatial resolution                                                                                                | Resolutions varied for each bands. (E.g. 10m resolution for Band 2)                            | 30m resolution                                                                                                                                                                                   |
 +-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Temporal resolution                                                                                               | 10 days (5 days for combined constellation 2A & 2B)                                            | 16 days                                                                                                                                                                                          |
 +-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Spectral resolution                                                                                               | 13 spectral bands                                                                              | 9 spectral bands                                                                                                                                                                                 |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | [Central wavelength](https://sentinels.copernicus.eu/web/sentinel/user-guides/sentinel-2-msi/resolutions/spatial) | B1 443nm = Band 1 has central wavelength of 442 nm                                             |                                                                                                                                                                                                  |
++-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|                                                                                                                   |                                                                                                |                                                                                                                                                                                                  |
 +-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Process by Software**                                                                                           | **QGIS**                                                                                       | **SNAP**                                                                                                                                                                                         |
 +-------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -177,7 +181,7 @@ Another difference between the two images is that the redness is more intense in
 
 To mitigate the atmospheric effects (cloudy and foggy from April to May and rainy during summer) (and also due to data availability), the sensing time for Landsat is in December.
 
-##### Compare spectral signatures
+##### Compare spectral reflectance
 
 ::: {layout-nrow="1"}
 ![g) Spectral reflectance Sentinel](image/spectral_reflectance_sen.png){fig-align="center"}
@@ -191,18 +195,29 @@ For both sensors, the relationship between each land cover is similar, with wate
 
 Then, t-test is conducted to test the difference in average of the land cover reflectance between two sensors.
 
-| landcover  | t       | df     | p-value    |
-|------------|---------|--------|------------|
-| low_urban  | -136.65 | 2024.3 | \< 2.2e-16 |
-| high_urban | -299.51 | 6706.5 | \< 2.2e-16 |
-| bare_earth | -238.64 | 6347.2 | \< 2.2e-16 |
-| grass      | -76.054 | 601.63 | \< 2.2e-16 |
-| forest     | -269.72 | 7087.8 | \< 2.2e-16 |
-| water      | -157.95 | 348.97 | \< 2.2e-16 |
++---------------+--------------------+---------------+---------------+
+| landcover     | t                  | df            | p-value       |
++===============+====================+===============+===============+
+| low_urban     | -129.55            | 2224.5        | \< 2.2e-16    |
++---------------+--------------------+---------------+---------------+
+| high_urban    | -289.79            | 7115.3        | \< 2.2e-16    |
++---------------+--------------------+---------------+---------------+
+| bare_earth    | -223.36            | 7141.2        | \< 2.2e-16    |
++---------------+--------------------+---------------+---------------+
+| grass         | -71.533            | 674.71        | \< 2.2e-16    |
++---------------+--------------------+---------------+---------------+
+| forest        | -256.12            | 7799.9        | \< 2.2e-16    |
++---------------+--------------------+---------------+---------------+
+| water         | -175.3             | 270.91        | \< 2.2e-16    |
++---------------+--------------------+---------------+---------------+
 
 : Table 1. Welch two sample t-test (Sentinel and Landsat)
 
 Since p-values are all below 0.05, the difference in average reflectance of Landsat and of Sentinel data is statistically significant.
+
+![i) Landsat vs. Sentinel (NASA, 2015)](image/Landsat.v.Sentinel-2.png){fig-align="center"}
+
+Fig. i from [NASA](https://landsat.gsfc.nasa.gov/wp-content/uploads/2015/06/Landsat.v.Sentinel-2.png) shows that spectral bands are similar between Landsat 8 and Sentinel-2, except TIRS. Hence, the comparison above is possible. However, the atmospheric transmission varies. Sentinel bands have higher atmospheric transmission rate (white areas) and relatively low reflectance across all land cover type. Conversely, most Landsat bands are in atmospheric windows (gery areas), which allow energy to pass through the atmosphere, thus resulting in higher reflectance. 
 
 #### QGIS vs. SNAP
 
@@ -233,4 +248,10 @@ Two software can work together (using QGIS to check everything as did in CASA000
 
 ## Application
 
+One more question would be what possible factors contribute to the difference in mean reflectance analysed above and how to mitigate the difference. Apart from the atmospheric window discussed above, the temporal difference in the sensing date (19th November 2022 for Sentinel and 19th December 2022 for Landsat) might contribute to difference in atmospheric effects and in path radiance / noise from sky irradiance and radiance from surrounding areas. Hence, to increase data consistency and reduce reflectance difference for similar sensors, removing atmospheric effects and noise is needed this could be done through linear regression methods (e.g. to get surface reflectance for Sentinel using radiometric calibration method) (see Week 3). Moreover, Time-series-based Reflectance Adjustment (TRA) approach is developed to mitigate the drawbacks of fixed/global band transformation coefficients by considering difference in land cover type and locations [@shang2019a].
+
+(However, if just using one sensor for analysis, there would be no/less concerns on the consistency issue?)
+
 ## Reflection
+
+There are so many wrong decisions made when producing this analysis. And without solid understanding of concepts/theories, the practical is like a maze 👾. It would be more efficient to do the practical after fully understanding every concept and data (although it is also rewarding to discover and learn from mistakes..). For instance, when comparing the spectral reflectance of Landsat and Sentinel, i selected band 1 to 7 for both sensors at first. However, after reading the paper by Shang and Zhu [-@shang2019], i realized the wavelengths ranges/band numbers are different for both sensors (e.g. NIR is band 5 in Landsat while 8A for Sentinel.) After modifying this mistake, the overall patterns do not change much, albeit slight difference in t-statistics.
