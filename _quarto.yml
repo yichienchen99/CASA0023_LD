@@ -5,7 +5,7 @@ project:
 book:
   title: "CASA0023_LD"
   author: "Yi-Chien Chen"
-  date: "`r Sys.Date()`"
+  date: "25-01-2023"
   chapters:
     - index.qmd
     - intro.qmd

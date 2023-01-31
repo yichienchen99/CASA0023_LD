@@ -1,16 +1,11 @@
 # Content {.unnumbered}
 
 1.  Introduction
-    -   Remote sensing intro / sensors / resolutions
-
-```{=html}
-<!-- -->
-```
+    -   Remote sensing data intro / sensors / resolutions
 2.  Sensor - WorldView3
-
 3.  Corrections
-
-    -   Corrections / Enhancement
+    -   Corrections / Enhancements
+4.  Policy
 
 ## Structure (of each chapter)
 
