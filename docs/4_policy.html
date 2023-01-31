@@ -166,12 +166,13 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#summary-reflection" id="toc-summary-reflection" class="nav-link active" data-scroll-target="#summary-reflection"><span class="toc-section-number">4.1</span>  Summary &amp; Reflection</a>
+  <li><a href="#summary-application" id="toc-summary-application" class="nav-link active" data-scroll-target="#summary-application"><span class="toc-section-number">4.1</span>  Summary &amp; Application</a>
   <ul class="collapse">
   <li><a href="#policy-challenge-in-london" id="toc-policy-challenge-in-london" class="nav-link" data-scroll-target="#policy-challenge-in-london"><span class="toc-section-number">4.1.1</span>  Policy Challenge in London</a></li>
   <li><a href="#green-belt-and-open-space" id="toc-green-belt-and-open-space" class="nav-link" data-scroll-target="#green-belt-and-open-space"><span class="toc-section-number">4.1.2</span>  Green Belt and open space</a></li>
   <li><a href="#linkages-to-global-goals" id="toc-linkages-to-global-goals" class="nav-link" data-scroll-target="#linkages-to-global-goals"><span class="toc-section-number">4.1.3</span>  Linkages to global goals</a></li>
   <li><a href="#advancing-local-national-and-global-approach" id="toc-advancing-local-national-and-global-approach" class="nav-link" data-scroll-target="#advancing-local-national-and-global-approach"><span class="toc-section-number">4.1.4</span>  Advancing local, national and global approach</a></li>
+  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question"><span class="toc-section-number">4.1.5</span>  Question</a></li>
   </ul></li>
   <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection"><span class="toc-section-number">4.2</span>  Reflection</a></li>
   </ul>
@@ -197,8 +198,8 @@ div.csl-indent {
 
 </header>
 
-<section id="summary-reflection" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="summary-reflection"><span class="header-section-number">4.1</span> Summary &amp; Reflection</h2>
+<section id="summary-application" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="summary-application"><span class="header-section-number">4.1</span> Summary &amp; Application</h2>
 <p>(the summary of the policy and city you have selected)</p>
 <p>(how the remotely sensed data you sourced could be used to assist with contributing to the policy goal. How could the data be applied to solve the policy challenge.)</p>
 <section id="policy-challenge-in-london" class="level3" data-number="4.1.1">
@@ -256,47 +257,32 @@ div.csl-indent {
 <li>Analyse spatial and temporal patterns of urban growth and loss of greenspace.</li>
 <li>Investigate the quality of GB and open greenspace. (since it is found that densification of existing urban areas and development of inner-city brownfield sites are the main source of land use change, instead of expansion to GB which is controlled by GB policies in 2000 <span class="citation" data-cites="acompar2017">(<a href="references.html#ref-acompar2017" role="doc-biblioref"><span>“A Comparison of Greenspace Loss and Urban Expansion over Time in London and Nairobi <span></span> EOES Hub”</span> 2017</a>)</span>)</li>
 </ol>
-<table class="table">
-<colgroup>
-<col style="width: 4%">
-<col style="width: 21%">
-<col style="width: 18%">
-<col style="width: 55%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th colspan="3">Pro ✔️ | Con ❌ | | | | | | | |</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1 To measure heat vulnerability / temperature through LST</td>
-<td><p>1) strong correlations between LST and air temperature;</p>
-<p>2) Compared to other measures such as air and surface temperature values taken at meteorological stations with coarse spatial resolution, satellite imagery derived LST presents data at higher spatial resolutions, thereby enabling comparisons among different neighborhoods.</p></td>
-<td><p>1) does not fully capture the set of micrometeorological conditions that factor into human thermal comfort or heat stress;</p>
-<p>2) Some of the images might be covered by clouds, which could seriously affect LST estimates. =&gt; limit the data to only clear-sky images</p></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Dataset</td>
-<td><strong>MOD11A2</strong> <strong>Level-3 MODIS Land Surface Temperature and Emissivity (LST/E) 8-day products (1-km resolution)</strong> <span class="citation" data-cites="chen2022">(<a href="references.html#ref-chen2022" role="doc-biblioref">Chen, Lin, and Chiu 2022</a>)</span> ❌ Spatial resolution of 1-km might be too broad for land use analysis.. so may require downscaling (could be achieved based on the inverse relationship between LST and NDVI)</td>
-<td colspan="2"><strong>ECOSTRESS Land Surface Temperature and Emissivity products</strong> <span class="citation" data-cites="li2022">(<a href="references.html#ref-li2022" role="doc-biblioref">Li et al. 2022</a>)</span> ✔️ Fine-scaled atmospherically-corrected imagery throughout diurnal cycles at a 70m spatial resolution base on MODIS data, which allows the estimation of daytime and nighttime LSTs. | <strong>SOLWEIG:</strong> localised temperature modelling<span class="citation" data-cites="maclachlan2021">(<a href="references.html#ref-maclachlan2021" role="doc-biblioref">MacLachlan et al. 2021</a>)</span> Requirement: Elevation (EO: OSM+ CSIRO) + Land cover data (EO: OSM+ CSIRO) + Meteorological data (air temperature, relative humidity, barometric pressure, wind speed, wind direction, and downward shortwave radiation) (e.g.&nbsp;Perth International Airport weather station) ✔️ 1) compare temperature dynamics within low- and high-density urban areas; 2) use as a basis for assessing a planned redevelopment and how optimizing tree placement relative to modeled temperature values could assist in mitigating localized UHI impacts. ❌ Owing to these data frequently being unavailable in a spatially continuous form (e.g., raster data), the input required for SOLWEIG is often limited to point data, acquired from weather stations. |</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>2 To see the boundary of GB (land cover / land use changes)</td>
-<td><strong>Sentinel</strong> –&gt; classification (veg vs land) (e.g.&nbsp;a supervised classifier (Random Forest). <span class="citation" data-cites="acompar2017">(<a href="references.html#ref-acompar2017" role="doc-biblioref"><span>“A Comparison of Greenspace Loss and Urban Expansion over Time in London and Nairobi <span></span> EOES Hub”</span> 2017</a>)</span></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p>To see the boundary of GB (land cover / land use changes):</p>
+<ul>
+<li><strong>Sentinel</strong> –&gt; classification (veg vs land) (e.g.&nbsp;a supervised classifier (Random Forest). <span class="citation" data-cites="acompar2017">(<a href="references.html#ref-acompar2017" role="doc-biblioref"><span>“A Comparison of Greenspace Loss and Urban Expansion over Time in London and Nairobi <span></span> EOES Hub”</span> 2017</a>)</span></li>
+</ul>
+<p>To measure heat vulnerability / temperature through LST:</p>
+<ul>
+<li><p>✔️1) strong correlations between LST and air temperature;</p></li>
+<li><p>✔️2) Compared to other measures such as air and surface temperature values taken at meteorological stations with coarse spatial resolution, satellite imagery derived LST presents data at higher spatial resolutions, thereby enabling comparisons among different neighborhoods.</p></li>
+<li><p>❌1) does not fully capture the set of micrometeorological conditions that factor into human thermal comfort or heat stress;</p></li>
+<li><p>❌2) Some of the images might be covered by clouds, which could seriously affect LST estimates. =&gt; limit the data to only clear-sky images</p></li>
+<li><p><strong>MOD11A2</strong> <strong>Level-3 MODIS Land Surface Temperature and Emissivity (LST/E) 8-day products (1-km resolution)</strong> <span class="citation" data-cites="chen2022">(<a href="references.html#ref-chen2022" role="doc-biblioref">Chen, Lin, and Chiu 2022</a>)</span></p>
+<ul>
+<li>❌ Spatial resolution of 1-km might be too broad for land use analysis.. so may require downscaling (could be achieved based on the inverse relationship between LST and NDVI)</li>
+</ul></li>
+<li><p><strong>ECOSTRESS Land Surface Temperature and Emissivity products</strong> <span class="citation" data-cites="li2022">(<a href="references.html#ref-li2022" role="doc-biblioref">Li et al. 2022</a>)</span></p>
+<ul>
+<li>✔️ Fine-scaled atmospherically-corrected imagery throughout diurnal cycles at a 70m spatial resolution base on MODIS data, which allows the estimation of daytime and nighttime LSTs.</li>
+</ul></li>
+<li><p><strong>SOLWEIG:</strong> localised temperature modelling<span class="citation" data-cites="maclachlan2021">(<a href="references.html#ref-maclachlan2021" role="doc-biblioref">MacLachlan et al. 2021</a>)</span></p>
+<ul>
+<li><p>Requirement: Elevation (EO: OSM+ CSIRO) + Land cover data (EO: OSM+ CSIRO) + Meteorological data (air temperature, relative humidity, barometric pressure, wind speed, wind direction, and downward shortwave radiation) (e.g.&nbsp;Perth International Airport weather station)</p></li>
+<li><p>✔️ 1) compare temperature dynamics within low- and high-density urban areas;</p></li>
+<li><p>✔️ 2) use as a basis for assessing a planned redevelopment and how optimizing tree placement relative to modeled temperature values could assist in mitigating localized UHI impacts.</p></li>
+<li><p>❌ Owing to these data frequently being unavailable in a spatially continuous form (e.g., raster data), the input required for SOLWEIG is often limited to point data, acquired from weather stations.</p></li>
+</ul></li>
+</ul>
 </section>
 <section id="linkages-to-global-goals" class="level3" data-number="4.1.3">
 <h3 data-number="4.1.3" class="anchored" data-anchor-id="linkages-to-global-goals"><span class="header-section-number">4.1.3</span> Linkages to global goals</h3>
@@ -317,22 +303,35 @@ div.csl-indent {
 </section>
 <section id="advancing-local-national-and-global-approach" class="level3" data-number="4.1.4">
 <h3 data-number="4.1.4" class="anchored" data-anchor-id="advancing-local-national-and-global-approach"><span class="header-section-number">4.1.4</span> Advancing local, national and global approach</h3>
-<p>(local)</p>
-<p>Current protection of GB: 1) protected from inappropriate development. 2)improvement projects (discrete cases)</p>
-<p>Add-on values: Besides combating UHI (and preventing sprawl), GB also reduces <strong>air pollutions,</strong> provides <strong>local food source</strong> and enhances <strong>ecosystem and biodiversity.</strong> &nbsp;</p>
-<p>Optimization for plans: Global policies lack an effective <strong>data-driven approach</strong> in deriving <strong>optimal</strong> vegetative placement—particularly for reducing the ever-increasing socio-economic and environmental impacts associated with UHI effects <span class="citation" data-cites="maclachlan2021">(<a href="references.html#ref-maclachlan2021" role="doc-biblioref">MacLachlan et al. 2021</a>)</span></p>
-<p>Quality and monitoring. – long-term inspection of quality (changes through time and seasons – identify key areas for improvements / where to spend money on)</p>
-<p>(national)</p>
-<p>(global)</p>
-<p>Urban planning rarely integrates biodiversity and ecosystem services into service and design, aside from demonstration projects. (<u><strong>World Cities Report</strong></u>)</p>
+<p>Local</p>
+<ul>
+<li><p>Current protection of GB: 1) protected from inappropriate development. 2)improvement projects (discrete cases)</p></li>
+<li><p>Add-on values: Besides combating UHI (and preventing sprawl), GB also reduces <strong>air pollutions,</strong> provides <strong>local food source</strong> and enhances <strong>ecosystem and biodiversity.</strong> &nbsp;</p></li>
+<li><p>Optimization for plans: Global policies lack an effective <strong>data-driven approach</strong> in deriving <strong>optimal</strong> vegetative placement—particularly for reducing the ever-increasing socio-economic and environmental impacts associated with UHI effects <span class="citation" data-cites="maclachlan2021">(<a href="references.html#ref-maclachlan2021" role="doc-biblioref">MacLachlan et al. 2021</a>)</span></p></li>
+<li><p>Quality and monitoring. – long-term inspection of quality (changes through time and seasons – identify key areas for improvements / where to spend money on)</p></li>
+</ul>
+<p>National</p>
+<ul>
+<li>National Planning Policy Framework (NPPF) states to protect the integrity of Green Belt. but does not mention how.</li>
+</ul>
+<p>Global</p>
+<ul>
+<li>Urban planning rarely integrates biodiversity and ecosystem services into service and design, aside from demonstration projects. (<u><strong>World Cities Report</strong></u>)</li>
+</ul>
+</section>
+<section id="question" class="level3" data-number="4.1.5">
+<h3 data-number="4.1.5" class="anchored" data-anchor-id="question"><span class="header-section-number">4.1.5</span> Question</h3>
+<p>Is there any privacy concern on monitoring via remotely sensed data? (e.g.&nbsp;in the case of watering gardens, what if the residents get angry about being monitored and refuse to make changes?)</p>
 </section>
 </section>
 <section id="reflection" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="reflection"><span class="header-section-number">4.2</span> Reflection</h2>
 <p>(what you have learnt in relation to the policy, city and the application of the data.)</p>
 <ul>
-<li>The gap between the academic paper and policy needs to be filled.. (while some research could be due to political ends? abit dark though)</li>
-<li></li>
+<li>Remote sensing data can be used effectively to reduce the labor-intensive work / 3d work (e.g.&nbsp;physically surveying and collecting data).</li>
+<li>When writing papers, the recommendations / long-term solutions on how to reach the policy goals should be proposed in addition to the findings from the data. (although some research due to political ends may alter their arguments? a bit dark tho😈)</li>
+<li>National and global higher level policies and goals tend to be more generic and vague in terms of the solutions and approaches to reach the stated visions. Local policy and guidance, complying the higher level policies, tend to consider the contextual attributes. Thus, it can sometimes be difficult to provide one-size-fit-all solutions in local policy (and academic papers). Nevertheless, the case studies and more detailed guidelines may help in this context (from city planning perspective but many not for other themes like ecology and forestry), as well as the provision of tools and methods like the one on optimization of tree placement.</li>
+<li>Some challenges might not be under the control of the city. For instance, Green Belt is beyond the London metropolitan boundary and extend to wider areas. The regulation and effective maintenance might require collaboration from different local authorities. Plus majority of the land on Green Belt is privately owned..</li>
 </ul>
 
 
