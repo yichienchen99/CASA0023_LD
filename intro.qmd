@@ -1,11 +1,13 @@
 # Content {.unnumbered}
 
 1.  Introduction
-    -   Remote sensing data intro / sensors / resolutions
+    -   Remote sensing data intro / sensors / resolutions (using QGIS/SNAP/R)
 2.  Sensor - WorldView3
 3.  Corrections
-    -   Corrections / Enhancements
+    -   Corrections / Enhancements (using R)
 4.  Policy
+5.  GEE
+    -   Filter/reduce/map (using GEE)
 
 ## Structure (of each chapter)
 

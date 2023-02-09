@@ -1,0 +1,126 @@
+---
+title: "Google Earth Engine"
+bibliography: references.bib
+---
+
+## Summary 
+
+Google Earth Engine (GEE) is a geospatial processing service, analyzing near Earth's surface at any space at scale. The key benefit of using GEE is that the datasets are cloud-hosted and efficient computations can be executed through servers [@gandhi].
+
+-   Client: browser; polygons imported from local
+
+-   Server: data storage; Earth Engine Objects
+
+Map, not looping: to just load the image collection once and use function to repeat the calculations for each image, ensure more efficient codes and computation. + know the amount of objects in the collection (otherwise the looping use x+1..)
+
+### Scale 
+
+-   scale = pixel resolution
+
+-   Images are pre-processed (cut into 256x256 tiles in original projection and resolution) [@gorelick2017]
+
+-   ✔️ enable fast and efficient access and fast visualization [@gorelick2017]
+
+-   ::: callout-important
+    To ensure the consistency of the values across analysis, scale should be set. (explore pixel resolution values at different scales \> set pixel resolution when Map.addLayer)
+    :::
+
+-   Scale is related to the spatial resolution of the datasets. For example, the scale of Landsat-8 10m and 30m has the same value. why? - the nominal/native resolution of Landsat-8 is at 30m.
+
+-   Scale can be influenced by zoom levels.
+
+-   For different purpose of analysis, the resolution / scale would be different. Continental level analysis may use coarse scale and forest/tree placement may require fine scale.
+
+### Filter
+
+-   for image (raster)
+
+    -   by date
+
+    -   by location (specified path and row)/boundary/polygon (imported shapefile or drawn manually) (similar to st.join/st.intersect)
+
+    -   by bands
+
+-   for feature (vector/polygon)
+
+    -   by ID/attributes
+
+### Reducer
+
+-   Zonal statistics, similar to groupby
+
+-   Summarize lots of images to one image composite
+
+    -   by median of the pixels in collections
+
+        -   Median is good for distinct/large difference in index values (e.g. forest vs. non-forest)
+
+        -   but.. not good when the area has few pixels \> use the normalizing statistics (= percentiles) instead (high percentiles concentrate on top indicate the classifier is more robust)
+
+        -   and.. not representing changes across seasons (esp. for vegetation/crop/forest) \> medians of the pixels in 4 seasons (divide the time series into 4 in a list) [(Source: Google Earth)](https://youtu.be/WvaBZbph_cU?t=1638)
+
+    -   image.reduceRegion: one boundary (e.g. GLA boundary)
+
+    -   image.reduceRegions: sub-divided regions within a boundary (e.g. Boroughs within GLA boundary) - more like zonal statistics
+
+[![Filter, map, reduce](image/filter_map_reduce.png)](https://docs.google.com/document/d/11oo1TuvXyEvReoYLDeTcoh16rEN90I8Bf5qp0KxVu7U/edit)
+
+[@cardille]
+
+### Join 
+
+-   spatial join
+
+-   can be applied to 2+ datasets (e.g. Landsat and Sentinel) and/or images
+
+### Risk/limitation of using GEE
+
+-   uncertainty of future change in GEE openness (can be closed / charged)
+
+-   SAR phase data cannot be used on GEE. Need SNAP for this.
+
+-   GEE is better at live and year mapping but not good at joining and filtering (recommended workflow: GEE (reduce data size) \> R/Python... (analysis))
+
+## Application
+
+Applications utilizing the benefits of GEE in analyzing changes through timelapse and comparing across locations.
+
+### Map built-up area / urban expansion
+
+This could be further integrated to analysis on urbanization challenges like UHI, flooding...
+
+1.  GIF of the urbanization trajectories using Landsat 8 Level 2 Tier 1 [@wang, chap. A1.2]
+
+![my first GEE GIF!](image/firstgif.gif)
+
+-   Following the practical by [@wang, chap. A1.2], the above GIF shows the 2010-2020 changes in the area of the Kempegowda International Airport in India visually (its now the fourth busiest airport in the country). Then it would be helpful to quantify the change in the areas by classification.
+
+2.  Urban / LCLU classification
+
+-   Many datasets are available, with different coverage and properties. The MODIS Land Cover Type Yearly Global can be used to map the changes in urban areas (it is the global dataset!) [@wang, chap. A1.2]
+
+### UHI
+
+-   MODIS & Landsat (EE LST toolbox) can all be used to calculate land surface temperature (LST) [@wang, chap. A1.5]. Since surface UHI is the urban temperature subtracts rural reference, the rural/urban classification in the previous section can be applied to 1) mask the urban area for analysis 2) calculate the difference between urban and rural LST.
+
+    ![Surface Urban Heat Island in Kinmen](image/suhi_km.png)
+
+-   With reference to [@wang, chap. A1.5], the above map shows the spatial variability in Surface UHI in summers between 2014 and 2019 for Kinmen County using Landsat-8. (Red pixels: higher (diff.max=8°C); blue pixels: lower (diff.min=2°C). Summer temperature is used here to avoid the difference in seasons balancing out the peak values. The built-up area is quite small, as the county is still urbanizing slowly with a population of 140,843 within a 151.6 km2 area in 2022 as per Wikipedia. (Thus this might not be a proper site for analyzing UHI). However, the intensity of UHI is high in the most populous town Jincheng (with population density of 1,946 ppl/km2, whereas the whole county's density is 929 ppl/km2). Plus, the usual residents is 40% of the total census population. The elderly who live alone take up a large share of the usual residents. High temperature in the urban areas may increase the threats to those vulnerable groups.
+
+-   Another hotspot is in the central-south of the island which is the location of the Airport. More specifically, that is the location of the Airport hall, bus stops, taxi and car park, while the runway of the Airport is not classified as urban by MODIS (yet the LST is also high on runway). High reflectance of the road and building material, the absence of trees and vegetation and (possibly) the high volume of GHG emissions may contribute to the high temperature in this area compared to its rural neighbours.
+
+### [Earth Engine APP](https://github.com/philippgaertner/awesome-earth-engine-apps) 
+
+-   display large data and information quickly
+
+-   e.g. using sliders to change the year + changing cities
+
+### Question
+
+I cannot figure out why i cannot export image on GEE..
+
+## Reflection
+
+In the application section, i think GIF is more efficient to show changes across time compared to sliders and A/B diagrams. Sometimes using sliders takes time to load the data and makes the comparison less direct, while showing A/B diagrams in the report may be restricted to the limited specified set of years (e.g. 2010 and 2020, instead of all the available time).
+
+When calculating the UHI, several familiar concepts from week 1 reoccur like the different surface reflectance for materials being sampled to determine the land cover type - done by the MODIS dataset. The transformation of the data where the brightness temperature and emissivity (based on fractional vegetation cover from NDVI) are combined to find LST - done by the EE toolbox/module within a few steps.

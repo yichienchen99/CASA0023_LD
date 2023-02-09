@@ -13,6 +13,7 @@ book:
     - 2_portfolio.qmd
     - 3_corrections.qmd
     - 4_policy.qmd
+    - 5_GEE.qmd
     - summary.qmd
     - dictionary.qmd
     - references.qmd
