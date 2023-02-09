@@ -9,7 +9,7 @@
 5.  GEE
     -   Filter/reduce/map (using GEE)
 
-## Structure (of each chapter)
+### Structure (of each chapter)
 
 -   Summary:
 
