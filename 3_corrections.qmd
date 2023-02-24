@@ -1,5 +1,6 @@
 ---
 title: "Corrections"
+bibliography: references.bib
 ---
 
 ## Summary

@@ -5,7 +5,7 @@ project:
 book:
   title: "CASA0023_LD"
   author: "Yi-Chien Chen"
-  date: "23-01-25"
+  date: "23-01-16"
   chapters:
     - index.qmd
     - intro.qmd
@@ -14,6 +14,7 @@ book:
     - 3_corrections.qmd
     - 4_policy.qmd
     - 5_GEE.qmd
+    - 6_classification.qmd
     - summary.qmd
     - dictionary.qmd
     - references.qmd

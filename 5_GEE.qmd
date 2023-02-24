@@ -3,7 +3,7 @@ title: "Google Earth Engine"
 bibliography: references.bib
 ---
 
-## Summary 
+## Summary
 
 Google Earth Engine (GEE) is a geospatial processing service, analyzing near Earth's surface at any space at scale. The key benefit of using GEE is that the datasets are cloud-hosted and efficient computations can be executed through servers [@gandhi].
 
@@ -13,7 +13,7 @@ Google Earth Engine (GEE) is a geospatial processing service, analyzing near Ear
 
 Map, not looping: to just load the image collection once and use function to repeat the calculations for each image, ensure more efficient codes and computation. + know the amount of objects in the collection (otherwise the looping use x+1..)
 
-### Scale 
+### Scale
 
 -   scale = pixel resolution
 
@@ -67,7 +67,7 @@ Map, not looping: to just load the image collection once and use function to rep
 
 [@cardille]
 
-### Join 
+### Join
 
 -   spatial join
 
@@ -109,7 +109,7 @@ This could be further integrated to analysis on urbanization challenges like UHI
 
 -   Another hotspot is in the central-south of the island which is the location of the Airport. More specifically, that is the location of the Airport hall, bus stops, taxi and car park, while the runway of the Airport is not classified as urban by MODIS (yet the LST is also high on runway). High reflectance of the road and building material, the absence of trees and vegetation and (possibly) the high volume of GHG emissions may contribute to the high temperature in this area compared to its rural neighbours.
 
-### [Earth Engine APP](https://github.com/philippgaertner/awesome-earth-engine-apps) 
+### [Earth Engine APP](https://github.com/philippgaertner/awesome-earth-engine-apps)
 
 -   display large data and information quickly
 
