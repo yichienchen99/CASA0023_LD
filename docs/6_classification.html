@@ -184,8 +184,10 @@ div.csl-indent {
   </ul></li>
   <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="toc-section-number">6.2</span>  Application</a>
   <ul class="collapse">
-  <li><a href="#lulc" id="toc-lulc" class="nav-link" data-scroll-target="#lulc"><span class="toc-section-number">6.2.1</span>  LULC</a></li>
+  <li><a href="#cart-random-forest" id="toc-cart-random-forest" class="nav-link" data-scroll-target="#cart-random-forest"><span class="toc-section-number">6.2.1</span>  CART &amp; Random Forest</a></li>
+  <li><a href="#svm" id="toc-svm" class="nav-link" data-scroll-target="#svm"><span class="toc-section-number">6.2.2</span>  SVM</a></li>
   </ul></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection"><span class="toc-section-number">6.3</span>  Reflection</a></li>
   </ul>
 </nav>
     </div>
@@ -238,18 +240,24 @@ div.csl-indent {
 <p></p><figcaption class="figure-caption">(GISGeography, 2014)</figcaption><p></p>
 </figure>
 </div>
-<p>Process: Select representative training samples for each land cover class &gt; generate a signature file, storing all training samples' spectral information &gt; use the signature file to run a classification (through one of the classification algorithm: Maximum likelihood (normal distribution/parametric); Density slicing; Nearest neighbor; Minimum-distance; Principal components; Support vector machine (SVM); CART; RF; Iso cluster; Neural network) &gt; pixel assignment &gt; accuracy assessment</p>
+<p>Process: Select representative training samples for each land cover class &gt; generate a signature file, storing all training samples’ spectral information &gt; use the signature file to run a classification (through one of the classification algorithm: Maximum likelihood (normal distribution/parametric); Density slicing; Nearest neighbor; Minimum-distance; Principal components; Support vector machine (SVM); CART; RF; Iso cluster; Neural network) &gt; pixel assignment &gt; accuracy assessment</p>
 <p>Pattern recognition / ML</p>
 <p>Scale: pixel-based</p>
 <ul>
 <li><p>CART: a tree</p></li>
-<li><p>RF: many trees</p></li>
-<li><p>SVM: multi-dimensional decision hyperplane boundary</p></li>
+<li><p>RF: merging many trees, trained with bagging methods (to create a combination of learning models which improves the overall result)</p></li>
+<li><p>SVM: optimal multi-dimensional decision hyperplane boundary that divides the dataset (test all possibilities of C and Gamma &gt; compare with testing data &gt; choose the combination with best accuracy)</p></li>
 </ul>
 <ol start="3" type="1">
 <li><strong>Object-based image analysis (OBIA)</strong></li>
 </ol>
-<p><img src="https://gisgeography.com/wp-content/uploads/2014/06/object-based-diagram.png" class="img-fluid" alt="(GISGeography, 2014)"> Segmentation algorithms: Multi-resolution segmentation in <a href="http://www.ecognition.com/"><strong>eCognition</strong></a>; The segment mean shift tool in <a href="https://www.arcgis.com/"><strong>ArcGIS</strong></a> &gt; different methods to classify objects (shape; texture; spectral; geographic context; nearest neighbor)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://gisgeography.com/wp-content/uploads/2014/06/object-based-diagram.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">(GISGeography, 2014)</figcaption><p></p>
+</figure>
+</div>
+<p>Segmentation algorithms: Multi-resolution segmentation in <a href="http://www.ecognition.com/"><strong>eCognition</strong></a>; The segment mean shift tool in <a href="https://www.arcgis.com/"><strong>ArcGIS</strong></a> &gt; different methods to classify objects (shape; texture; spectral; geographic context; nearest neighbor)</p>
 <p>Scale: object-based.. (groups pixels into representative vector shapes/objects)</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -313,7 +321,7 @@ Note
 <li>Is projection the problem?</li>
 </ul>
 <ol start="3" type="1">
-<li>(Practical)How to select high and low urban samples for training for supervised classification? (High and low as of albedo or as of density? Based on Andy’s practical workbook, it is albedo but i am confused with the purpose of classification by albedo.)</li>
+<li>(Practical) How to select high and low urban samples for training for supervised classification? (High and low as of albedo or as of density? Based on Andy’s practical workbook, it is albedo but i am confused with the purpose of classification by albedo.)</li>
 </ol>
 <ul>
 <li>A:</li>
@@ -322,28 +330,79 @@ Note
 <li>(Practical) Error occur when trying to print the training data after selecting different land cover as feature collection: <code>FeatureCollection: Collection query aborted after accumulating over 5000 elements.</code></li>
 </ol>
 <ul>
-<li>Answer from <a href="https://gis.stackexchange.com/questions/327644/error-collection-query-aborted-after-accumulating-over-5000-elements">web</a>: when printing the training data, use <code>.limit(5000)</code> to allow printing subset of large data. (not sure if it is the right way to do, but this is the checking process afterall) (and not sure why the data is so large..)</li>
+<li>Answers <a href="https://gis.stackexchange.com/questions/327644/error-collection-query-aborted-after-accumulating-over-5000-elements">online</a>: when printing the training data, use <code>.limit(5000)</code> to allow printing subset of large data. (not sure if it is the right way to do, but this is the checking process afterall) (and not sure why the data is so large..)</li>
 </ul>
 </section>
 </section>
 <section id="application" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="application"><span class="header-section-number">6.2</span> Application</h2>
 <p>Classification of EO imagery allows extracting (and predicting) patterns/land cover from the data. This supports analysis on LULC, urban expansion, urban green space, illegal logging, forest fire, etc.</p>
-<section id="lulc" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="lulc"><span class="header-section-number">6.2.1</span> LULC</h3>
-<p>As done in the practical, the remote sensing data can be classified by land cover type.</p>
-<p><img src="image/output2.png" class="img-fluid"></p>
+<section id="cart-random-forest" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="cart-random-forest"><span class="header-section-number">6.2.1</span> CART &amp; Random Forest</h3>
+<p>As done in the practical, the Sentinel data is classified using CART and RF. When selecting training data (selecting land cover geometries as variables), the false inference on the landuse and the inclusion of other land cover type in the geometry may add noise to the prediction, hence lowering the accuracy. Also, mentioned in the practical, when splitting the data into training and testing (for accuracy testing), the pixels of the selected geometries should be used, rather than the geometry that may add more noise to the results.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/output1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Output from practical - land cover classification using CART</figcaption><p></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/output2.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Output from practical - land cover classification using RF</figcaption><p></p>
+</figure>
+</div>
+<p>The accuracy is not as high as Andy’s output. For RF, the OOB error is 6%.. and the accuracy is 93%. Resubstitution accuracy is 99% (original training data vs.&nbsp;model output). When comparing testing data and model output, the accuracy gives 93%. &gt; Is there any correlations between OOB accuracy and the confusion matrix? (and is it possible to add the legend to the output?)</p>
+<p>Comparing two outputs visually, RF captures the difference in high and low urban land cover types better than CART. However, both methods produce outputs that seems like salt and pepper since they are pixel-based. Although the low urban type might exist in the forest (like meterological stations), it might not be necessary when drawing out the forest boundary. Object-based methods could be used for this purpose and for higher resolution building boundary detection for instance.</p>
+</section>
+<section id="svm" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="svm"><span class="header-section-number">6.2.2</span> SVM</h3>
+<p>[Technical / methods] Study by <span class="citation" data-cites="ustuner2015">(<a href="references.html#ref-ustuner2015" role="doc-biblioref">Ustuner, Sanli, and Dixon 2015</a>)</span> constructs the a classification model for agricultural landuse in Turkey using SVM method with <a href="https://www.eoportal.org/satellite-missions/rapideye#rapideye-earth-observation-constellation">RapidEye</a> imargery. With fieldwork and Google Earth information on land cover types, it compares the classification accuracy with the result from Maximum Likelihood Classification (MLC) and internally among the results using different parameters (error penalty (C), gamma, bias term (r), polynomial degree (d)) and kernel types (linear, polynomial, radial basis function, sigmoid). Accuracy is assessed through <a href="https://vitalflux.com/cohen-kappa-score-python-example-machine-learning/?utm_content=cmp-true">kappa coefficient</a> (comparing classified images against ground truth data). Results show that the SVM method outperforms MLC and classification accuracy is influenced by the choice of parameters (and kernels) <span class="citation" data-cites="ustuner2015">(<a href="references.html#ref-ustuner2015" role="doc-biblioref">Ustuner, Sanli, and Dixon 2015</a>)</span>. However, the generalization performance of kernels is influenced by the types of dataset (multi- or hyper-spectural or SAR…) so the conclusion on the best-performing kernel type is not fixed (may vary due to dataset).</p>
+<p>[Context / application] The country’s agricultural productivity highly influence its economy. However, the data on agricultural statistics is manually collected by government employees from farmers’ declaration. The data could be unreliable <span class="citation" data-cites="ustuner2015">(<a href="references.html#ref-ustuner2015" role="doc-biblioref">Ustuner, Sanli, and Dixon 2015</a>)</span> and labour-intensive, being not cost-effective for the government. Hence, methods like applying image classification on remote sensing data could provide viable, up-to-data and reliable information for sustainable crop management and planning. Before putting into practice, the sensitivity / reliability of the methods is tested through comparing between different models and within SVM using different parameters and kernels. The best combination of parameter and kernel will be used to inform decisions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/classified_rapideye.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">(Ustuner, Sanli and Dixon, 2015)</figcaption><p></p>
+</figure>
+</div>
+<p>The above output shows highest accuracy selections (compared to results from other models with different error penalty in the same kernel) of four different kernels from SVM + the result from MLC. Kappa for MS9 = 0.8209, MR5 = 0.8222, ML11 = 0.8223, MP9 = 0.8411. &gt;&gt; Recommendation from the authors: optimum parameters for SVM should be analyzed in detail before choosing one for best classification result.</p>
+</section>
+</section>
+<section id="reflection" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="reflection"><span class="header-section-number">6.3</span> Reflection</h2>
+<ul>
+<li><p>Still confused about which classifier to choose when performing image classification, although knowing reference to literature on relevant themes might hint the direction and performing/comparing different classifiers might just be within several lines of code in GEE. Does the accuracy means everything? Choosing the one with highest accuracy might not be reproducible in the sense that different regions/time of year/giving new data could yield varying results?</p>
+<ul>
+<li><p>The choice of classifier depends on the <strong>intended outcomes</strong> and the <strong>data quality</strong> <span class="citation" data-cites="pragati212020 lanenok2015">(<a href="references.html#ref-pragati212020" role="doc-biblioref">Pragati21 2020</a>; <a href="references.html#ref-lanenok2015" role="doc-biblioref">lanenok 2015</a>)</span>.</p>
+<ol type="1">
+<li><p>&gt; SVM &gt; sparse data &amp; binary classification &amp; non-linear data (faster and better results, gives <u>distance</u> to boundary)</p></li>
+<li><p>&gt; RF &gt; numerical and categorical features &amp; multi-class (gives probability of belonging to class)</p></li>
+<li><p>&gt; MLC (parametric) &gt; assuming normally distributed data (not common in LULC data &gt; may results in lower accuracy)</p></li>
+</ol></li>
+</ul></li>
+<li><p>Image classification: DN/reflectance of imagery &gt; being divided based on similarities/closeness to each other using different forms of classifiers/algorithms &gt; revealing/predicting the LULC of the Earth surface &gt; testing accuracy &gt; being used for further analysis / practical applications in assisting decision making</p></li>
+<li><p>It seems like performing classification requires some knowledge on the study area’s land cover, especially classifying detailed land cover like agricultural landuse. From the ground truth map, different crop types usually looks similar to human eyes while obtaining different reflectance. Hence, field works would be required to collect in-situ point data using GPS and Google Earth ancillary data could be the additional data source with experts opinions <span class="citation" data-cites="ustuner2015">(<a href="references.html#ref-ustuner2015" role="doc-biblioref">Ustuner, Sanli, and Dixon 2015</a>)</span>.</p></li>
+<li><p>Advancement in sensors increases the possibility of recording more data in the imagery, leading to better accuracy in predictions (RedEdge band in RapidEye for example).</p></li>
+</ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
 <div id="ref-gisgeography2014" class="csl-entry" role="doc-biblioentry">
 GISGeography. 2014. <span>“Image Classification Techniques in Remote Sensing.”</span> <a href="https://gisgeography.com/image-classification-techniques-remote-sensing/">https://gisgeography.com/image-classification-techniques-remote-sensing/</a>.
 </div>
+<div id="ref-lanenok2015" class="csl-entry" role="doc-biblioentry">
+lanenok. 2015. <span>“Answer to <span>"</span>When to Use Random Forest over SVM and Vice Versa?<span>"</span>.”</span> <a href="https://datascience.stackexchange.com/a/6855">https://datascience.stackexchange.com/a/6855</a>.
+</div>
+<div id="ref-pragati212020" class="csl-entry" role="doc-biblioentry">
+Pragati21. 2020. <span>“SVM AND RANDOM FOREST: A Case Study.”</span> <a href="https://medium.com/@pandeypragati2112/svm-and-random-forest-a-case-study-6213da5be02f">https://medium.com/@pandeypragati2112/svm-and-random-forest-a-case-study-6213da5be02f</a>.
+</div>
+<div id="ref-ustuner2015" class="csl-entry" role="doc-biblioentry">
+Ustuner, Mustafa, Fusun Balik Sanli, and Barnali Dixon. 2015. <span>“Application of Support Vector Machines for Landuse Classification Using High-Resolution RapidEye Images: A Sensitivity Analysis.”</span> <em>European Journal of Remote Sensing</em> 48 (1): 403–22. <a href="https://doi.org/10.5721/EuJRS20154823">https://doi.org/10.5721/EuJRS20154823</a>.
+</div>
 <div id="ref-weih" class="csl-entry" role="doc-biblioentry">
 Weih, Robert C, and Norman D Riggan. n.d. <span>“OBJECT-BASED CLASSIFICATION VS. PIXEL-BASED CLASSIFICATION: COMPARITIVE IMPORTANCE OF MULTI-RESOLUTION IMAGERY.”</span>
 </div>
 </div>
-</section>
 </section>
 
 </main> <!-- /main -->

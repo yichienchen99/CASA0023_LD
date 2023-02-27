@@ -25,7 +25,7 @@ Scale: pixel-based
 
 ![(GISGeography, 2014)](https://gisgeography.com/wp-content/uploads/2014/06/supervised-diagram.png)
 
-Process: Select representative training samples for each land cover class \> generate a signature file, storing all training samples\' spectral information \> use the signature file to run a classification (through one of the classification algorithm: Maximum likelihood (normal distribution/parametric); Density slicing; Nearest neighbor; Minimum-distance; Principal components; Support vector machine (SVM); CART; RF; Iso cluster; Neural network) \> pixel assignment \> accuracy assessment
+Process: Select representative training samples for each land cover class \> generate a signature file, storing all training samples' spectral information \> use the signature file to run a classification (through one of the classification algorithm: Maximum likelihood (normal distribution/parametric); Density slicing; Nearest neighbor; Minimum-distance; Principal components; Support vector machine (SVM); CART; RF; Iso cluster; Neural network) \> pixel assignment \> accuracy assessment
 
 Pattern recognition / ML
 
@@ -33,27 +33,27 @@ Scale: pixel-based
 
 -   CART: a tree
 
--   RF: many trees
+-   RF: merging many trees, trained with bagging methods (to create a combination of learning models which improves the overall result)
 
--   SVM: multi-dimensional decision hyperplane boundary
+-   SVM: optimal multi-dimensional decision hyperplane boundary that divides the dataset (test all possibilities of C and Gamma \> compare with testing data \> choose the combination with best accuracy)
 
 3.  **Object-based image analysis (OBIA)**
 
 ![(GISGeography, 2014)](https://gisgeography.com/wp-content/uploads/2014/06/object-based-diagram.png)
+
 Segmentation algorithms: Multi-resolution segmentation in [**eCognition**](http://www.ecognition.com/); The segment mean shift tool in [**ArcGIS**](https://www.arcgis.com/) \> different methods to classify objects (shape; texture; spectral; geographic context; nearest neighbor)
 
 Scale: object-based.. (groups pixels into representative vector shapes/objects)
 
 ::: callout-note
-✔️: Esp. good for **high spatial resolution image** by avoiding the noisiness in the outputs of pixel-based methods, more like human in processing patterns. Because OBIA used both spectral and contextual information, it had higher accuracy compared to pixel-based methods (when comparing high and medium spatial resolution imagery) [@weih]. \> gaining popularity due to increasingly amount of high-resolution data available!
-More in next chapter..
+✔️: Esp. good for **high spatial resolution image** by avoiding the noisiness in the outputs of pixel-based methods, more like human in processing patterns. Because OBIA used both spectral and contextual information, it had higher accuracy compared to pixel-based methods (when comparing high and medium spatial resolution imagery) [@weih]. \> gaining popularity due to increasingly amount of high-resolution data available! More in next chapter..
 :::
 
 ### Overfitting
 
 > have leaves with one pixel value.. Large difference between predicted values and true value (= high bias = oversimplified model); High variability of a model for a given point (= high variance = not generalize enough)
 
-#### 2 methods to balance bias and variance 
+#### 2 methods to balance bias and variance
 
 1.  [Limit the minimum number of pixels in leaves]{.underline} (usually 20 pixels) = top-down, easier to perform, but less mathematically sound.
 2.  [Weakest link pruning with tree score]{.underline} (find the weakest link and delete it) = bottom-up.
@@ -83,20 +83,54 @@ More in next chapter..
 
 -   Is projection the problem?
 
-3.  (Practical)How to select high and low urban samples for training for supervised classification? (High and low as of albedo or as of density? Based on Andy's practical workbook, it is albedo but i am confused with the purpose of classification by albedo.)
+3.  (Practical) How to select high and low urban samples for training for supervised classification? (High and low as of albedo or as of density? Based on Andy's practical workbook, it is albedo but i am confused with the purpose of classification by albedo.)
 
 -   A:
 
 4.  (Practical) Error occur when trying to print the training data after selecting different land cover as feature collection: `FeatureCollection: Collection query aborted after accumulating over 5000 elements.`
 
--   Answer from [web](https://gis.stackexchange.com/questions/327644/error-collection-query-aborted-after-accumulating-over-5000-elements): when printing the training data, use `.limit(5000)` to allow printing subset of large data. (not sure if it is the right way to do, but this is the checking process afterall) (and not sure why the data is so large..)
+-   Answers [online](https://gis.stackexchange.com/questions/327644/error-collection-query-aborted-after-accumulating-over-5000-elements): when printing the training data, use `.limit(5000)` to allow printing subset of large data. (not sure if it is the right way to do, but this is the checking process afterall) (and not sure why the data is so large..)
 
 ## Application
 
 Classification of EO imagery allows extracting (and predicting) patterns/land cover from the data. This supports analysis on LULC, urban expansion, urban green space, illegal logging, forest fire, etc.
 
-### LULC
+### CART & Random Forest 
 
-As done in the practical, the remote sensing data can be classified by land cover type.
+As done in the practical, the Sentinel data is classified using CART and RF. When selecting training data (selecting land cover geometries as variables), the false inference on the landuse and the inclusion of other land cover type in the geometry may add noise to the prediction, hence lowering the accuracy. Also, mentioned in the practical, when splitting the data into training and testing (for accuracy testing), the pixels of the selected geometries should be used, rather than the geometry that may add more noise to the results.
 
-![](image/output2.png)
+![Output from practical - land cover classification using CART](image/output1.png)
+
+![Output from practical - land cover classification using RF](image/output2.png)
+
+The accuracy is not as high as Andy's output. For RF, the OOB error is 6%.. and the accuracy is 93%. Resubstitution accuracy is 99% (original training data vs. model output). When comparing testing data and model output, the accuracy gives 93%. \> Is there any correlations between OOB accuracy and the confusion matrix? (and is it possible to add the legend to the output?)
+
+Comparing two outputs visually, RF captures the difference in high and low urban land cover types better than CART. However, both methods produce outputs that seems like salt and pepper since they are pixel-based. Although the low urban type might exist in the forest (like meterological stations), it might not be necessary when drawing out the forest boundary. Object-based methods could be used for this purpose and for higher resolution building boundary detection for instance.
+
+### SVM
+
+\[Technical / methods\] Study by [@ustuner2015] constructs the a classification model for agricultural landuse in Turkey using SVM method with [RapidEye](https://www.eoportal.org/satellite-missions/rapideye#rapideye-earth-observation-constellation) imargery. With fieldwork and Google Earth information on land cover types, it compares the classification accuracy with the result from Maximum Likelihood Classification (MLC) and internally among the results using different parameters (error penalty (C), gamma, bias term (r), polynomial degree (d)) and kernel types (linear, polynomial, radial basis function, sigmoid). Accuracy is assessed through [kappa coefficient](https://vitalflux.com/cohen-kappa-score-python-example-machine-learning/?utm_content=cmp-true) (comparing classified images against ground truth data). Results show that the SVM method outperforms MLC and classification accuracy is influenced by the choice of parameters (and kernels) [@ustuner2015]. However, the generalization performance of kernels is influenced by the types of dataset (multi- or hyper-spectural or SAR...) so the conclusion on the best-performing kernel type is not fixed (may vary due to dataset).
+
+\[Context / application\] The country's agricultural productivity highly influence its economy. However, the data on agricultural statistics is manually collected by government employees from farmers' declaration. The data could be unreliable [@ustuner2015] and labour-intensive, being not cost-effective for the government. Hence, methods like applying image classification on remote sensing data could provide viable, up-to-data and reliable information for sustainable crop management and planning. Before putting into practice, the sensitivity / reliability of the methods is tested through comparing between different models and within SVM using different parameters and kernels. The best combination of parameter and kernel will be used to inform decisions.
+
+![(Ustuner, Sanli and Dixon, 2015)](image/classified_rapideye.png)
+
+The above output shows highest accuracy selections (compared to results from other models with different error penalty in the same kernel) of four different kernels from SVM + the result from MLC. Kappa for MS9 = 0.8209, MR5 = 0.8222, ML11 = 0.8223, MP9 = 0.8411. \>\> Recommendation from the authors: optimum parameters for SVM should be analyzed in detail before choosing one for best classification result.
+
+## Reflection
+
+-   Still confused about which classifier to choose when performing image classification, although knowing reference to literature on relevant themes might hint the direction and performing/comparing different classifiers might just be within several lines of code in GEE. Does the accuracy means everything? Choosing the one with highest accuracy might not be reproducible in the sense that different regions/time of year/giving new data could yield varying results?
+
+    -   The choice of classifier depends on the **intended outcomes** and the **data quality** [@pragati212020; @lanenok2015].
+
+        1.  \> SVM \> sparse data & binary classification & non-linear data (faster and better results, gives [distance]{.underline} to boundary)
+
+        2.  \> RF \> numerical and categorical features & multi-class (gives probability of belonging to class)
+
+        3.  \> MLC (parametric) \> assuming normally distributed data (not common in LULC data \> may results in lower accuracy)
+
+-   Image classification: DN/reflectance of imagery \> being divided based on similarities/closeness to each other using different forms of classifiers/algorithms \> revealing/predicting the LULC of the Earth surface \> testing accuracy \> being used for further analysis / practical applications in assisting decision making
+
+-   It seems like performing classification requires some knowledge on the study area's land cover, especially classifying detailed land cover like agricultural landuse. From the ground truth map, different crop types usually looks similar to human eyes while obtaining different reflectance. Hence, field works would be required to collect in-situ point data using GPS and Google Earth ancillary data could be the additional data source with experts opinions [@ustuner2015].
+
+-   Advancement in sensors increases the possibility of recording more data in the imagery, leading to better accuracy in predictions (RedEdge band in RapidEye for example).
