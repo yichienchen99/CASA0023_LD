@@ -49,7 +49,7 @@ Scale: object-based.. (groups pixels into representative vector shapes/objects)
 ✔️: Esp. good for **high spatial resolution image** by avoiding the noisiness in the outputs of pixel-based methods, more like human in processing patterns. Because OBIA used both spectral and contextual information, it had higher accuracy compared to pixel-based methods (when comparing high and medium spatial resolution imagery) [@weih]. \> gaining popularity due to increasingly amount of high-resolution data available! More in next chapter..
 :::
 
-### Overfitting
+### Overfitting (of trees)
 
 > have leaves with one pixel value.. Large difference between predicted values and true value (= high bias = oversimplified model); High variability of a model for a given point (= high variance = not generalize enough)
 
@@ -83,7 +83,7 @@ Scale: object-based.. (groups pixels into representative vector shapes/objects)
 
 -   Is projection the problem?
 
-3.  (Practical) How to select high and low urban samples for training for supervised classification? (High and low as of albedo or as of density? Based on Andy's practical workbook, it is albedo but i am confused with the purpose of classification by albedo.)
+3.  (Practical) How to select high and low urban samples for training for supervised classification? (High and low as of albedo or as of density? Based on Andy's practical workbook, it is albedo. Is this for analyzing the impact of albedo/building material on the micro-climate and earth surface temperature?)
 
 -   A:
 
@@ -95,7 +95,7 @@ Scale: object-based.. (groups pixels into representative vector shapes/objects)
 
 Classification of EO imagery allows extracting (and predicting) patterns/land cover from the data. This supports analysis on LULC, urban expansion, urban green space, illegal logging, forest fire, etc.
 
-### CART & Random Forest 
+### CART & Random Forest
 
 As done in the practical, the Sentinel data is classified using CART and RF. When selecting training data (selecting land cover geometries as variables), the false inference on the landuse and the inclusion of other land cover type in the geometry may add noise to the prediction, hence lowering the accuracy. Also, mentioned in the practical, when splitting the data into training and testing (for accuracy testing), the pixels of the selected geometries should be used, rather than the geometry that may add more noise to the results.
 
@@ -115,11 +115,17 @@ Comparing two outputs visually, RF captures the difference in high and low urban
 
 ![(Ustuner, Sanli and Dixon, 2015)](image/classified_rapideye.png)
 
-The above output shows highest accuracy selections (compared to results from other models with different error penalty in the same kernel) of four different kernels from SVM + the result from MLC. Kappa for MS9 = 0.8209, MR5 = 0.8222, ML11 = 0.8223, MP9 = 0.8411. \>\> Recommendation from the authors: optimum parameters for SVM should be analyzed in detail before choosing one for best classification result.
+\[Result / recommendation\] The above output shows highest accuracy selections (compared to results from other models with different error penalty in the same kernel) of four different kernels from SVM + the result from MLC. Kappa for MS9 = 0.8209, MR5 = 0.8222, ML11 = 0.8223, MP9 = 0.8411. \>\> Recommendation from the authors: optimum parameters for SVM should be analyzed in detail before choosing one for best classification result.
+
+Another study by [@pal2005] suggests that SVM (using pair-wise comparison for multi-class) achieves higher accuracy than ML and ANN. Nevertheless, effective use depends on the values of a few user‐defined parameters. SVM in dealing with multi-class: n hyperplanes should be determined (comparing one class with the rest \> may produce unclassified data, hence lowing the accuracy) or n(n-1)/2 classifiers (pair-wise comparison) [@pal2005].
 
 ## Reflection
 
--   Still confused about which classifier to choose when performing image classification, although knowing reference to literature on relevant themes might hint the direction and performing/comparing different classifiers might just be within several lines of code in GEE. Does the accuracy means everything? Choosing the one with highest accuracy might not be reproducible in the sense that different regions/time of year/giving new data could yield varying results?
+-   Which classifier to choose when performing image classification?
+
+    -   Reference to literature on relevant themes might hint the direction.
+
+    -   Performing/comparing different classifiers might just be within several lines of code in GEE. (but.. Does the accuracy means everything? Choosing the one with highest accuracy might not be reproducible in the sense that different regions/time of year/giving new data could yield varying results?)
 
     -   The choice of classifier depends on the **intended outcomes** and the **data quality** [@pragati212020; @lanenok2015].
 
@@ -129,7 +135,7 @@ The above output shows highest accuracy selections (compared to results from oth
 
         3.  \> MLC (parametric) \> assuming normally distributed data (not common in LULC data \> may results in lower accuracy)
 
--   Image classification: DN/reflectance of imagery \> being divided based on similarities/closeness to each other using different forms of classifiers/algorithms \> revealing/predicting the LULC of the Earth surface \> testing accuracy \> being used for further analysis / practical applications in assisting decision making
+-   Image classification workflow: DN/reflectance of imagery \> (some fieldwork / Google Earth selection of training land cover type data \>) being divided based on similarities/closeness to each other using different forms of classifiers/algorithms \> revealing/predicting the LULC of the Earth surface \> testing accuracy \> being used for further analysis / practical applications in assisting decision making
 
 -   It seems like performing classification requires some knowledge on the study area's land cover, especially classifying detailed land cover like agricultural landuse. From the ground truth map, different crop types usually looks similar to human eyes while obtaining different reflectance. Hence, field works would be required to collect in-situ point data using GPS and Google Earth ancillary data could be the additional data source with experts opinions [@ustuner2015].
 

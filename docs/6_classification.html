@@ -179,7 +179,7 @@ div.csl-indent {
   <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary"><span class="toc-section-number">6.1</span>  Summary</a>
   <ul class="collapse">
   <li><a href="#types-of-image-classification" id="toc-types-of-image-classification" class="nav-link" data-scroll-target="#types-of-image-classification"><span class="toc-section-number">6.1.1</span>  3 types of image classification</a></li>
-  <li><a href="#overfitting" id="toc-overfitting" class="nav-link" data-scroll-target="#overfitting"><span class="toc-section-number">6.1.2</span>  Overfitting</a></li>
+  <li><a href="#overfitting-of-trees" id="toc-overfitting-of-trees" class="nav-link" data-scroll-target="#overfitting-of-trees"><span class="toc-section-number">6.1.2</span>  Overfitting (of trees)</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="toc-section-number">6.1.3</span>  Questions:</a></li>
   </ul></li>
   <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="toc-section-number">6.2</span>  Application</a>
@@ -273,8 +273,8 @@ Note
 </div>
 </div>
 </section>
-<section id="overfitting" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="overfitting"><span class="header-section-number">6.1.2</span> Overfitting</h3>
+<section id="overfitting-of-trees" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="overfitting-of-trees"><span class="header-section-number">6.1.2</span> Overfitting (of trees)</h3>
 <blockquote class="blockquote">
 <p>have leaves with one pixel value.. Large difference between predicted values and true value (= high bias = oversimplified model); High variability of a model for a given point (= high variance = not generalize enough)</p>
 </blockquote>
@@ -321,7 +321,7 @@ Note
 <li>Is projection the problem?</li>
 </ul>
 <ol start="3" type="1">
-<li>(Practical) How to select high and low urban samples for training for supervised classification? (High and low as of albedo or as of density? Based on Andy’s practical workbook, it is albedo but i am confused with the purpose of classification by albedo.)</li>
+<li>(Practical) How to select high and low urban samples for training for supervised classification? (High and low as of albedo or as of density? Based on Andy’s practical workbook, it is albedo. Is this for analyzing the impact of albedo/building material on the micro-climate and earth surface temperature?)</li>
 </ol>
 <ul>
 <li>A:</li>
@@ -365,14 +365,17 @@ Note
 <p></p><figcaption class="figure-caption">(Ustuner, Sanli and Dixon, 2015)</figcaption><p></p>
 </figure>
 </div>
-<p>The above output shows highest accuracy selections (compared to results from other models with different error penalty in the same kernel) of four different kernels from SVM + the result from MLC. Kappa for MS9 = 0.8209, MR5 = 0.8222, ML11 = 0.8223, MP9 = 0.8411. &gt;&gt; Recommendation from the authors: optimum parameters for SVM should be analyzed in detail before choosing one for best classification result.</p>
+<p>[Result / recommendation] The above output shows highest accuracy selections (compared to results from other models with different error penalty in the same kernel) of four different kernels from SVM + the result from MLC. Kappa for MS9 = 0.8209, MR5 = 0.8222, ML11 = 0.8223, MP9 = 0.8411. &gt;&gt; Recommendation from the authors: optimum parameters for SVM should be analyzed in detail before choosing one for best classification result.</p>
+<p>Another study by <span class="citation" data-cites="pal2005">(<a href="references.html#ref-pal2005" role="doc-biblioref">Pal and Mather 2005</a>)</span> suggests that SVM (using pair-wise comparison for multi-class) achieves higher accuracy than ML and ANN. Nevertheless, effective use depends on the values of a few user‐defined parameters. SVM in dealing with multi-class: n hyperplanes should be determined (comparing one class with the rest &gt; may produce unclassified data, hence lowing the accuracy) or n(n-1)/2 classifiers (pair-wise comparison) <span class="citation" data-cites="pal2005">(<a href="references.html#ref-pal2005" role="doc-biblioref">Pal and Mather 2005</a>)</span>.</p>
 </section>
 </section>
 <section id="reflection" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="reflection"><span class="header-section-number">6.3</span> Reflection</h2>
 <ul>
-<li><p>Still confused about which classifier to choose when performing image classification, although knowing reference to literature on relevant themes might hint the direction and performing/comparing different classifiers might just be within several lines of code in GEE. Does the accuracy means everything? Choosing the one with highest accuracy might not be reproducible in the sense that different regions/time of year/giving new data could yield varying results?</p>
+<li><p>Which classifier to choose when performing image classification?</p>
 <ul>
+<li><p>Reference to literature on relevant themes might hint the direction.</p></li>
+<li><p>Performing/comparing different classifiers might just be within several lines of code in GEE. (but.. Does the accuracy means everything? Choosing the one with highest accuracy might not be reproducible in the sense that different regions/time of year/giving new data could yield varying results?)</p></li>
 <li><p>The choice of classifier depends on the <strong>intended outcomes</strong> and the <strong>data quality</strong> <span class="citation" data-cites="pragati212020 lanenok2015">(<a href="references.html#ref-pragati212020" role="doc-biblioref">Pragati21 2020</a>; <a href="references.html#ref-lanenok2015" role="doc-biblioref">lanenok 2015</a>)</span>.</p>
 <ol type="1">
 <li><p>&gt; SVM &gt; sparse data &amp; binary classification &amp; non-linear data (faster and better results, gives <u>distance</u> to boundary)</p></li>
@@ -380,7 +383,7 @@ Note
 <li><p>&gt; MLC (parametric) &gt; assuming normally distributed data (not common in LULC data &gt; may results in lower accuracy)</p></li>
 </ol></li>
 </ul></li>
-<li><p>Image classification: DN/reflectance of imagery &gt; being divided based on similarities/closeness to each other using different forms of classifiers/algorithms &gt; revealing/predicting the LULC of the Earth surface &gt; testing accuracy &gt; being used for further analysis / practical applications in assisting decision making</p></li>
+<li><p>Image classification workflow: DN/reflectance of imagery &gt; (some fieldwork / Google Earth selection of training land cover type data &gt;) being divided based on similarities/closeness to each other using different forms of classifiers/algorithms &gt; revealing/predicting the LULC of the Earth surface &gt; testing accuracy &gt; being used for further analysis / practical applications in assisting decision making</p></li>
 <li><p>It seems like performing classification requires some knowledge on the study area’s land cover, especially classifying detailed land cover like agricultural landuse. From the ground truth map, different crop types usually looks similar to human eyes while obtaining different reflectance. Hence, field works would be required to collect in-situ point data using GPS and Google Earth ancillary data could be the additional data source with experts opinions <span class="citation" data-cites="ustuner2015">(<a href="references.html#ref-ustuner2015" role="doc-biblioref">Ustuner, Sanli, and Dixon 2015</a>)</span>.</p></li>
 <li><p>Advancement in sensors increases the possibility of recording more data in the imagery, leading to better accuracy in predictions (RedEdge band in RapidEye for example).</p></li>
 </ul>
@@ -392,6 +395,9 @@ GISGeography. 2014. <span>“Image Classification Techniques in Remote Sensing.�
 </div>
 <div id="ref-lanenok2015" class="csl-entry" role="doc-biblioentry">
 lanenok. 2015. <span>“Answer to <span>"</span>When to Use Random Forest over SVM and Vice Versa?<span>"</span>.”</span> <a href="https://datascience.stackexchange.com/a/6855">https://datascience.stackexchange.com/a/6855</a>.
+</div>
+<div id="ref-pal2005" class="csl-entry" role="doc-biblioentry">
+Pal, M., and P. M. Mather. 2005. <span>“Support Vector Machines for Classification in Remote Sensing.”</span> <em>International Journal of Remote Sensing</em> 26 (5): 1007–11. <a href="https://doi.org/10.1080/01431160512331314083">https://doi.org/10.1080/01431160512331314083</a>.
 </div>
 <div id="ref-pragati212020" class="csl-entry" role="doc-biblioentry">
 Pragati21. 2020. <span>“SVM AND RANDOM FOREST: A Case Study.”</span> <a href="https://medium.com/@pandeypragati2112/svm-and-random-forest-a-case-study-6213da5be02f">https://medium.com/@pandeypragati2112/svm-and-random-forest-a-case-study-6213da5be02f</a>.
