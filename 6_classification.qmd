@@ -81,11 +81,11 @@ Scale: object-based.. (groups pixels into representative vector shapes/objects)
 
     ![](image/inconsistency.png)
 
--   Is projection the problem?
+-   (A: projection, but dont bother..)
 
 3.  (Practical) How to select high and low urban samples for training for supervised classification? (High and low as of albedo or as of density? Based on Andy's practical workbook, it is albedo. Is this for analyzing the impact of albedo/building material on the micro-climate and earth surface temperature?)
 
--   A:
+-   A: Albedo - building reflectence - analysing the energy and temperature. For density - Google building data - areas of building / area of whole pixel ..
 
 4.  (Practical) Error occur when trying to print the training data after selecting different land cover as feature collection: `FeatureCollection: Collection query aborted after accumulating over 5000 elements.`
 
