@@ -1,0 +1,190 @@
+---
+title: "Classification 2"
+bibliography: references.bib
+---
+
+## Summary
+
+### OBIA
+
+Critique on pixel-based classification: **Spatial autocorrelation** (test/train) may influence the outcome of accuracy assessment (Tobler 1^st^ Law)
+
+-   This could be solved by
+
+    -   1\) applying [distance filter](https://developers.google.com/earth-engine/guides/classification)/metrics or Moran's I to the test / train data
+
+    -   2\) or classify the image by Object-based image analysis (OBIA)
+
+-   If not consider SA -- model would be too good / high accuracy
+
+2 **parameters** for OBIA:
+
+-   Distance (between centroids/seeds)
+
+-   Homogeneity/similarity of pixels around the centroids
+
+The output would be features of the objects (e.g. mean of the pixel values) \>\> look like art rather than imagery
+
+**Applications** in medical and surgery (e.g. cancer detection)
+
+### Sub-pixel
+
+Fraction of selected features per pixel \> spectrally pure endmembers
+
+Cons: difficult to assess accuracy (no test/train split) \> harden
+
+**Applications** on pollution detection and % of vegetation
+
+-   spectrally pure ENDMEMBER selection: library (), lab, points/polygon (one point), value specification
+
+-   endmember \* fraction \>\> unconstrained \>\> constrained (sum to one)
+
+-   if multiple points = MESMA
+
+### Accuracy Assessment
+
+Random sampling \> test/train \> model output \> test output \> matrix
+
+**PA (producer accuracy)**: $\frac{TP}{TP+FN}$ == recall / sensitivity (correctly classified pixel vs. groud truth data)
+
+-   High PA: Low FN and High FP: e.g. predicted urban but actually other land cover type
+
+```{=html}
+<!-- -->
+```
+-   Error of omission = 100-PA
+
+**UA (user accuracy)**: $\frac{TP}{TP+FP}$ == precision (correctly classified pixel vs. same class pixels as classified)
+
+-   High UA: High FN and Low FP: e.g. predicted other but actually urban
+
+```{=html}
+<!-- -->
+```
+-   Error of commission = 100-UA
+
+**OA (overall accuracy)**: (TP+FP+FN+TN)
+
+::: callout-note
+PA and UA never both good: model with Low FN and Low FP does not exist. Since data is not balanced, changes in **decision threshold** of classification may vary the outcomes. Increasing FP (more predicted positive) \> UA worsens \> FN reduces \> PA improves. The matrix are related and may change together. The trade-offs between the two make the ideal situation with high PA and high UA impossible.
+
+Hence, one of them would be more important than the other under different scenarios and the one with higher relevance to the problem should be picked when analyzing accuracy and designing the model [@wilber]:
+
+-   Recall/PA is important when we believe False Negatives are more important than False Positives (e.g. our problem of cancer detection).
+
+-   Precision/UA is important when we believe False Positives are more important than False Negatives (e.g. spam detection).
+:::
+
+#### **F1 score**
+
+F1 score
+
+:   To solve the issue above with decision threshold, F1 score includes the information of both PA and UA in one single coefficient. $\frac{TP}{TP+\frac{1}{2}∗(FP+FN)}$
+
+![(Wilber, 2022)](image/accuracy_tradeoff.png)
+
+When PA and UA are similarly well-performed, the F1 and Accuracy are also highest.
+
+Critiques on F1 score:
+
+-   Not considering TN
+
+-   Assuming UA and PA equally important
+
+> Other matrix to assess accuracy: calibration, popular diagnostic tools (specificity, likelihood ratios, etc.), expectation frameworks, Receiver Operating Characteristic Curve (ROC), Area Under the Receiver Operator Characteristic Curve (AUROC) (popular for binomial model).
+
+#### **Kappa**
+
+Kappa coefficient 
+
+:   The accuracy of an image compared to the results by chance$k=\frac{p_o−p_e}{1−p_e}$
+
+    $p_o$: the proportion of cases correctly classified (accuracy)
+
+    $p_e$: expected cases correctly classified by chance
+
+Critiques on Kappa coefficient:
+
+-   different definitions by authors in terms of good Kappa
+
+-   different accuracy can have different ranges of kappa
+
+#### Cross validation
+
+Data-splitting: based on simple, stratified, random selection.
+
+Repeated selection (resampling by bootstrapping): to compute the sampling variability of the accuracy metric (changing the split) [@karasiak2022]
+
+Find the average of different scenarios to test how generalisable the model is
+
+Critique on averaging accuracy:
+
+-   Randomly distributed points for testing may have spatial autocorrelation with nearby training data \> influencing overestimating the accuracy / overfitting the model.
+
+**Spatial cross validation**
+
+To mitigate issue with Spatial autocorrelation in Cross validation, randomly distributed clusters of points (clustering through Moran's I, DBSCAN, Distance metrics..) are selected for testing [@lovelace2019].
+
+-   reference data are also split into subsets like in cross validation but the number of subsets can vary (*k*-fold) [@karasiak2022].
+
+```{=html}
+<!-- -->
+```
+-   k-fold \> random sample \> \> best values of C and gamma for SVM \> fold \>\> ML3 IN R \> GEE not good at data analysis but for remote sensing data
+
+![(Lovelace et al., 2019)](image/SCV.png)
+
+::: callout-note
+mlr3 to split data for spatial CV:
+
+3 stages: 1) **task**: data specification (including response and predictor variables) and the model type (such as regression or classification). 2) **learner** defines the specific learning algorithm that is applied to the created task. 3) **resampling** approach assesses the predictive performance of the model, i.e., its ability to generalize to new data.
+
+Detailed example see [@lovelace2019].
+:::
+
+**Leave one out** (for everything except one point) -- more extreme / computationally extensive
+
+::: callout-note
+Selecting data for training / testing / accuracy:
+
+\>\> reproducible (same model for different years data) == (choose land that not change to much --  pseudo-invariant features) / (manual selection of ROI) / (choose same parcel/feature from different years = generalizable) == no fixed rules
+:::
+
+#### Questions
+
+1.  What's the neighborhood size (shouldn't it be 100 if its 2\*seed size)? When calculating std, why max size should be the same as NS?
+
+## Application
+
+### **Pre-classified data**
+
+#### [**Dynamic world**](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1#description)  
+
+-   Near real time data at 10m resolution (Sentinel-2 with 2-5 days revisit!!)
+
+-   World / region / biomes \> experts / non-experts to label training pixels (5x5) \> pre-processing (\> TOA \> rotate \> band math/ratioing) \> normalisation (log) \> classification (CNN)
+
+-   Crit: Blobbing -- since ppl/users train data + CNN (deep learning, moving window of filtering..)
+
+-   Weird -- worse the resolution of sentinel
+
+-   Accuracy (confusion matrix, but...)
+
+#### [Google open building data](https://sites.research.google/open-buildings/)
+
+-   Currently constrains to Africa, South Asia and South-East Asia locations
+
+-   Include building info like outlines, footprints on the ground, confidence score (on if this is a building / accuracy?), the centroid of the building.
+
+-   Not having info like building typology, address, and other details beyond geometry.
+
+-   Application on population mapping suggested on their webpage is largely related to the population estimates based on building block. However, the population density per building may vary spatially and over time, influenced by the building height and
+    functions. Estimating population based on building outline seems less convincing.
+
+-   Nevertheless, other applications are valuable to public policy and urban planning. For instance, the location and density of settlements could be used to evaluate the potential impacts of natural disasters and providing corresponding interventions to
+    reduce risks. Moreover, the location of buildings can be used to simulate transport demands, hence planning a more robust transport system.
+
+-   Besides, the space between buildings / the public realm is drawn out by the dataset. This could be useful for analyzing the environmental conditions in urban areas, guiding regulations
+    on building heights (for regeneration projects) -- narrow streets with high buildings may increase wind speed and reduce daylight penetration (hence should be avoided).
+
+## Reflection

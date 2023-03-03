@@ -15,6 +15,7 @@ book:
     - 4_policy.qmd
     - 5_GEE.qmd
     - 6_classification.qmd
+    - 7_classification2.qmd
     - summary.qmd
     - dictionary.qmd
     - references.qmd

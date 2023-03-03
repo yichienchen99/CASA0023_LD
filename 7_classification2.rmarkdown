@@ -1,0 +1,120 @@
+---
+title: "Classification 2"
+bibliography: references.bib
+---
+
+
+## Summary 
+
+### OBIA
+
+Critique on pixel-based classification:
+**Spatial autocorrelation** (test/train) may influence the outcome of accuracy assessment (Tobler 1^st^ Law)
+
+-   This could be solved by
+
+    -   1\) applying [distance filter](https://developers.google.com/earth-engine/guides/classification)/metrics or Moran\'s I to the test / train data
+
+    -   2\) or classify the image by Object-based image analysis (OBIA)
+
+-   If not consider SA -- model would be too good / high accuracy
+
+2 **parameters** for OBIA:
+
+-   Distance (between centroids/seeds)
+
+-   Homogeneity/similarity of pixels around the centroids
+
+The output would be features of the objects (e.g. mean of the pixel values) \>\> look like art rather than imagery
+
+**Applications** in medical and surgery (e.g. cancer detection)
+
+### Sub-pixel
+
+Fraction of selected features per pixel \> spectrally pure endmembers
+
+Cons: difficult to assess accuracy (no test/train split) \> harden
+
+**Applications** on pollution detection and % of vegetation
+
+-   spectrally pure ENDMEMBER selection: library (), lab, points/polygon (one point), value specification
+
+-   endmember \* fraction \>\> unconstrained \>\> constrained (sum to one)
+
+-   if multiple points = MESMA
+
+### Accuracy Assessment 
+
+Random sampling \> test/train \> model output \> test output \> matrix
+
+**PA**: mappers (TP FN) \> Error of omission 100-PA ==recall (in ML)
+
+**UA**: users (TP FP) \> Error of commission 100-UA == precision
+
+**OA**:
+
+PA and UA never both good
+
+Depend on the placement of decision boundaries / threshold -- trade-off between PA and UA
+
+#### **F1 score** 
+
+to solve the issue with threshold (include both PA and UA)
+
+-   Crit: all of them not consider TN, UA and PA not equally important
+
+-   \> many other matrix to consider!
+
+#### **Kappa** 
+
+the accuracy of an image compared to the results by chance
+
+-   Crit: different definitions by authors in terms of good Kappa
+
+-   Crit2: diff accuracy can have diff range of kappa
+
+-   Useless \>don\'t use it
+
+#### Cross validation 
+
+change test/train - average - test how generalizable the model is
+
+(critique on average accuracy) - randomly distributed points
+
+Spatial cross validation -- (mitigate issue with SA) randomly distributed clusters of points (clustering through Moran's I, DBSCAN, Distance metrics..)
+
+-   k-fold \> random sample \> \> best values of C and gamma for SVM \> fold \>\> ML3 IN R \> GEE not good at data analysis but for remote sensing data
+
+Leave one out (for everything except one point) -- more extreme / computationally extensive
+
+::: callout-note
+Note on selecting data for training / testing / accuracy
+
+\>\> reproducible (same model for different years data) == (choose land that not change to much --  sudo invariance features) / (manual selection of ROI) / (choose same parcel/feature from different years = generalizable) ==
+no fixed rules
+:::
+
+#### Questions
+
+
+```{r}
+// Run SNIC on the regular square grid.
+var snic = ee.Algorithms.Image.Segmentation.SNIC({
+  image: oneimage_study_area_cloud, 
+  //size: 50,  // don't need it seeds given
+  compactness: 1,
+  connectivity: 8,
+  neighborhoodSize:50,
+  seeds: seeds
+});
+
+Map.addLayer(snic, {}, 'means', true ,0.6)
+```
+
+
+What's the neighborhood size (shouldn\'t it be 100 if its 2\*seed size)? When calculating std, why max size should be the same as NS
+
+## Application
+
+## Reflection 
+
