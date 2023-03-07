@@ -49,18 +49,16 @@ Random sampling \> test/train \> model output \> test output \> matrix
 
 -   High PA: Low FN and High FP: e.g. predicted urban but actually other land cover type
 
-```{=html}
 <!-- -->
-```
+
 -   Error of omission = 100-PA
 
 **UA (user accuracy)**: $\frac{TP}{TP+FP}$ == precision (correctly classified pixel vs. same class pixels as classified)
 
 -   High UA: High FN and Low FP: e.g. predicted other but actually urban
 
-```{=html}
 <!-- -->
-```
+
 -   Error of commission = 100-UA
 
 **OA (overall accuracy)**: (TP+FP+FN+TN)
@@ -75,7 +73,7 @@ Hence, one of them would be more important than the other under different scenar
 -   Precision/UA is important when we believe False Positives are more important than False Negatives (e.g. spam detection).
 :::
 
-#### **F1 score**
+#### F1 score
 
 F1 score
 
@@ -93,9 +91,9 @@ Critiques on F1 score:
 
 > Other matrix to assess accuracy: calibration, popular diagnostic tools (specificity, likelihood ratios, etc.), expectation frameworks, Receiver Operating Characteristic Curve (ROC), Area Under the Receiver Operator Characteristic Curve (AUROC) (popular for binomial model).
 
-#### **Kappa**
+#### Kappa
 
-Kappa coefficient 
+Kappa coefficient
 
 :   The accuracy of an image compared to the results by chance$k=\frac{p_o−p_e}{1−p_e}$
 
@@ -127,9 +125,8 @@ To mitigate issue with Spatial autocorrelation in Cross validation, randomly dis
 
 -   reference data are also split into subsets like in cross validation but the number of subsets can vary (*k*-fold) [@karasiak2022].
 
-```{=html}
 <!-- -->
-```
+
 -   k-fold \> random sample \> \> best values of C and gamma for SVM \> fold \>\> ML3 IN R \> GEE not good at data analysis but for remote sensing data
 
 ![(Lovelace et al., 2019)](image/SCV.png)
@@ -150,41 +147,64 @@ Selecting data for training / testing / accuracy:
 \>\> reproducible (same model for different years data) == (choose land that not change to much --  pseudo-invariant features) / (manual selection of ROI) / (choose same parcel/feature from different years = generalizable) == no fixed rules
 :::
 
-#### Questions
+### Questions
 
 1.  What's the neighborhood size (shouldn't it be 100 if its 2\*seed size)? When calculating std, why max size should be the same as NS?
 
 ## Application
 
-### **Pre-classified data**
+Below are some examples of pre-classified data that could be imported in GEE.
 
-#### [**Dynamic world**](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1#description)  
+### Dynamic world
 
--   Near real time data at 10m resolution (Sentinel-2 with 2-5 days revisit!!)
+-   [GEE data catalog](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1)
 
--   World / region / biomes \> experts / non-experts to label training pixels (5x5) \> pre-processing (\> TOA \> rotate \> band math/ratioing) \> normalisation (log) \> classification (CNN)
+-   Near real time data at 10m resolution (Sentinel-2 with 2-5 days revisit)
 
--   Crit: Blobbing -- since ppl/users train data + CNN (deep learning, moving window of filtering..)
+-   Process: World / region / biomes \> experts / non-experts to label training pixels (5x5) \> pre-processing (\> TOA \> rotate \> band math/ratioing) \> normalisation (log) \> classification (CNN)
 
--   Weird -- worse the resolution of sentinel
+-   Critique: Blobbing -- since ppl/users train data + CNN (deep learning, moving window of filtering..)
+
+-   Weird: worse the resolution of sentinel
 
 -   Accuracy (confusion matrix, but...)
 
-#### [Google open building data](https://sites.research.google/open-buildings/)
+### [Google open building data](https://sites.research.google/open-buildings/)
+
+-   [GEE data catalog](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_Research_open-buildings_v2_polygons)
+
+-   50cm high-resolution
 
 -   Currently constrains to Africa, South Asia and South-East Asia locations
 
--   Include building info like outlines, footprints on the ground, confidence score (on if this is a building / accuracy?), the centroid of the building.
+-   Include building info like outlines, footprints on the ground, confidence score (on if this is a building / accuracy), the centroid of the building. (not having info like building typology, address, and other details beyond geometry.)
 
--   Not having info like building typology, address, and other details beyond geometry.
+#### Application 
 
--   Application on population mapping suggested on their webpage is largely related to the population estimates based on building block. However, the population density per building may vary spatially and over time, influenced by the building height and
-    functions. Estimating population based on building outline seems less convincing.
+Thoughts on applications suggested by developers:
 
--   Nevertheless, other applications are valuable to public policy and urban planning. For instance, the location and density of settlements could be used to evaluate the potential impacts of natural disasters and providing corresponding interventions to
-    reduce risks. Moreover, the location of buildings can be used to simulate transport demands, hence planning a more robust transport system.
+-   [Population mapping]{.underline}: largely related to the population estimates based on building block. Estimating population based on building outline seems less convincing as the building height data is not assessed. This could be solved by combining the method of detecting building shades from satellite imagery and sample building height annotations with longitude, latitude, and elevation from the ICESat-2, ATL03 photons [@zhao2023]. Hence, a 3D building data can be used to estimate population more accurately. However, the population density per building may vary spatially and over time, influenced by the building functions. Offices for instance should be omitted during prediction. The detailed land use type per building may be beyond the scope of remote sensing data. That said, population estimation for informal settlements can be valuable, which is not included in the census data.
 
--   Besides, the space between buildings / the public realm is drawn out by the dataset. This could be useful for analyzing the environmental conditions in urban areas, guiding regulations
-    on building heights (for regeneration projects) -- narrow streets with high buildings may increase wind speed and reduce daylight penetration (hence should be avoided).
+-   [Humanitarian response]{.underline}: the location and density of settlements could be used to evaluate the risk zones and potential loss due to natural disasters, integrated with deep learning from data like past disaster events, social media, and weather reports to forecast the affected areas and consolidate early-warning system. Te detailed methods may subject to the types of disasters (flooding/earthquake/landslide/volcanic eruptions..). Corresponding interventions (e.g. relocation of hospitals and residence within the risk zones) in relation to the local demographics of vulnerable groups can be integrated to reduce risks, complying to the [Sendai Framework for Disaster Risk reduction 2015-2030](https://www.undrr.org/publication/sendai-framework-disaster-risk-reduction-2015-2030#:~:text=The%20Sendai%20Framework%20for%20Disaster,Investing%20in%20disaster%20reduction%20for). Nevertheless, the LULC classifications may already achieve this goal, albeit without building outline..
+
+-   [Addressing systems & Statistical indicators]{.underline}: the location of buildings can be used to simulate transport demands and routing, hence planning a more robust transport system.
+
+Other possible uses of the data:
+
+-   [Planning support]{.underline}: The space between buildings / street width could be useful for analyzing the environmental conditions in urban public realm, guiding regulations on building heights -- narrow streets with high buildings should be avoided, increasing wind speed and reducing daylight penetration.
+
+#### Accuracy 
+
+The accuracy is enhanced through the novel method using U-Net Model (mixup, self-training, distance weighting with Gaussian convolutions, and residual decoder blocks) [@sirko]. For randomly selected test data (Figure2c), the areas with potential bias are omitted, including those with vast rural land and empty area (*.ibid*).
+
+![(Sirko et al, 2021)](image/open_data.png)
+
+U-Net Model originates from biomed image semantic segmentation [@ronneberger2015; @li2021], having wide range of applications in different fields, outperforming the original sliding-window convolutional network.
+
+![U-Net Architecture (Ronneberger, Fischer and Brox, 2015)](image/u-net-architecture.png)
+
+The performance of open building data can be accessed from the confidence score. However, there is difference in the performance spatially. Some areas like single building in rural area and dessert terrain can have lower accuracy [@sirko]. In urban areas, large buildings may be split into smaller ones, with most cases seen in Egypt - Cairo (*ibid.*).
+
+![(Sirko et al, 2021)](image/open.png)
 
 ## Reflection

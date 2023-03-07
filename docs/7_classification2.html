@@ -187,10 +187,12 @@ div.csl-indent {
   <li><a href="#obia" id="toc-obia" class="nav-link" data-scroll-target="#obia"><span class="toc-section-number">7.1.1</span>  OBIA</a></li>
   <li><a href="#sub-pixel" id="toc-sub-pixel" class="nav-link" data-scroll-target="#sub-pixel"><span class="toc-section-number">7.1.2</span>  Sub-pixel</a></li>
   <li><a href="#accuracy-assessment" id="toc-accuracy-assessment" class="nav-link" data-scroll-target="#accuracy-assessment"><span class="toc-section-number">7.1.3</span>  Accuracy Assessment</a></li>
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="toc-section-number">7.1.4</span>  Questions</a></li>
   </ul></li>
   <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="toc-section-number">7.2</span>  Application</a>
   <ul class="collapse">
-  <li><a href="#pre-classified-data" id="toc-pre-classified-data" class="nav-link" data-scroll-target="#pre-classified-data"><span class="toc-section-number">7.2.1</span>  <strong>Pre-classified data</strong></a></li>
+  <li><a href="#dynamic-world" id="toc-dynamic-world" class="nav-link" data-scroll-target="#dynamic-world"><span class="toc-section-number">7.2.1</span>  Dynamic world</a></li>
+  <li><a href="#google-open-building-data" id="toc-google-open-building-data" class="nav-link" data-scroll-target="#google-open-building-data"><span class="toc-section-number">7.2.2</span>  Google open building data</a></li>
   </ul></li>
   <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection"><span class="toc-section-number">7.3</span>  Reflection</a></li>
   </ul>
@@ -287,7 +289,7 @@ Note
 </div>
 </div>
 <section id="f1-score" class="level4" data-number="7.1.3.1">
-<h4 data-number="7.1.3.1" class="anchored" data-anchor-id="f1-score"><span class="header-section-number">7.1.3.1</span> <strong>F1 score</strong></h4>
+<h4 data-number="7.1.3.1" class="anchored" data-anchor-id="f1-score"><span class="header-section-number">7.1.3.1</span> F1 score</h4>
 <dl>
 <dt>F1 score</dt>
 <dd>
@@ -311,7 +313,7 @@ Note
 </blockquote>
 </section>
 <section id="kappa" class="level4" data-number="7.1.3.2">
-<h4 data-number="7.1.3.2" class="anchored" data-anchor-id="kappa"><span class="header-section-number">7.1.3.2</span> <strong>Kappa</strong></h4>
+<h4 data-number="7.1.3.2" class="anchored" data-anchor-id="kappa"><span class="header-section-number">7.1.3.2</span> Kappa</h4>
 <dl>
 <dt>Kappa coefficient</dt>
 <dd>
@@ -381,38 +383,72 @@ Note
 </div>
 </div>
 </section>
-<section id="questions" class="level4" data-number="7.1.3.4">
-<h4 data-number="7.1.3.4" class="anchored" data-anchor-id="questions"><span class="header-section-number">7.1.3.4</span> Questions</h4>
+</section>
+<section id="questions" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="questions"><span class="header-section-number">7.1.4</span> Questions</h3>
 <ol type="1">
 <li>What’s the neighborhood size (shouldn’t it be 100 if its 2*seed size)? When calculating std, why max size should be the same as NS?</li>
 </ol>
 </section>
 </section>
-</section>
 <section id="application" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="application"><span class="header-section-number">7.2</span> Application</h2>
-<section id="pre-classified-data" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="pre-classified-data"><span class="header-section-number">7.2.1</span> <strong>Pre-classified data</strong></h3>
-<section id="dynamic-world" class="level4" data-number="7.2.1.1">
-<h4 data-number="7.2.1.1" class="anchored" data-anchor-id="dynamic-world"><span class="header-section-number">7.2.1.1</span> <a href="https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1#description"><strong>Dynamic world</strong></a></h4>
+<p>Below are some examples of pre-classified data that could be imported in GEE.</p>
+<section id="dynamic-world" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="dynamic-world"><span class="header-section-number">7.2.1</span> Dynamic world</h3>
 <ul>
-<li><p>Near real time data at 10m resolution (Sentinel-2 with 2-5 days revisit!!)</p></li>
-<li><p>World / region / biomes &gt; experts / non-experts to label training pixels (5x5) &gt; pre-processing (&gt; TOA &gt; rotate &gt; band math/ratioing) &gt; normalisation (log) &gt; classification (CNN)</p></li>
-<li><p>Crit: Blobbing – since ppl/users train data + CNN (deep learning, moving window of filtering..)</p></li>
-<li><p>Weird – worse the resolution of sentinel</p></li>
+<li><p><a href="https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1">GEE data catalog</a></p></li>
+<li><p>Near real time data at 10m resolution (Sentinel-2 with 2-5 days revisit)</p></li>
+<li><p>Process: World / region / biomes &gt; experts / non-experts to label training pixels (5x5) &gt; pre-processing (&gt; TOA &gt; rotate &gt; band math/ratioing) &gt; normalisation (log) &gt; classification (CNN)</p></li>
+<li><p>Critique: Blobbing – since ppl/users train data + CNN (deep learning, moving window of filtering..)</p></li>
+<li><p>Weird: worse the resolution of sentinel</p></li>
 <li><p>Accuracy (confusion matrix, but…)</p></li>
 </ul>
 </section>
-<section id="google-open-building-data" class="level4" data-number="7.2.1.2">
-<h4 data-number="7.2.1.2" class="anchored" data-anchor-id="google-open-building-data"><span class="header-section-number">7.2.1.2</span> <a href="https://sites.research.google/open-buildings/">Google open building data</a></h4>
+<section id="google-open-building-data" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="google-open-building-data"><span class="header-section-number">7.2.2</span> <a href="https://sites.research.google/open-buildings/">Google open building data</a></h3>
 <ul>
+<li><p><a href="https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_Research_open-buildings_v2_polygons">GEE data catalog</a></p></li>
+<li><p>50cm high-resolution</p></li>
 <li><p>Currently constrains to Africa, South Asia and South-East Asia locations</p></li>
-<li><p>Include building info like outlines, footprints on the ground, confidence score (on if this is a building / accuracy?), the centroid of the building.</p></li>
-<li><p>Not having info like building typology, address, and other details beyond geometry.</p></li>
-<li><p>Application on population mapping suggested on their webpage is largely related to the population estimates based on building block. However, the population density per building may vary spatially and over time, influenced by the building height and functions. Estimating population based on building outline seems less convincing.</p></li>
-<li><p>Nevertheless, other applications are valuable to public policy and urban planning. For instance, the location and density of settlements could be used to evaluate the potential impacts of natural disasters and providing corresponding interventions to reduce risks. Moreover, the location of buildings can be used to simulate transport demands, hence planning a more robust transport system.</p></li>
-<li><p>Besides, the space between buildings / the public realm is drawn out by the dataset. This could be useful for analyzing the environmental conditions in urban areas, guiding regulations on building heights (for regeneration projects) – narrow streets with high buildings may increase wind speed and reduce daylight penetration (hence should be avoided).</p></li>
+<li><p>Include building info like outlines, footprints on the ground, confidence score (on if this is a building / accuracy), the centroid of the building. (not having info like building typology, address, and other details beyond geometry.)</p></li>
 </ul>
+<section id="application-1" class="level4" data-number="7.2.2.1">
+<h4 data-number="7.2.2.1" class="anchored" data-anchor-id="application-1"><span class="header-section-number">7.2.2.1</span> Application</h4>
+<p>Thoughts on applications suggested by developers:</p>
+<ul>
+<li><p><u>Population mapping</u>: largely related to the population estimates based on building block. Estimating population based on building outline seems less convincing as the building height data is not assessed. This could be solved by combining the method of detecting building shades from satellite imagery and sample building height annotations with longitude, latitude, and elevation from the ICESat-2, ATL03 photons <span class="citation" data-cites="zhao2023">(<a href="references.html#ref-zhao2023" role="doc-biblioref">Zhao et al. 2023</a>)</span>. Hence, a 3D building data can be used to estimate population more accurately. However, the population density per building may vary spatially and over time, influenced by the building functions. Offices for instance should be omitted during prediction. The detailed land use type per building may be beyond the scope of remote sensing data. That said, population estimation for informal settlements can be valuable, which is not included in the census data.</p></li>
+<li><p><u>Humanitarian response</u>: the location and density of settlements could be used to evaluate the risk zones and potential loss due to natural disasters, integrated with deep learning from data like past disaster events, social media, and weather reports to forecast the affected areas and consolidate early-warning system. Te detailed methods may subject to the types of disasters (flooding/earthquake/landslide/volcanic eruptions..). Corresponding interventions (e.g.&nbsp;relocation of hospitals and residence within the risk zones) in relation to the local demographics of vulnerable groups can be integrated to reduce risks, complying to the <a href="https://www.undrr.org/publication/sendai-framework-disaster-risk-reduction-2015-2030#:~:text=The%20Sendai%20Framework%20for%20Disaster,Investing%20in%20disaster%20reduction%20for">Sendai Framework for Disaster Risk reduction 2015-2030</a>. Nevertheless, the LULC classifications may already achieve this goal, albeit without building outline..</p></li>
+<li><p><u>Addressing systems &amp; Statistical indicators</u>: the location of buildings can be used to simulate transport demands and routing, hence planning a more robust transport system.</p></li>
+</ul>
+<p>Other possible uses of the data:</p>
+<ul>
+<li><u>Planning support</u>: The space between buildings / street width could be useful for analyzing the environmental conditions in urban public realm, guiding regulations on building heights – narrow streets with high buildings should be avoided, increasing wind speed and reducing daylight penetration.</li>
+</ul>
+</section>
+<section id="accuracy" class="level4" data-number="7.2.2.2">
+<h4 data-number="7.2.2.2" class="anchored" data-anchor-id="accuracy"><span class="header-section-number">7.2.2.2</span> Accuracy</h4>
+<p>The accuracy is enhanced through the novel method using U-Net Model (mixup, self-training, distance weighting with Gaussian convolutions, and residual decoder blocks) <span class="citation" data-cites="sirko">(<a href="references.html#ref-sirko" role="doc-biblioref">Sirko et al., n.d.</a>)</span>. For randomly selected test data (Figure2c), the areas with potential bias are omitted, including those with vast rural land and empty area (<em>.ibid</em>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/open_data.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">(Sirko et al, 2021)</figcaption><p></p>
+</figure>
+</div>
+<p>U-Net Model originates from biomed image semantic segmentation <span class="citation" data-cites="ronneberger2015 li2021">(<a href="references.html#ref-ronneberger2015" role="doc-biblioref">Ronneberger, Fischer, and Brox 2015</a>; <a href="references.html#ref-li2021" role="doc-biblioref">Li et al. 2021</a>)</span>, having wide range of applications in different fields, outperforming the original sliding-window convolutional network.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/u-net-architecture.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">U-Net Architecture (Ronneberger, Fischer and Brox, 2015)</figcaption><p></p>
+</figure>
+</div>
+<p>The performance of open building data can be accessed from the confidence score. However, there is difference in the performance spatially. Some areas like single building in rural area and dessert terrain can have lower accuracy <span class="citation" data-cites="sirko">(<a href="references.html#ref-sirko" role="doc-biblioref">Sirko et al., n.d.</a>)</span>. In urban areas, large buildings may be split into smaller ones, with most cases seen in Egypt - Cairo (<em>ibid.</em>).</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image/open.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">(Sirko et al, 2021)</figcaption><p></p>
+</figure>
+</div>
 </section>
 </section>
 </section>
@@ -424,11 +460,23 @@ Note
 <div id="ref-karasiak2022" class="csl-entry" role="doc-biblioentry">
 Karasiak, N., J.-F. Dejoux, C. Monteil, and D. Sheeren. 2022. <span>“Spatial Dependence Between Training and Test Sets: Another Pitfall of Classification Accuracy Assessment in Remote Sensing.”</span> <em>Machine Learning</em> 111 (7): 2715–40. <a href="https://doi.org/10.1007/s10994-021-05972-1">https://doi.org/10.1007/s10994-021-05972-1</a>.
 </div>
+<div id="ref-li2021" class="csl-entry" role="doc-biblioentry">
+Li, Meng-Yi, Ding-Ju Zhu, Wen Xu, Yu-Jie Lin, Kai-Leung Yung, and Andrew W. H. Ip. 2021. <span>“Application of U-Net with Global Convolution Network Module in Computer-Aided Tongue Diagnosis.”</span> <em>Journal of Healthcare Engineering</em> 2021 (November): e5853128. <a href="https://doi.org/10.1155/2021/5853128">https://doi.org/10.1155/2021/5853128</a>.
+</div>
 <div id="ref-lovelace2019" class="csl-entry" role="doc-biblioentry">
 Lovelace, Robin, Jakub Nowosad, and Jannes Muenchow. 2019. <em>Chapter 12 Statistical Learning | Geocomputation with R</em>. <a href="https://r.geocompx.org/spatial-cv.html">https://r.geocompx.org/spatial-cv.html</a>.
 </div>
+<div id="ref-ronneberger2015" class="csl-entry" role="doc-biblioentry">
+Ronneberger, Olaf, Philipp Fischer, and Thomas Brox. 2015. <span>“U-Net: Convolutional Networks for Biomedical Image Segmentation.”</span> In, edited by Nassir Navab, Joachim Hornegger, William M. Wells, and Alejandro F. Frangi, 9351:234–41. Cham: Springer International Publishing. <a href="http://link.springer.com/10.1007/978-3-319-24574-4_28">http://link.springer.com/10.1007/978-3-319-24574-4_28</a>.
+</div>
+<div id="ref-sirko" class="csl-entry" role="doc-biblioentry">
+Sirko, Wojciech, Sergii Kashubin, Marvin Ritter, Abigail Annkah, Yasser Salah Eddine Bouchareb, Yann Dauphin, Daniel Keysers, Maxim Neumann, Moustapha Cisse, and John Quinn. n.d. <span>“Continental-Scale Building Detection from High Resolution Satellite Imagery.”</span>
+</div>
 <div id="ref-wilber" class="csl-entry" role="doc-biblioentry">
 Wilber, Jared. n.d. <span>“Precision and Recall.”</span> <a href="https://mlu-explain.github.io/precision-recall/">https://mlu-explain.github.io/precision-recall/</a>.
+</div>
+<div id="ref-zhao2023" class="csl-entry" role="doc-biblioentry">
+Zhao, Yi, Bin Wu, Qiaoxuan Li, Lei Yang, Hongchao Fan, Jianping Wu, and Bailang Yu. 2023. <span>“Combining ICESat-2 Photons and Google Earth Satellite Images for Building Height Extraction.”</span> <em>International Journal of Applied Earth Observation and Geoinformation</em> 117 (March): 103213. <a href="https://doi.org/10.1016/j.jag.2023.103213">https://doi.org/10.1016/j.jag.2023.103213</a>.
 </div>
 </div>
 </section>
