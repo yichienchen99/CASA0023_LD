@@ -179,7 +179,7 @@ Below are some examples of pre-classified data that could be imported in GEE.
 
 -   Include building info like outlines, footprints on the ground, confidence score (on if this is a building / accuracy), the centroid of the building. (not having info like building typology, address, and other details beyond geometry.)
 
-#### Application 
+#### Application
 
 Thoughts on applications suggested by developers:
 
@@ -193,7 +193,7 @@ Other possible uses of the data:
 
 -   [Planning support]{.underline}: The space between buildings / street width could be useful for analyzing the environmental conditions in urban public realm, guiding regulations on building heights -- narrow streets with high buildings should be avoided, increasing wind speed and reducing daylight penetration.
 
-#### Accuracy 
+#### Accuracy
 
 The accuracy is enhanced through the novel method using U-Net Model (mixup, self-training, distance weighting with Gaussian convolutions, and residual decoder blocks) [@sirko]. For randomly selected test data (Figure2c), the areas with potential bias are omitted, including those with vast rural land and empty area (*.ibid*).
 

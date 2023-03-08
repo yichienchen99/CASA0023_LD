@@ -1,19 +1,19 @@
 # Preface {.unnumbered}
 
-Learning diary for CASA0023 Remote Sensing Cities and Environments 22/23
+This website presents the online learning diary for [CASA0023 Remote Sensing Cities and Environments 22/23](https://andrewmaclachlan.github.io/CASA0023/). It contains brief overview of the weekly lectures including summary of key concepts, some practical outputs showing applications and examples of remote sensing techniques, open source applications from web source and literature, and individual reflection on the learnt concepts/techniques.
 
 ### About the author
 
 #### Education
 
-Yi-Chien is currently the master student at [CASA, UCL](https://www.ucl.ac.uk/bartlett/casa/bartlett-centre-advanced-spatial-analysis) in the MSc Urban Spatial Science programme in 2022/23. She studied urban planning at [BSP, UCL](https://www.ucl.ac.uk/bartlett/planning/bartlett-school-planning) in 2019-2022 and hold a BSc in Urban Planning, Design and Management.
+Yi-Chien Chen is currently the master student at [CASA, UCL](https://www.ucl.ac.uk/bartlett/casa/bartlett-centre-advanced-spatial-analysis) in the MSc Urban Spatial Science programme 2022/23. She studied urban planning at [BSP, UCL](https://www.ucl.ac.uk/bartlett/planning/bartlett-school-planning) during 2019-2022 and hold a BSc in Urban Planning, Design and Management.
 
 #### Bio
 
-She has some work/internship experience in architecture industry focusing on architecture design of residential high-rise complexes and one public space project in a mountainous area, in real estate agency doing quantitative market research, and a university career service role conducting a range of duties from data analysis to poster design. In this uni admin role, her fondness for figures and data grows. She was also a voluntary translator for [ArchDaily](https://www.archdaily.com/) as she's interested in architecture and urban design.
+She has some internship experience in architecture industry focusing on architecture design of residential high-rise complexes and one public space project in a mountainous area, in real estate agency doing quantitative market research, and a university career service role conducting a range of duties from data analysis to poster design. In this uni admin role, her fondness for figures and data grows. She was also a voluntary translator for [ArchDaily](https://www.archdaily.com/) as she's interested in architecture and urban design.
 
-Her recent 2-week (but super productive!) work shadowing experience in summer 2022 with AECOM London office is most relevant to her planning background, gathering information from the policy and qualitatively constructing design guidance and architecture models at neighbourhood level for the local authorities/government. In this experience, she met the GIS team virtually and see the demands on (geospatial) data-oriented planning policy recommendation and interventions.
+Her recent 2-week (but super productive!) work shadowing in summer 2022 with AECOM London office is the most relevant experience to her planning background, gathering information from the policy and qualitatively constructing design guidance and architecture models at neighbourhood level for the local authorities/government. In this experience, she met the GIS team virtually and see the demands on (geospatial) data-oriented planning policy recommendation and interventions.
 
 Email: zcfther\@ucl.ac.uk
 
-GitHub: https://github.com/yichienchen99
+[GitHub](https://github.com/yichienchen99)

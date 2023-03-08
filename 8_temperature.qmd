@@ -1,0 +1,50 @@
+---
+title: "Temperature"
+bibliography: references.bib
+---
+
+## Summary
+
+This week's lecture goes into the application of remote sensing data on urban temperature / Urban Heat Island (UHI) mitigation (mentioned under week 4 policy section of this learning diary as well) through several policy case studies in different cities/countries. This section will elaborate UHI impacts and some limitations of related policies.
+
+### UHI and its impacts
+
+UHI is correlated with the material (e.g. darker surfaces absorb and retain more heat than reflective ones), vegetation that cools the environment through evapotranspiration and shading, building heights and road widths (e.g. low Sky View Factor reduces outgoing longwave radiation), hard surface that reduces the emitance of heat (as opposed to vegetation/soft surface) and air speed, etc. Some of the factors may also related to others. For example, low SVF with clusters of high-rise buildings can sometimes cause high wind speed and reflective building material.
+
+UHI has wide impacts socially, economically and environmentally on urban areas and its periphery:
+
++----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| pillars                          | impacts                                                                                                                                                                     |
++==================================+=============================================================================================================================================================================+
+| Social                           | -   Heat-related illness                                                                                                                                                    |
+|                                  |                                                                                                                                                                             |
+|                                  | -   Higher mortality rate                                                                                                                                                   |
++----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Economic                         | -   Lower GDP in some areas                                                                                                                                                 |
+|                                  |                                                                                                                                                                             |
+|                                  | -   Local government and related sectors increase spending on coping with UHI impacts                                                                                       |
++----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Environmental                    | -   Positive feedback loop where people would use more energy for cooling at high temperature, increasing GHG emissions which further contributing to higher temperature..  |
+|                                  |                                                                                                                                                                             |
+|                                  | -   Rising use of energy (burning fossil fuels) increases air pollution                                                                                                     |
++----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+### UHI and policy response 
+
+Different policy strategies and scales can have varying outcomes on GHG emissions and related UHI impacts at non-identical rates. Global policies (and national policies) are broader and context-less, guiding the overall directions and providing some standard indicators (like New Urban Agenda and Sustainable Development Goals). In some ways, global policies may boost creativity and diversity in approaches to climate mitigation and adaptations.
+
+Local policies tend to be more detailed, considering the context and implementation. However, the actual interventions/projects can diverge from the policy statements due to several reasons. First, limited resources (funding/technique/human capital) slow down policy enforcement by the government and other stakeholders. For example, (in the British planning system) the [viability assessment](https://www.gov.uk/guidance/viability) can be provided by the developers to claim/negotiate for a lower amount of affordable housing provision than initially planned in the application to ensure the project delivery and viability (and so can the green infrastructure provision be reduced by this means!). Second, the quality of green infrastructure is usually not guaranteed, relying on the developers' efforts. Plus, the interventions may not be in the location of demands. Usually people with more decision-making power vote for plans benefiting the wealthier neighborhoods, where people are less affected by the heat, neglecting the poorer ones (e.g. informal settlements). Third, implementations take time to become effective or accepted by the public, while the change in political conditions can influence the project objectives. Introducing projects that are operated by businesses and funded by the government, benefiting the public, would effectively mitigate this challenge as the external political factors may have limited impacts on project delivery.
+
+## Application
+
+Remote sensing data steps in to cope with the detection of factors related to urban heat. For instance, albedo could be classified through LULC. Areas/buildings with reflective roofs would be areas of focus on introducing green roofs. Also, land surface temperature could be monitored using Sentinel data. The census/demographic data (or other social background information like redlining areas) can be incorporated into the temperature analysis, uncovering places that are most in need of mitigation and adaptation, providing equitable solutions to the residents while making justice changes to the neighborhood.
+
+The building outline (pre)classified data such as Google open building data (see last week's application section) can be applied to investigate urban morphology, implying street width and suggesting appropriate building height for each application. This could be included in the planning process at site-level, rather than using current planning guidance that depends on some zoning / special area regulation which is at area-scale and negotiable. The figure-ground map could also be used to masterplan the transport system. Borrowing the idea from Barcelona superblocks, the transformation of roads could be low-cost solution to promote sustainable mobility.
+
+## Reflection
+
+The applications of remote sensing data tend to be passive and focus on the aftermath analysis of urban challenges (heat/temperature and climate change, as well as natural disasters and illegal logging, etc.). This may be less valuable in reversing and recovering the loss to the city.
+
+Front-ended/active applications like incorporating the optimization of tree placement in the planning process through remote sensing techniques should increase the spread to cover more expansive areas. More similar approaches could be developed to increase the awareness of the applicability and usefulness of remote sensing data. It would also be valuable to form the quadruple helix collaboration between government, industry, academia and the public to develop innovative business plans for such applications, ensuring long-term use and maintenance.
+
+Nevertheless, barriers in remote sensing data such as the temporal resolution and accuracy may limit the application scope. Although there could be efficient and reproducible project management plans, the actual acquisition of data may be time-consuming, lagging the data processing and analysis, delaying the interventions and rapid response. Comparable indicators/methods and agreed analytic frameworks would be needed to cope with the great diversity of contextual scenarios. Plus, the remote sensing surface temperature may not imply the trend of air temperature experienced by normal human.. This could be further proved with increasing the coverage of temperature sensors.

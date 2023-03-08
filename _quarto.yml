@@ -3,9 +3,19 @@ project:
   output-dir: docs
 
 book:
-  title: "CASA0023_LD"
+  title: "CASA0023 Learning Diary"
   author: "Yi-Chien Chen"
-  date: "23-01-16"
+  #date: "23-01-16"
+  navbar:
+    logo: "images/casa_logo.jpg"
+    collapse: true
+    collapse-below: lg
+    background: light
+    search: true
+    right:
+      - icon: github
+  repo-url: https://github.com/yichienchen99/CASA0023_LD
+  repo-actions: [edit, issue]
   chapters:
     - index.qmd
     - intro.qmd
@@ -16,17 +26,22 @@ book:
     - 5_GEE.qmd
     - 6_classification.qmd
     - 7_classification2.qmd
+    - 8_temperature.qmd
     - summary.qmd
     - dictionary.qmd
     - references.qmd
+  favicon: "image/favicon.ico"	
 
 bibliography: references.bib
 
 format:
   html:
-    theme: cosmo
+    theme:
+        light: [cosmo, flatly]
+        dark: [cosmo, darkly]
+    code-link: true
   pdf:
-    documentclass: scrreprt
+    documentclass: scrbook
 
 editor: visual
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>CASA0023 Learning Diary - Content</title>
+<title>CASA0023 Learning Diary - 8&nbsp; Temperature</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./1_intro.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./summary.html" rel="next">
+<link href="./7_classification2.html" rel="prev">
 <link href="./image/favicon.ico" rel="icon">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -101,7 +101,7 @@ ul.task-list li input[type="checkbox"] {
     </nav>
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Content</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Temperature</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -126,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active">Content</a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">Content</a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -166,7 +166,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./8_temperature.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Temperature</span></a>
+  <a href="./8_temperature.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Temperature</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -193,16 +193,22 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#structure-of-each-chapter" id="toc-structure-of-each-chapter" class="nav-link active" data-scroll-target="#structure-of-each-chapter">Structure (of each chapter)</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link active" data-scroll-target="#summary"><span class="toc-section-number">8.1</span>  Summary</a>
+  <ul class="collapse">
+  <li><a href="#uhi-and-its-impacts" id="toc-uhi-and-its-impacts" class="nav-link" data-scroll-target="#uhi-and-its-impacts"><span class="toc-section-number">8.1.1</span>  UHI and its impacts</a></li>
+  <li><a href="#uhi-and-policy-response" id="toc-uhi-and-policy-response" class="nav-link" data-scroll-target="#uhi-and-policy-response"><span class="toc-section-number">8.1.2</span>  UHI and policy response</a></li>
+  </ul></li>
+  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="toc-section-number">8.2</span>  Application</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection"><span class="toc-section-number">8.3</span>  Reflection</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/yichienchen99/CASA0023_LD/edit/main/intro.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/yichienchen99/CASA0023_LD/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/yichienchen99/CASA0023_LD/edit/main/8_temperature.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/yichienchen99/CASA0023_LD/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Content</h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Temperature</span></h1>
 </div>
 
 
@@ -217,50 +223,65 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<ol type="1">
-<li>Introduction
-<ul>
-<li>Remote sensing data intro / sensors / resolutions (using QGIS/SNAP/R)</li>
-</ul></li>
-<li>Sensor - WorldView3</li>
-<li>Corrections
-<ul>
-<li>Corrections / Enhancements (using R)</li>
-</ul></li>
-<li>Policy</li>
-<li>GEE
-<ul>
-<li>Filter/reduce/map (using GEE)</li>
-</ul></li>
-<li>Classification
-<ul>
-<li>Pixel-based (supervised and unsupervised)</li>
-</ul></li>
-<li>Classification 2
-<ul>
-<li>Object-based, sub-pixel, accuracy assessment</li>
-</ul></li>
-</ol>
-<section id="structure-of-each-chapter" class="level3">
-<h3 class="anchored" data-anchor-id="structure-of-each-chapter">Structure (of each chapter)</h3>
-<ul>
-<li><p>Summary:</p>
-<ul>
-<li><p>Content summary (outputs from the practical, small code chunks with relevant explanation and flow charts)</p>
-<ul>
-<li>✔️&amp;❌: indicate Pros and Cons of specific idea / concept / object…</li>
-</ul></li>
-<li><p>Questions (data, methods, or applications)</p></li>
-</ul></li>
-<li><p>Applications:</p>
-<ul>
-<li>Application of data / concepts / methods in literature / policy (largely sourced from weekly reading).</li>
-</ul></li>
-<li><p>Reflection:</p>
-<ul>
-<li>A personal reflection on the presented content (e.g.&nbsp;what was interesting, why and why might the data or tools presented this week be useful in the future to you or perhaps they won’t be useful but something similar might be)</li>
-</ul></li>
-</ul>
+<section id="summary" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">8.1</span> Summary</h2>
+<p>This week’s lecture goes into the application of remote sensing data on urban temperature / Urban Heat Island (UHI) mitigation (mentioned under week 4 policy section of this learning diary as well) through several policy case studies in different cities/countries. This section will elaborate UHI impacts and some limitations of related policies.</p>
+<section id="uhi-and-its-impacts" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="uhi-and-its-impacts"><span class="header-section-number">8.1.1</span> UHI and its impacts</h3>
+<p>UHI is correlated with the material (e.g.&nbsp;darker surfaces absorb and retain more heat than reflective ones), vegetation that cools the environment through evapotranspiration and shading, building heights and road widths (e.g.&nbsp;low Sky View Factor reduces outgoing longwave radiation), hard surface that reduces the emitance of heat (as opposed to vegetation/soft surface) and air speed, etc. Some of the factors may also related to others. For example, low SVF with clusters of high-rise buildings can sometimes cause high wind speed and reflective building material.</p>
+<p>UHI has wide impacts socially, economically and environmentally on urban areas and its periphery:</p>
+<table class="table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>pillars</th>
+<th>impacts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Social</td>
+<td><ul>
+<li><p>Heat-related illness</p></li>
+<li><p>Higher mortality rate</p></li>
+</ul></td>
+</tr>
+<tr class="even">
+<td>Economic</td>
+<td><ul>
+<li><p>Lower GDP in some areas</p></li>
+<li><p>Local government and related sectors increase spending on coping with UHI impacts</p></li>
+</ul></td>
+</tr>
+<tr class="odd">
+<td>Environmental</td>
+<td><ul>
+<li><p>Positive feedback loop where people would use more energy for cooling at high temperature, increasing GHG emissions which further contributing to higher temperature..</p></li>
+<li><p>Rising use of energy (burning fossil fuels) increases air pollution</p></li>
+</ul></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uhi-and-policy-response" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="uhi-and-policy-response"><span class="header-section-number">8.1.2</span> UHI and policy response</h3>
+<p>Different policy strategies and scales can have varying outcomes on GHG emissions and related UHI impacts at non-identical rates. Global policies (and national policies) are broader and context-less, guiding the overall directions and providing some standard indicators (like New Urban Agenda and Sustainable Development Goals). In some ways, global policies may boost creativity and diversity in approaches to climate mitigation and adaptations.</p>
+<p>Local policies tend to be more detailed, considering the context and implementation. However, the actual interventions/projects can diverge from the policy statements due to several reasons. First, limited resources (funding/technique/human capital) slow down policy enforcement by the government and other stakeholders. For example, (in the British planning system) the <a href="https://www.gov.uk/guidance/viability">viability assessment</a> can be provided by the developers to claim/negotiate for a lower amount of affordable housing provision than initially planned in the application to ensure the project delivery and viability (and so can the green infrastructure provision be reduced by this means!). Second, the quality of green infrastructure is usually not guaranteed, relying on the developers’ efforts. Plus, the interventions may not be in the location of demands. Usually people with more decision-making power vote for plans benefiting the wealthier neighborhoods, where people are less affected by the heat, neglecting the poorer ones (e.g.&nbsp;informal settlements). Third, implementations take time to become effective or accepted by the public, while the change in political conditions can influence the project objectives. Introducing projects that are operated by businesses and funded by the government, benefiting the public, would effectively mitigate this challenge as the external political factors may have limited impacts on project delivery.</p>
+</section>
+</section>
+<section id="application" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="application"><span class="header-section-number">8.2</span> Application</h2>
+<p>Remote sensing data steps in to cope with the detection of factors related to urban heat. For instance, albedo could be classified through LULC. Areas/buildings with reflective roofs would be areas of focus on introducing green roofs. Also, land surface temperature could be monitored using Sentinel data. The census/demographic data (or other social background information like redlining areas) can be incorporated into the temperature analysis, uncovering places that are most in need of mitigation and adaptation, providing equitable solutions to the residents while making justice changes to the neighborhood.</p>
+<p>The building outline (pre)classified data such as Google open building data (see last week’s application section) can be applied to investigate urban morphology, implying street width and suggesting appropriate building height for each application. This could be included in the planning process at site-level, rather than using current planning guidance that depends on some zoning / special area regulation which is at area-scale and negotiable. The figure-ground map could also be used to masterplan the transport system. Borrowing the idea from Barcelona superblocks, the transformation of roads could be low-cost solution to promote sustainable mobility.</p>
+</section>
+<section id="reflection" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="reflection"><span class="header-section-number">8.3</span> Reflection</h2>
+<p>The applications of remote sensing data tend to be passive and focus on the aftermath analysis of urban challenges (heat/temperature and climate change, as well as natural disasters and illegal logging, etc.). This may be less valuable in reversing and recovering the loss to the city.</p>
+<p>Front-ended/active applications like incorporating the optimization of tree placement in the planning process through remote sensing techniques should increase the spread to cover more expansive areas. More similar approaches could be developed to increase the awareness of the applicability and usefulness of remote sensing data. It would also be valuable to form the quadruple helix collaboration between government, industry, academia and the public to develop innovative business plans for such applications, ensuring long-term use and maintenance.</p>
+<p>Nevertheless, barriers in remote sensing data such as the temporal resolution and accuracy may limit the application scope. Although there could be efficient and reproducible project management plans, the actual acquisition of data may be time-consuming, lagging the data processing and analysis, delaying the interventions and rapid response. Comparable indicators/methods and agreed analytic frameworks would be needed to cope with the great diversity of contextual scenarios. Plus, the remote sensing surface temperature may not imply the trend of air temperature experienced by normal human.. This could be further proved with increasing the coverage of temperature sensors.</p>
 
 
 </section>
@@ -516,13 +537,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./7_classification2.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Classification 2</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./1_intro.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./summary.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Summary</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
