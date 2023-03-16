@@ -5,63 +5,49 @@ bibliography: references.bib
 
 ## Summary
 
-Google Earth Engine (GEE) is a geospatial processing service, analyzing near Earth's surface at any space at scale. The key benefit of using GEE is that the datasets are cloud-hosted and efficient computations can be executed through servers [@gandhi].
+This week Google Earth Engine (GEE) is introduced. It is a geospatial processing service like SNAP/QGIS (but somehow more powerful), analyzing near Earth's surface at any space at scale. This section describes some basic concepts and functions of GEE and its limitations. An example of GEE application is included in Application section.
 
--   Client: browser; polygons imported from local
+The key benefit of using GEE is that the datasets are cloud-hosted and efficient computations can be executed through *servers* [@gandhi].
 
--   Server: data storage; Earth Engine Objects
+Server vs. Client 
 
-Map, not looping: to just load the image collection once and use function to repeat the calculations for each image, ensure more efficient codes and computation. + know the amount of objects in the collection (otherwise the looping use x+1..)
+:   Server is like the back-end of GEE, responsible for data storage, including Earth Engine Objects. On the other hand, client is the browser/interface of GEE, including polygons imported from local.
 
 ### Scale
 
--   scale = pixel resolution
+Imagery is pre-processed (cut into 256x256 tiles in original projection and resolution) [@gorelick2017]. Scale is related to the spatial resolution/pixel of the datasets. The scale of Landsat-8 10m and 30m has the same value because the nominal/native resolution of Landsat-8 is at 30m. For different purpose of analysis, the resolution / scale would be different. Continental level analysis may use coarse scale and forest/tree placement may require fine scale.
 
--   Images are pre-processed (cut into 256x256 tiles in original projection and resolution) [@gorelick2017]
+::: {.callout-important appearance="simple"}
+As scale can be influenced by zoom levels, it should be set to ensure the consistency of the values across analysis. (explore pixel resolution values at different scales \> set pixel resolution when Map.addLayer)
 
--   ✔️ enable fast and efficient access and fast visualization [@gorelick2017]
-
--   ::: callout-important
-    To ensure the consistency of the values across analysis, scale should be set. (explore pixel resolution values at different scales \> set pixel resolution when Map.addLayer)
-    :::
-
--   Scale is related to the spatial resolution of the datasets. For example, the scale of Landsat-8 10m and 30m has the same value. why? - the nominal/native resolution of Landsat-8 is at 30m.
-
--   Scale can be influenced by zoom levels.
-
--   For different purpose of analysis, the resolution / scale would be different. Continental level analysis may use coarse scale and forest/tree placement may require fine scale.
+✔️ enable fast and efficient access and fast visualization [@gorelick2017]
+:::
 
 ### Filter
 
--   for image (raster)
+Imagery (raster data) can be filtered by date / by location (specified path and row)/boundary/polygon (imported shapefile or drawn manually) (similar to st.join/st.intersect) / by bands. Feature (vector/polygon) can also be filtered by ID/attributes usually.
 
-    -   by date
+### Map
 
-    -   by location (specified path and row)/boundary/polygon (imported shapefile or drawn manually) (similar to st.join/st.intersect)
-
-    -   by bands
-
--   for feature (vector/polygon)
-
-    -   by ID/attributes
+Not looping. Load the image collection once and repeat the calculation/function for each image. This ensures more efficient codes and computation, being certain on the amount of objects in the collection (otherwise looping use x+1 iteration).
 
 ### Reducer
 
--   Zonal statistics, similar to groupby
+Reducer is like conducting zonal statistics in QGIS (similar to `groupby` in R). It summarizes lots of images into one image composite through specified methods. For example:
 
--   Summarize lots of images to one image composite
+-   By **median** of the pixels in collections
 
-    -   by median of the pixels in collections
+    -   ✔️Median is good for distinct/large difference in index values (e.g. forest vs. non-forest).
 
-        -   Median is good for distinct/large difference in index values (e.g. forest vs. non-forest)
+    -   ❌but.. not as good when the area has **few pixels** \> use the normalizing statistics (= percentiles) instead (high percentiles concentrate on top indicate the classifier is more robust)
 
-        -   but.. not good when the area has few pixels \> use the normalizing statistics (= percentiles) instead (high percentiles concentrate on top indicate the classifier is more robust)
+    -   ❌and.. not representing **seasonality** (esp. for vegetation/crop/forest) \> medians of the pixels in 4 seasons (divide the time series into 4 in a list) [(Source: Google Earth)](https://youtu.be/WvaBZbph_cU?t=1638)
 
-        -   and.. not representing changes across seasons (esp. for vegetation/crop/forest) \> medians of the pixels in 4 seasons (divide the time series into 4 in a list) [(Source: Google Earth)](https://youtu.be/WvaBZbph_cU?t=1638)
+-   By geographical **boundary**
 
-    -   image.reduceRegion: one boundary (e.g. GLA boundary)
+    1.  `Image.reduceRegion`: one boundary (e.g. GLA boundary)
 
-    -   image.reduceRegions: sub-divided regions within a boundary (e.g. Boroughs within GLA boundary) - more like zonal statistics
+    2.  `Image.reduceRegions`: **sub-divided regions** within a boundary (e.g. Boroughs within GLA boundary) - more like zonal statistics.
 
 [![Filter, map, reduce](image/filter_map_reduce.png)](https://docs.google.com/document/d/11oo1TuvXyEvReoYLDeTcoh16rEN90I8Bf5qp0KxVu7U/edit)
 
@@ -69,55 +55,59 @@ Map, not looping: to just load the image collection once and use function to rep
 
 ### Join
 
--   spatial join
+-   Spatial join
 
 -   can be applied to 2+ datasets (e.g. Landsat and Sentinel) and/or images
 
-### Risk/limitation of using GEE
+### Risks/limitations of GEE
 
--   uncertainty of future change in GEE openness (can be closed / charged)
+1.  Uncertainty of future change in GEE openness (can be closed / charged (and currently it is charged for business/commercial use))
 
--   SAR phase data cannot be used on GEE. Need SNAP for this.
+2.  SAR phased data cannot be used on GEE. Need SNAP for this.
 
--   GEE is better at live and year mapping but not good at joining and filtering (recommended workflow: GEE (reduce data size) \> R/Python... (analysis))
+3.  GEE is better at live and year mapping but not good at analysis (recommended workflow: GEE (reduce data size&pre-processing) \> R (analysis))
+
+### Question
+
+1.  I cannot export image on GEE..?
+
+-   It could be found in the Google Drive & can then be imported in R.
 
 ## Application
 
-Applications utilizing the benefits of GEE in analyzing changes through timelapse and comparing across locations.
+This section demonstrates some applications utilizing the benefits of GEE in analyzing changes through timelapse and comparing across locations.
 
-### Map built-up area / urban expansion
-
-This could be further integrated to analysis on urbanization challenges like UHI, flooding...
+### Built-up area / urban expansion
 
 1.  GIF of the urbanization trajectories using Landsat 8 Level 2 Tier 1 [@wang, chap. A1.2]
 
 ![my first GEE GIF!](image/firstgif.gif)
 
--   Following the practical by [@wang, chap. A1.2], the above GIF shows the 2010-2020 changes in the area of the Kempegowda International Airport in India visually (its now the fourth busiest airport in the country). Then it would be helpful to quantify the change in the areas by classification.
+Following the practical by [@wang, chap. A1.2], the above GIF shows the 2010-2020 changes in the area of the Kempegowda International Airport in India visually (its now the fourth busiest airport in the country). Then it would be helpful to quantify the change in the areas by classification.
 
-2.  Urban / LCLU classification
+2.  Urban / LCLU classification (also detailed in two following weeks' chapters)
 
--   Many datasets are available, with different coverage and properties. The MODIS Land Cover Type Yearly Global can be used to map the changes in urban areas (it is the global dataset!) [@wang, chap. A1.2]
+Many datasets are available, with different coverage and properties. The MODIS Land Cover Type Yearly Global can be used to map the changes in urban areas (it is the global dataset!) [@wang, chap. A1.2]
 
-### UHI
+Once the urban/built-up area is classified, the result could be further integrated into analysis on **urbanization challenges** like UHI, flooding...
 
--   MODIS & Landsat (EE LST toolbox) can all be used to calculate land surface temperature (LST) [@wang, chap. A1.5]. Since surface UHI is the urban temperature subtracts rural reference, the rural/urban classification in the previous section can be applied to 1) mask the urban area for analysis 2) calculate the difference between urban and rural LST.
+### Urban Heat Island (UHI)
 
-    ![Surface Urban Heat Island in Kinmen](image/suhi_km.png)
+MODIS & Landsat (EE LST toolbox) can both be used to calculate land surface temperature (LST) [@wang, chap. A1.5]. Since **surface UHI** can be quantified as the **urban temperature subtracts rural reference**, the rural/urban classification in the previous section can be applied to 1) mask the urban area for analysis and 2) calculate the difference between urban and rural LST.
 
--   With reference to [@wang, chap. A1.5], the above map shows the spatial variability in Surface UHI in summers between 2014 and 2019 for Kinmen County using Landsat-8. (Red pixels: higher (diff.max=8°C); blue pixels: lower (diff.min=2°C). Summer temperature is used here to avoid the difference in seasons balancing out the peak values. The built-up area is quite small, as the county is still urbanizing slowly with a population of 140,843 within a 151.6 km2 area in 2022 as per Wikipedia. (Thus this might not be a proper site for analyzing UHI). However, the intensity of UHI is high in the most populous town Jincheng (with population density of 1,946 ppl/km2, whereas the whole county's density is 929 ppl/km2). Plus, the usual residents is 40% of the total census population. The elderly who live alone take up a large share of the usual residents. High temperature in the urban areas may increase the threats to those vulnerable groups.
+![Surface Urban Heat Island in Kinmen](image/suhi_km.png)
 
--   Another hotspot is in the central-south of the island which is the location of the Airport. More specifically, that is the location of the Airport hall, bus stops, taxi and car park, while the runway of the Airport is not classified as urban by MODIS (yet the LST is also high on runway). High reflectance of the road and building material, the absence of trees and vegetation and (possibly) the high volume of GHG emissions may contribute to the high temperature in this area compared to its rural neighbours.
+With reference to [@wang, chap. A1.5], the above map shows the spatial variability in Surface UHI in summers between 2014 and 2019 for Kinmen County using Landsat-8. (Red pixels: higher (diff.max=8°C); blue pixels: lower (diff.min=2°C). Summer temperature is used here to avoid the difference in seasons balancing out the peak values. The built-up area (shown as all the colored pixels) is quite small, as the county is still urbanizing slowly with a population of 140,843 within a 151.6 km2 area in 2022 as per Wikipedia. Arguably, this city with limited 'urban sprawl' might not be a proper site for analyzing UHI. However, the intensity of UHI is high in the most populous town Jincheng (with population density of 1,946 ppl/km2, whereas the whole county's density is 929 ppl/km2). Plus, the usual residents is 40% of the total census population. The elderly who live alone take up a large share of the usual residents. High temperature in the urban areas may increase the threats to those vulnerable groups.
+
+::: {.callout-tip appearance="simple"}
+Is it the large urban area that require UHI mitigation and analysis for government and researcher? or should all other land be integrated into the heat action plan / something similar?
+:::
+
+Another hot-spot is in the central-south of the island which is the location of the Airport. More specifically, that is the location of the Airport hall, bus stops, taxi and car park, while the runway of the Airport is not classified as urban by MODIS (yet the LST is also high on runway). High reflectance of the road and building material, the absence of trees and vegetation and (possibly) the high volume of GHG emissions may contribute to the high temperature in this area compared to its rural neighbours.
 
 ### [Earth Engine APP](https://github.com/philippgaertner/awesome-earth-engine-apps)
 
--   display large data and information quickly
-
--   e.g. using sliders to change the year + changing cities
-
-### Question
-
-I cannot figure out why i cannot export image on GEE..
+A range of pre-processed / classified GEE models are openly shared here. With the benefit of displaying large data and information quickly, the interaction between users and data is enhanced. Some excellent examples/techniques/visualisations to learn from e.g. using sliders to change the year / cities / show before-after comparison, etc..
 
 ## Reflection
 

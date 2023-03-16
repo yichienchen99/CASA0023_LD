@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>CASA0023_LD - 7&nbsp; Classification 2</title>
+<title>CASA0023 Learning Diary - 7&nbsp; Classification 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -95,10 +95,10 @@ div.csl-indent {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./general_images/casa_logo.jpg" alt="" class="navbar-logo">
+    <img src="./images/casa_logo.jpg" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">CASA0023_LD</span>
+    <span class="navbar-title">CASA0023 Learning Diary</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -218,7 +218,7 @@ div.csl-indent {
   <li><a href="#obia" id="toc-obia" class="nav-link" data-scroll-target="#obia"><span class="toc-section-number">7.1.1</span>  OBIA</a></li>
   <li><a href="#sub-pixel" id="toc-sub-pixel" class="nav-link" data-scroll-target="#sub-pixel"><span class="toc-section-number">7.1.2</span>  Sub-pixel</a></li>
   <li><a href="#accuracy-assessment" id="toc-accuracy-assessment" class="nav-link" data-scroll-target="#accuracy-assessment"><span class="toc-section-number">7.1.3</span>  Accuracy Assessment</a></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="toc-section-number">7.1.4</span>  Questions</a></li>
+  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question"><span class="toc-section-number">7.1.4</span>  Question</a></li>
   </ul></li>
   <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="toc-section-number">7.2</span>  Application</a>
   <ul class="collapse">
@@ -251,40 +251,36 @@ div.csl-indent {
 
 <section id="summary" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">7.1</span> Summary</h2>
+<p>This week lecture continues to explain and evaluate other classification methods (object-based and sub-pixel) and accuracy assessment of classification outcomes. Two pre-classified models are discussed in the application section.</p>
 <section id="obia" class="level3" data-number="7.1.1">
 <h3 data-number="7.1.1" class="anchored" data-anchor-id="obia"><span class="header-section-number">7.1.1</span> OBIA</h3>
-<p>Critique on pixel-based classification: <strong>Spatial autocorrelation</strong> (test/train) may influence the outcome of accuracy assessment (Tobler 1<sup>st</sup> Law)</p>
-<ul>
-<li><p>This could be solved by</p>
-<ul>
-<li><p>1) applying <a href="https://developers.google.com/earth-engine/guides/classification">distance filter</a>/metrics or Moran’s I to the test / train data</p></li>
-<li><p>2) or classify the image by Object-based image analysis (OBIA)</p></li>
-</ul></li>
-<li><p>If not consider SA – model would be too good / high accuracy</p></li>
-</ul>
-<p>2 <strong>parameters</strong> for OBIA:</p>
-<ul>
+<p>Critique on pixel-based classification: <strong>Spatial autocorrelation</strong> (test/train) may influence the outcome of accuracy assessment (Tobler 1<sup>st</sup> Law). If not consider SA – model would be too good / high accuracy. SA could be solved by:</p>
+<ol type="1">
+<li><p>applying <a href="https://developers.google.com/earth-engine/guides/classification">distance filter</a>/metrics or Moran’s I to the test / train data</p></li>
+<li><p>or classify the image through <strong>Object-based image analysis (OBIA)</strong>.</p></li>
+</ol>
+<p>Two <strong>parameters</strong> for OBIA:</p>
+<ol type="1">
 <li><p>Distance (between centroids/seeds)</p></li>
 <li><p>Homogeneity/similarity of pixels around the centroids</p></li>
-</ul>
-<p>The output would be features of the objects (e.g.&nbsp;mean of the pixel values) &gt;&gt; look like art rather than imagery</p>
-<p><strong>Applications</strong> in medical and surgery (e.g.&nbsp;cancer detection)</p>
+</ol>
+<p>The output would be features of the objects (e.g.&nbsp;mean of the pixel values) that look like art rather than imagery. OBIA is originally applied in medical and surgery (e.g.&nbsp;cancer detection).</p>
 </section>
 <section id="sub-pixel" class="level3" data-number="7.1.2">
 <h3 data-number="7.1.2" class="anchored" data-anchor-id="sub-pixel"><span class="header-section-number">7.1.2</span> Sub-pixel</h3>
-<p>Fraction of selected features per pixel &gt; spectrally pure endmembers</p>
+<p>Fraction of selected features per pixel &gt; spectrally pure end-members</p>
 <p>Cons: difficult to assess accuracy (no test/train split) &gt; harden</p>
 <p><strong>Applications</strong> on pollution detection and % of vegetation</p>
 <ul>
 <li><p>spectrally pure ENDMEMBER selection: library (), lab, points/polygon (one point), value specification</p></li>
-<li><p>endmember * fraction &gt;&gt; unconstrained &gt;&gt; constrained (sum to one)</p></li>
+<li><p>end-member * fraction &gt;&gt; unconstrained &gt;&gt; constrained (sum to one)</p></li>
 <li><p>if multiple points = MESMA</p></li>
 </ul>
 </section>
 <section id="accuracy-assessment" class="level3" data-number="7.1.3">
 <h3 data-number="7.1.3" class="anchored" data-anchor-id="accuracy-assessment"><span class="header-section-number">7.1.3</span> Accuracy Assessment</h3>
 <p>Random sampling &gt; test/train &gt; model output &gt; test output &gt; matrix</p>
-<p><strong>PA (producer accuracy)</strong>: <span class="math inline">\(\frac{TP}{TP+FN}\)</span> == recall / sensitivity (correctly classified pixel vs.&nbsp;groud truth data)</p>
+<p><strong>PA (producer accuracy)</strong>: <span class="math inline">\(\frac{TP}{TP+FN}\)</span> == recall / sensitivity (correctly classified pixel vs.&nbsp;ground truth data)</p>
 <ul>
 <li>High PA: Low FN and High FP: e.g.&nbsp;predicted urban but actually other land cover type</li>
 </ul>
@@ -301,22 +297,19 @@ div.csl-indent {
 <li>Error of commission = 100-UA</li>
 </ul>
 <p><strong>OA (overall accuracy)</strong>: (TP+FP+FN+TN)</p>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-important callout callout-style-simple">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="callout-body-container">
 <p>PA and UA never both good: model with Low FN and Low FP does not exist. Since data is not balanced, changes in <strong>decision threshold</strong> of classification may vary the outcomes. Increasing FP (more predicted positive) &gt; UA worsens &gt; FN reduces &gt; PA improves. The matrix are related and may change together. The trade-offs between the two make the ideal situation with high PA and high UA impossible.</p>
 <p>Hence, one of them would be more important than the other under different scenarios and the one with higher relevance to the problem should be picked when analyzing accuracy and designing the model <span class="citation" data-cites="wilber">(<a href="references.html#ref-wilber" role="doc-biblioref">Wilber, n.d.</a>)</span>:</p>
 <ul>
 <li><p>Recall/PA is important when we believe False Negatives are more important than False Positives (e.g.&nbsp;our problem of cancer detection).</p></li>
 <li><p>Precision/UA is important when we believe False Positives are more important than False Negatives (e.g.&nbsp;spam detection).</p></li>
 </ul>
+</div>
 </div>
 </div>
 <section id="f1-score" class="level4" data-number="7.1.3.1">
@@ -383,40 +376,34 @@ Note
 <p></p><figcaption class="figure-caption">(Lovelace et al., 2019)</figcaption><p></p>
 </figure>
 </div>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-tip callout callout-style-simple">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="callout-body-container">
 <p>mlr3 to split data for spatial CV:</p>
 <p>3 stages: 1) <strong>task</strong>: data specification (including response and predictor variables) and the model type (such as regression or classification). 2) <strong>learner</strong> defines the specific learning algorithm that is applied to the created task. 3) <strong>resampling</strong> approach assesses the predictive performance of the model, i.e., its ability to generalize to new data.</p>
 <p>Detailed example see <span class="citation" data-cites="lovelace2019">(<a href="references.html#ref-lovelace2019" role="doc-biblioref">Lovelace, Nowosad, and Muenchow 2019</a>)</span>.</p>
 </div>
 </div>
+</div>
 <p><strong>Leave one out</strong> (for everything except one point) – more extreme / computationally extensive</p>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-important callout callout-style-simple">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="callout-body-container">
 <p>Selecting data for training / testing / accuracy:</p>
 <p>&gt;&gt; reproducible (same model for different years data) == (choose land that not change to much – &nbsp;pseudo-invariant features) / (manual selection of ROI) / (choose same parcel/feature from different years = generalizable) == no fixed rules</p>
 </div>
 </div>
+</div>
 </section>
 </section>
-<section id="questions" class="level3" data-number="7.1.4">
-<h3 data-number="7.1.4" class="anchored" data-anchor-id="questions"><span class="header-section-number">7.1.4</span> Questions</h3>
+<section id="question" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="question"><span class="header-section-number">7.1.4</span> Question</h3>
 <ol type="1">
 <li>What’s the neighborhood size (shouldn’t it be 100 if its 2*seed size)? When calculating std, why max size should be the same as NS?</li>
 </ol>

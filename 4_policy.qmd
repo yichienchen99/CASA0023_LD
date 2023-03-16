@@ -5,7 +5,7 @@ bibliography: references.bib
 
 ## Summary & Application
 
-The lecture this week shows a range of policy relevant to remote sensing data, from urban heat island to air pollution to disaster response. The following summary will detail London's policy response to Urban Heat Island effect and how can remote sensing be incorporated into the strategic planning and solve the current challenges. London Green Belt will be the focus in this entry but admittedly it can be a less effective/direct solution to tackle increasing temperature in the city.
+The lecture this week shows a range of policy relevant to remote sensing techniques, from urban heat island to air pollution to disaster response. The following summary will detail London's policy response to Urban Heat Island effect and how can EO data be incorporated into the strategic planning and solve the current challenges. London Green Belt will be the focus in this entry but admittedly it can be a less effective/direct solution to tackle increasing temperature in the city.
 
 ### Policy Challenge in London
 
@@ -118,7 +118,9 @@ Global
 
 ### Question
 
-Is there any privacy concern on monitoring via remotely sensed data? (e.g. in the case of watering gardens, what if the residents get angry about being monitored and refuse to make changes?)
+1.  Is there any privacy concern on monitoring via remotely sensed data? (e.g. in the case of watering gardens, what if the residents get angry about being monitored and refuse to make changes?)
+
+-   Yes. If the solution/intervention is in private land, the alternative in public space would be provided. The government / clients tend to prevent privacy concerns when deploying a model so the actual deployment could be affected... (could be another drawback of using EO/remote sensing data?).
 
 ## Reflection
 

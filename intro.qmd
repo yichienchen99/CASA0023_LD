@@ -12,6 +12,7 @@
     -   Pixel-based (supervised and unsupervised)
 7.  Classification 2
     -   Object-based, sub-pixel, accuracy assessment
+8.  Temperature
 
 ### Structure (of each chapter)
 

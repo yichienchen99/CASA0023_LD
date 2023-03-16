@@ -13,23 +13,23 @@ UHI is correlated with the material (e.g. darker surfaces absorb and retain more
 
 UHI has wide impacts socially, economically and environmentally on urban areas and its periphery:
 
-+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| pillars                          | impacts                                                                                                                                                                     |
-+==================================+=============================================================================================================================================================================+
-| Social                           | -   Heat-related illness                                                                                                                                                    |
-|                                  |                                                                                                                                                                             |
-|                                  | -   Higher mortality rate                                                                                                                                                   |
-+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Economic                         | -   Lower GDP in some areas                                                                                                                                                 |
-|                                  |                                                                                                                                                                             |
-|                                  | -   Local government and related sectors increase spending on coping with UHI impacts                                                                                       |
-+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Environmental                    | -   Positive feedback loop where people would use more energy for cooling at high temperature, increasing GHG emissions which further contributing to higher temperature..  |
-|                                  |                                                                                                                                                                             |
-|                                  | -   Rising use of energy (burning fossil fuels) increases air pollution                                                                                                     |
-+----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| pillars       | impacts                                                                                                                                                                    |
++===============+============================================================================================================================================================================+
+| Social        | -   Heat-related illness                                                                                                                                                   |
+|               |                                                                                                                                                                            |
+|               | -   Higher mortality rate                                                                                                                                                  |
++---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Economic      | -   Lower GDP in some areas                                                                                                                                                |
+|               |                                                                                                                                                                            |
+|               | -   Local government and related sectors increase spending on coping with UHI impacts                                                                                      |
++---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Environmental | -   Positive feedback loop where people would use more energy for cooling at high temperature, increasing GHG emissions which further contributing to higher temperature.. |
+|               |                                                                                                                                                                            |
+|               | -   Rising use of energy (burning fossil fuels) increases air pollution                                                                                                    |
++---------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
-### UHI and policy response 
+### UHI and policy response
 
 Different policy strategies and scales can have varying outcomes on GHG emissions and related UHI impacts at non-identical rates. Global policies (and national policies) are broader and context-less, guiding the overall directions and providing some standard indicators (like New Urban Agenda and Sustainable Development Goals). In some ways, global policies may boost creativity and diversity in approaches to climate mitigation and adaptations.
 

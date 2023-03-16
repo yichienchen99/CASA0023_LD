@@ -5,31 +5,27 @@ bibliography: references.bib
 
 ## Summary
 
+This week lecture continues to explain and evaluate other classification methods (object-based and sub-pixel) and accuracy assessment of classification outcomes. Two pre-classified models are discussed in the application section.
+
 ### OBIA
 
-Critique on pixel-based classification: **Spatial autocorrelation** (test/train) may influence the outcome of accuracy assessment (Tobler 1^st^ Law)
+Critique on pixel-based classification: **Spatial autocorrelation** (test/train) may influence the outcome of accuracy assessment (Tobler 1^st^ Law). If not consider SA -- model would be too good / high accuracy. SA could be solved by:
 
--   This could be solved by
+1.  applying [distance filter](https://developers.google.com/earth-engine/guides/classification)/metrics or Moran's I to the test / train data
 
-    -   1\) applying [distance filter](https://developers.google.com/earth-engine/guides/classification)/metrics or Moran's I to the test / train data
+2.  or classify the image through **Object-based image analysis (OBIA)**.
 
-    -   2\) or classify the image by Object-based image analysis (OBIA)
+Two **parameters** for OBIA:
 
--   If not consider SA -- model would be too good / high accuracy
+1.  Distance (between centroids/seeds)
 
-2 **parameters** for OBIA:
+2.  Homogeneity/similarity of pixels around the centroids
 
--   Distance (between centroids/seeds)
-
--   Homogeneity/similarity of pixels around the centroids
-
-The output would be features of the objects (e.g. mean of the pixel values) \>\> look like art rather than imagery
-
-**Applications** in medical and surgery (e.g. cancer detection)
+The output would be features of the objects (e.g. mean of the pixel values) that look like art rather than imagery. OBIA is originally applied in medical and surgery (e.g. cancer detection).
 
 ### Sub-pixel
 
-Fraction of selected features per pixel \> spectrally pure endmembers
+Fraction of selected features per pixel \> spectrally pure end-members
 
 Cons: difficult to assess accuracy (no test/train split) \> harden
 
@@ -37,7 +33,7 @@ Cons: difficult to assess accuracy (no test/train split) \> harden
 
 -   spectrally pure ENDMEMBER selection: library (), lab, points/polygon (one point), value specification
 
--   endmember \* fraction \>\> unconstrained \>\> constrained (sum to one)
+-   end-member \* fraction \>\> unconstrained \>\> constrained (sum to one)
 
 -   if multiple points = MESMA
 
@@ -45,7 +41,7 @@ Cons: difficult to assess accuracy (no test/train split) \> harden
 
 Random sampling \> test/train \> model output \> test output \> matrix
 
-**PA (producer accuracy)**: $\frac{TP}{TP+FN}$ == recall / sensitivity (correctly classified pixel vs. groud truth data)
+**PA (producer accuracy)**: $\frac{TP}{TP+FN}$ == recall / sensitivity (correctly classified pixel vs. ground truth data)
 
 -   High PA: Low FN and High FP: e.g. predicted urban but actually other land cover type
 
@@ -63,7 +59,7 @@ Random sampling \> test/train \> model output \> test output \> matrix
 
 **OA (overall accuracy)**: (TP+FP+FN+TN)
 
-::: callout-note
+::: {.callout-important appearance="simple"}
 PA and UA never both good: model with Low FN and Low FP does not exist. Since data is not balanced, changes in **decision threshold** of classification may vary the outcomes. Increasing FP (more predicted positive) \> UA worsens \> FN reduces \> PA improves. The matrix are related and may change together. The trade-offs between the two make the ideal situation with high PA and high UA impossible.
 
 Hence, one of them would be more important than the other under different scenarios and the one with higher relevance to the problem should be picked when analyzing accuracy and designing the model [@wilber]:
@@ -131,7 +127,7 @@ To mitigate issue with Spatial autocorrelation in Cross validation, randomly dis
 
 ![(Lovelace et al., 2019)](image/SCV.png)
 
-::: callout-note
+::: {.callout-tip appearance="simple"}
 mlr3 to split data for spatial CV:
 
 3 stages: 1) **task**: data specification (including response and predictor variables) and the model type (such as regression or classification). 2) **learner** defines the specific learning algorithm that is applied to the created task. 3) **resampling** approach assesses the predictive performance of the model, i.e., its ability to generalize to new data.
@@ -141,13 +137,13 @@ Detailed example see [@lovelace2019].
 
 **Leave one out** (for everything except one point) -- more extreme / computationally extensive
 
-::: callout-note
+::: {.callout-important appearance="simple"}
 Selecting data for training / testing / accuracy:
 
 \>\> reproducible (same model for different years data) == (choose land that not change to much --  pseudo-invariant features) / (manual selection of ROI) / (choose same parcel/feature from different years = generalizable) == no fixed rules
 :::
 
-### Questions
+### Question
 
 1.  What's the neighborhood size (shouldn't it be 100 if its 2\*seed size)? When calculating std, why max size should be the same as NS?
 

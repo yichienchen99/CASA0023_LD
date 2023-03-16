@@ -216,8 +216,8 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#sensors" id="toc-sensors" class="nav-link" data-scroll-target="#sensors"><span class="toc-section-number">1.1.1</span>  Sensors</a></li>
   <li><a href="#four-resolutions" id="toc-four-resolutions" class="nav-link" data-scroll-target="#four-resolutions"><span class="toc-section-number">1.1.2</span>  Four resolutions</a></li>
-  <li><a href="#practical" id="toc-practical" class="nav-link" data-scroll-target="#practical"><span class="toc-section-number">1.1.3</span>  Practical</a></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="toc-section-number">1.1.4</span>  Questions</a></li>
+  <li><a href="#basic-workflow-snap" id="toc-basic-workflow-snap" class="nav-link" data-scroll-target="#basic-workflow-snap"><span class="toc-section-number">1.1.3</span>  Basic workflow (SNAP)</a></li>
+  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question"><span class="toc-section-number">1.1.4</span>  Question</a></li>
   </ul></li>
   <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="toc-section-number">1.2</span>  Application</a></li>
   <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection"><span class="toc-section-number">1.3</span>  Reflection</a></li>
@@ -246,21 +246,14 @@ div.csl-indent {
 
 <section id="summary" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">1.1</span> Summary</h2>
+<p>This week’s lecture introduces passive and active sensors and the four resolutions of remote sensing data (and many other concepts!). The tutorial describes basic workflow of analyzing EO data using SNAP and QGIS. An example of analyzing color composite using SNAP is included at the end of this section.</p>
 <section id="sensors" class="level3" data-number="1.1.1">
 <h3 data-number="1.1.1" class="anchored" data-anchor-id="sensors"><span class="header-section-number">1.1.1</span> Sensors</h3>
-<p>Passive</p>
-<ul>
-<li><p>Attribute: Sun energy reflection in EM wave, don’t emit EM waves</p></li>
-<li><p>Example: human eyes, satellite (e.g.&nbsp;Wk2 sensor summary - WorldView-3)</p></li>
-<li><p>❌ Influenced by atmosphere haze(require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g.&nbsp;blue sky and orange sunset)), clouds and weather</p></li>
-<li><p>✔️ does not disturb the object or area of interest</p></li>
-</ul>
-<p>Active</p>
-<ul>
-<li><p>Attribute: Emit and receive EM wave / energy</p></li>
-<li><p>Example: radar, x-ray, LiDAR</p></li>
-<li><p>✔️ can pass clouds</p></li>
-</ul>
+<p><strong>Passive sensors</strong> are like human eyes/cameras that do not emit EM waves itself. Sun energy reflection in EM wave and satellite (e.g.&nbsp;Wk2 sensor summary - WorldView-3) capture that.</p>
+<p>❌ Influenced by atmosphere haze(require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g.&nbsp;blue sky and orange sunset)), clouds and weather</p>
+<p>✔️ does not disturb the object or area of interest</p>
+<p><strong>Active sensors</strong> emit and receive EM wave / energy like radar and x-ray. Examples include SAR and LiDAR.</p>
+<p>✔️ can pass clouds</p>
 </section>
 <section id="four-resolutions" class="level3" data-number="1.1.2">
 <h3 data-number="1.1.2" class="anchored" data-anchor-id="four-resolutions"><span class="header-section-number">1.1.2</span> Four resolutions</h3>
@@ -294,12 +287,11 @@ div.csl-indent {
 <li><p>High resolution / pixel -&gt; low revisit = low cost and number [graph]</p></li>
 </ul></li>
 </ol>
-<p>Trade off between resolution and time (and cost)</p>
+<p>There is trade-off between resolution and time (and cost). The choice of sensors depends on the purpose of the analysis.</p>
 </section>
-<section id="practical" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="practical"><span class="header-section-number">1.1.3</span> Practical</h3>
-<p>Overview/Workflow (SNAP):</p>
-<p>Download -&gt; New project in SNAP -&gt; Save downloaded file in a Data folder in the same directory as the project -&gt; Open product/zipped data -&gt; Select RGB-image channel (on product explorer panel right click product) <strong>=&gt; Fig. a,b,c</strong></p>
+<section id="basic-workflow-snap" class="level3" data-number="1.1.3">
+<h3 data-number="1.1.3" class="anchored" data-anchor-id="basic-workflow-snap"><span class="header-section-number">1.1.3</span> Basic workflow (SNAP)</h3>
+<p>Download &gt; New project in SNAP &gt; Save downloaded file in a Data folder in the same directory as the project &gt; Open product/zipped data &gt; Select RGB-image channel (on product explorer panel right click product) <strong>&gt; Fig. a,b,c</strong></p>
 <p><strong>To inspect/change image display</strong>: -&gt; Colour Manipulation panel (View -&gt; Tool Windows) -&gt; Change the range of histogram</p>
 <p><strong>To analyse spectral feature space</strong>: -&gt; Scatter plot (under Analysis tab) <strong>=&gt; Fig. d</strong></p>
 <p><strong>To mask the study area</strong>: -&gt; Resampling to 20m (since both masking and the Tasseled Cap function require same resolution while B2/B3/B4/B8 are 10m and B11/B12 are 20m) -&gt; Import vector (ESRI shapefile) -&gt; Select the imported layer in layer manager -&gt; Masking under Raster - Masks - Land/Sea Mask (select bands that would be used)</p>
@@ -396,10 +388,16 @@ div.csl-indent {
 </section>
 <section id="masking-vs.-cropping" class="level4" data-number="1.1.3.2">
 <h4 data-number="1.1.3.2" class="anchored" data-anchor-id="masking-vs.-cropping"><span class="header-section-number">1.1.3.2</span> Masking vs.&nbsp;cropping</h4>
-<ul>
-<li><p>masking: the outline of the geo boundary</p></li>
-<li><p>cropping: to the extent, the rectangular parameter of the geo boundary</p></li>
-</ul>
+<dl>
+<dt>Masking</dt>
+<dd>
+<p>The outline of the geographic boundary</p>
+</dd>
+<dt>Cropping</dt>
+<dd>
+<p>To the extent, the rectangular parameter of the geographic boundary</p>
+</dd>
+</dl>
 </section>
 <section id="example-processing-of-sentinel-and-landsat-data-of-kinmen-county" class="level4" data-number="1.1.3.3">
 <h4 data-number="1.1.3.3" class="anchored" data-anchor-id="example-processing-of-sentinel-and-landsat-data-of-kinmen-county"><span class="header-section-number">1.1.3.3</span> Example: Processing of Sentinel and Landsat data of Kinmen County</h4>
@@ -450,7 +448,7 @@ div.csl-indent {
 <li><p>False colour composite: B8, B4, B3. Plants reflect near-infrared and green light whilst absorbing red.</p></li>
 <li><p>Atmospheric penetration composite: B12, B11, B8A with no visible bands to penetrate atmospheric particles. Vegetation = blue, urban area = white, gray cyan or purple.</p></li>
 </ul>
-<p>Basically, Fig a,b,c show that the coastal city Xiamen’s built-up areas are mostly close to the seashore. This is mainly due to its historical ports that are open to international trades and thus becoming more urbanized. Kinmen Islands are less populous compared to Xiamen and the majority of land is bare soil / vegetation. Fig d shows that the dry bare soil is prominent in some areas (black dots at high B4 and high B8), while the image has large ratio of biomass (yellow peak at low B4 and high B8).</p>
+<p>Basically, Fig a,b,c show that Xiamen’s built-up areas are mostly close to the seashore (in fact most cities in eastern China are coastal). This is mainly due to its historical ports that are open to international trades and thus becoming more urbanized. Kinmen Islands are less populous compared to Xiamen and the majority of land is bare soil / vegetation. Fig d shows that the dry bare soil is prominent in some areas (black dots at high B4 and high B8), while the image has large ratio of biomass (yellow peak at low B4 and high B8).</p>
 </section>
 <section id="tasseled-cap-function" class="level5" data-number="1.1.3.3.2">
 <h5 data-number="1.1.3.3.2" class="anchored" data-anchor-id="tasseled-cap-function"><span class="header-section-number">1.1.3.3.2</span> Tasseled Cap function</h5>
@@ -594,30 +592,33 @@ div.csl-indent {
 </ul>
 </section>
 </section>
-<section id="questions" class="level3" data-number="1.1.4">
-<h3 data-number="1.1.4" class="anchored" data-anchor-id="questions"><span class="header-section-number">1.1.4</span> Questions</h3>
+<section id="question" class="level3" data-number="1.1.4">
+<h3 data-number="1.1.4" class="anchored" data-anchor-id="question"><span class="header-section-number">1.1.4</span> Question</h3>
 <ol type="1">
-<li><p>why in the practical book before Landsat when resampling Sentinel, the equation for brightness does not include B11 and B12 (but using 0.5082 and 0.1863)?</p>
-<p>A: It should be B11 and B12.</p></li>
-<li><p>Fig e looks different in terms of colour scheme? Since the majority of the city is coloured in blue, what do the blueish areas represent/mean (physically those areas are vegetations/forests, shouldn’t those be in green)?</p>
-<p>A: It depends on the colour gun set by the RGB.</p></li>
+<li>Why in the practical book before Landsat when resampling Sentinel, the equation for brightness does not include B11 and B12 (but using 0.5082 and 0.1863)?</li>
 </ol>
+<ul>
+<li>A: It should be B11 and B12.</li>
+</ul>
+<ol start="2" type="1">
+<li>Fig e looks different in terms of colour scheme? Since the majority of the city is coloured in blue, what do the blueish areas represent/mean (physically those areas are vegetations/forests, shouldn’t those be in green)?</li>
+</ol>
+<ul>
+<li>A: It depends on the colour gun set by the RGB.</li>
+</ul>
 </section>
 </section>
 <section id="application" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="application"><span class="header-section-number">1.2</span> Application</h2>
 <p>One more question would be what possible factors contribute to the difference in mean reflectance analysed above and how to mitigate the difference. Apart from the atmospheric window discussed above, the temporal difference in the sensing date (19th November 2022 for Sentinel and 19th December 2022 for Landsat) might contribute to difference in atmospheric effects and in path radiance / noise from sky irradiance and radiance from surrounding areas. Hence, to increase data consistency and reduce reflectance difference for similar sensors, removing atmospheric effects and noise is needed this could be done through linear regression methods (e.g.&nbsp;to get surface reflectance for Sentinel using radiometric calibration method) (see Week 3). Moreover, Time-series-based Reflectance Adjustment (TRA) approach is developed to mitigate the drawbacks of fixed/global band transformation coefficients by considering difference in land cover type and locations <span class="citation" data-cites="shang2019a">(<a href="references.html#ref-shang2019a" role="doc-biblioref">Shang and Zhu 2019a</a>)</span>.</p>
-<div class="callout-note callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
+<div class="callout-tip callout callout-style-simple">
+<div class="callout-body d-flex">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<div class="callout-caption-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<div class="callout-body-container">
 <p>However, if just using one sensor for analysis, there would be no/less concerns on the consistency issue?</p>
+</div>
 </div>
 </div>
 </section>

@@ -5,6 +5,8 @@ bibliography: references.bib
 
 ## Summary
 
+Corrections and enhancement are the two main concepts in this week's teaching. They are the pre-processing of EO data to ensure the data used in the classification/analysis is consistent and usable.
+
 ### Corrections
 
 #### Geometric Corrections
@@ -198,7 +200,7 @@ Although Kinmen County is rather a small area, covered sufficiently within one t
 
         Pan sharpen: for better visualization
 
-### Questions
+### Question
 
 ## Application
 

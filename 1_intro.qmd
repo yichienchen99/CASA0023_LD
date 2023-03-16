@@ -1,28 +1,23 @@
 ---
 title: "Introduction"
+bibliography: references.bib
 ---
 
 ## Summary
 
+This week's lecture introduces passive and active sensors and the four resolutions of remote sensing data (and many other concepts!). The tutorial describes basic workflow of analyzing EO data using SNAP and QGIS. An example of analyzing color composite using SNAP is included at the end of this section.
+
 ### Sensors
 
-Passive
+**Passive sensors** are like human eyes/cameras that do not emit EM waves itself. Sun energy reflection in EM wave and satellite (e.g. Wk2 sensor summary - WorldView-3) capture that.
 
--   Attribute: Sun energy reflection in EM wave, don't emit EM waves
+❌ Influenced by atmosphere haze(require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather
 
--   Example: human eyes, satellite (e.g. Wk2 sensor summary - WorldView-3)
+✔️ does not disturb the object or area of interest
 
--   ❌ Influenced by atmosphere haze(require atmosphere correction, no haze in outer space due to no atmosphere) and scattering (wavelength (e.g. blue sky and orange sunset)), clouds and weather
+**Active sensors** emit and receive EM wave / energy like radar and x-ray. Examples include SAR and LiDAR.
 
--   ✔️ does not disturb the object or area of interest
-
-Active
-
--   Attribute: Emit and receive EM wave / energy
-
--   Example: radar, x-ray, LiDAR
-
--   ✔️ can pass clouds
+✔️ can pass clouds
 
 ### Four resolutions
 
@@ -62,13 +57,11 @@ Active
 
     -   High resolution / pixel -\> low revisit = low cost and number \[graph\]
 
-Trade off between resolution and time (and cost)
+There is trade-off between resolution and time (and cost). The choice of sensors depends on the purpose of the analysis.
 
-### Practical
+### Basic workflow (SNAP)
 
-Overview/Workflow (SNAP):
-
-Download -\> New project in SNAP -\> Save downloaded file in a Data folder in the same directory as the project -\> Open product/zipped data -\> Select RGB-image channel (on product explorer panel right click product) **=\> Fig. a,b,c**
+Download \> New project in SNAP \> Save downloaded file in a Data folder in the same directory as the project \> Open product/zipped data \> Select RGB-image channel (on product explorer panel right click product) **\> Fig. a,b,c**
 
 **To inspect/change image display**: -\> Colour Manipulation panel (View -\> Tool Windows) -\> Change the range of histogram
 
@@ -128,9 +121,13 @@ Since Landsat has different spatial resolution than Sentinel, the latter will be
 
 #### Masking vs. cropping
 
--   masking: the outline of the geo boundary
+Masking
 
--   cropping: to the extent, the rectangular parameter of the geo boundary
+:   The outline of the geographic boundary
+
+Cropping
+
+:   To the extent, the rectangular parameter of the geographic boundary
 
 #### Example: Processing of Sentinel and Landsat data of Kinmen County
 
@@ -156,7 +153,7 @@ The initial exploration using Sentinel data:
 
 -   Atmospheric penetration composite: B12, B11, B8A with no visible bands to penetrate atmospheric particles. Vegetation = blue, urban area = white, gray cyan or purple.
 
-Basically, Fig a,b,c show that the coastal city Xiamen's built-up areas are mostly close to the seashore. This is mainly due to its historical ports that are open to international trades and thus becoming more urbanized. Kinmen Islands are less populous compared to Xiamen and the majority of land is bare soil / vegetation. Fig d shows that the dry bare soil is prominent in some areas (black dots at high B4 and high B8), while the image has large ratio of biomass (yellow peak at low B4 and high B8).
+Basically, Fig a,b,c show that Xiamen's built-up areas are mostly close to the seashore (in fact most cities in eastern China are coastal). This is mainly due to its historical ports that are open to international trades and thus becoming more urbanized. Kinmen Islands are less populous compared to Xiamen and the majority of land is bare soil / vegetation. Fig d shows that the dry bare soil is prominent in some areas (black dots at high B4 and high B8), while the image has large ratio of biomass (yellow peak at low B4 and high B8).
 
 ##### Tasseled Cap function
 
@@ -238,21 +235,21 @@ Two software can work together (using QGIS to check everything as did in CASA000
 
 -   when i checked GeoTIFFs and shapefiles in QGIS, nothing is shown.. so probably something went wrong when selecting POIs.
 
-### Questions
+### Question
 
-1.  why in the practical book before Landsat when resampling Sentinel, the equation for brightness does not include B11 and B12 (but using 0.5082 and 0.1863)?
+1.  Why in the practical book before Landsat when resampling Sentinel, the equation for brightness does not include B11 and B12 (but using 0.5082 and 0.1863)?
 
-    A: It should be B11 and B12.
+-   A: It should be B11 and B12.
 
 2.  Fig e looks different in terms of colour scheme? Since the majority of the city is coloured in blue, what do the blueish areas represent/mean (physically those areas are vegetations/forests, shouldn't those be in green)?
 
-    A: It depends on the colour gun set by the RGB.
+-   A: It depends on the colour gun set by the RGB.
 
 ## Application
 
 One more question would be what possible factors contribute to the difference in mean reflectance analysed above and how to mitigate the difference. Apart from the atmospheric window discussed above, the temporal difference in the sensing date (19th November 2022 for Sentinel and 19th December 2022 for Landsat) might contribute to difference in atmospheric effects and in path radiance / noise from sky irradiance and radiance from surrounding areas. Hence, to increase data consistency and reduce reflectance difference for similar sensors, removing atmospheric effects and noise is needed this could be done through linear regression methods (e.g. to get surface reflectance for Sentinel using radiometric calibration method) (see Week 3). Moreover, Time-series-based Reflectance Adjustment (TRA) approach is developed to mitigate the drawbacks of fixed/global band transformation coefficients by considering difference in land cover type and locations [@shang2019a].
 
-::: callout-note
+::: {.callout-tip appearance="simple"}
 However, if just using one sensor for analysis, there would be no/less concerns on the consistency issue?
 :::
 

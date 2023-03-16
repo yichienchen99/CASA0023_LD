@@ -45,7 +45,7 @@ Segmentation algorithms: Multi-resolution segmentation in [**eCognition**](http:
 
 Scale: object-based.. (groups pixels into representative vector shapes/objects)
 
-::: callout-note
+::: {.callout-important appearance="simple"}
 ✔️: Esp. good for **high spatial resolution image** by avoiding the noisiness in the outputs of pixel-based methods, more like human in processing patterns. Because OBIA used both spectral and contextual information, it had higher accuracy compared to pixel-based methods (when comparing high and medium spatial resolution imagery) [@weih]. \> gaining popularity due to increasingly amount of high-resolution data available! More in next chapter..
 :::
 
@@ -67,9 +67,9 @@ Scale: object-based.. (groups pixels into representative vector shapes/objects)
 
     -   Apply this final alpha to the whole data
 
-### Questions:
+### Question
 
-1.  (Practical) Whats the difference between *`.reduce(ee.Reducer.median())`* and *`.median()`* ??
+1.  (Practical) Whats the difference between *`.reduce(ee.Reducer.median())`* and *`.median()`* ?
 
 -   Tested - mostly no difference in the outputs. but the band name becomes B1_median when using reducer.median..
 
