@@ -3,9 +3,13 @@ title: "Classification 1"
 bibliography: references.bib
 ---
 
+[Week6: 21&23/Feb/2024]{.underline}
+
+This week multiple techniques for classification are learnt. The content this week focuses on (pixel-level) unsupervised and supervised classification, and overfitting. The application section includes examples of supervised classification sourced largely from literature (and also from practical).
+
 ## Summary
 
-Human is good at finding patterns in imagery while computers are not. The patterns / land cover types are useful for analysis, but it is tedious to digitize hugeamount of data manually. Hence, the task is given to the computers, extracting patterns from remote sensing data. Decision trees replicate human decisions on detecting patterns and making conclusions based on given information (expert system!). Multiple methods based on decision trees are developed to classify remote sensing image!
+Human is good at finding patterns in imagery while computers are not. The patterns / land cover types are useful for analysis, but it is tedious to digitize huge amount of data manually. Hence, the task is given to the computers (being more accurate and faster), extracting patterns from remote sensing data. Decision trees replicate human decisions on detecting patterns and making conclusions based on given information (expert system!). Multiple methods based on decision trees are developed to classify remote sensing image!
 
 > Image classification: Segregate pixels of a remote sensing image into groups of similar spectral character / spectral categorical classification.
 
@@ -15,21 +19,29 @@ Human is good at finding patterns in imagery while computers are not. The patter
 
 ![(GISGeography, 2014)](https://gisgeography.com/wp-content/uploads/2014/06/unsupervised-diagram.png)
 
+Unsupervised image classification
+
+:    A method of categorizing data [without any prior knowledge of the data \[main difference with supervised classification\]]{.underline}, based solely on the inherent structure of the image itself (i.e. No ground truth examples are provided to the training algorithm / not know information on class, except the number of class).
+
 Process: Clustering algorithm: K-means; ISODATA \> number of clusters \[Fewer clusters have more resembling pixels within groups. More clusters increase the variability within groups. [@gisgeography2014]\] \> manually assign land cover classes to each cluster
 
-Not know the class (except the number of cluster) before the process.
+::: {.callout-tip style="color: green" appearance="minimal"}
+This technique addresses the issue mentioned in Week1 about the reliance on prior knowledge of the local geography when selecting training/labelling LC features. This may enhance the analysis **efficiency** through increasing accuracy and lowering time consumed, with the possibility of **scaling up**. Furthermore, **patterns that are less apparent** to human-eye can be detected by this technique.
+:::
 
-Scale: pixel-based
+::: {.callout-important style="color: red" appearance="minimal"}
+The output may be **harder to interpret**, requiring further analysis to understand the classes. In this case, the involvement of human knowledge (not necessarily prior knowledge) would be needed to ensure the accuracy and usefulness of the outputs (which also depend on functions and data).
+:::
 
 2.  **Supervised image classification**
 
 ![(GISGeography, 2014)](https://gisgeography.com/wp-content/uploads/2014/06/supervised-diagram.png)
 
+Supervised image classification 
+
+:   A method of categorizing data based on a training dataset of labeled examples.
+
 Process: Select representative training samples for each land cover class \> generate a signature file, storing all training samples' spectral information \> use the signature file to run a classification (through one of the classification algorithm: Maximum likelihood (normal distribution/parametric); Density slicing; Nearest neighbor; Minimum-distance; Principal components; Support vector machine (SVM); CART; RF; Iso cluster; Neural network) \> pixel assignment \> accuracy assessment
-
-Pattern recognition / ML
-
-Scale: pixel-based
 
 -   CART: a tree
 
@@ -37,23 +49,43 @@ Scale: pixel-based
 
 -   SVM: optimal multi-dimensional decision hyperplane boundary that divides the dataset (test all possibilities of C and Gamma \> compare with testing data \> choose the combination with best accuracy)
 
+::: {.callout-tip style="color: green" appearance="minimal"}
+It tends to produce highly accurate results since the training data is given by human. And it is easier to interpret to the same reason. Plus, this technique is powerful given its wide application to different data and project purposes.
+:::
+
+::: {.callout-important style="color: red" appearance="minimal"}
+As mentioned, the outcomes can be limited to the labelled classes, so it is harder to apply the same model to wider coverage / different locations where the LULC is different. Contrary to unsupervised one, this method cannot detect patterns that are not visible to human-eye / knowledge (e.g. substances under water..). Hence, more attention to training data accuracy and comprehensiveness is required (but overall this method is powerful!).
+:::
+
+::: {.callout-note style="color: blue" appearance="minimal"}
+Future development on classification techniques could focus on enhancing the accuracy and reducing the need of labeling. The deep learning techniques like CNNs could be incorporated to detect complex patterns (already being developed in some cases like the Dynamic World [@brown2022]). Ancillary data can also be integrated to the imagery, being the additional context of the locations (e.g. terrain, climate, soil...). This may reduce some concerns on the difference between places/time series making the model less applicable/reproducible.
+
+Advancement in sensors increases the possibility of recording more data in the imagery, leading to better accuracy in classification (RedEdge band in RapidEye for example). Image fusion methods are also important to allow new data to be incorporated. Optical and radar imagery fusion may allow more information being included in one analysis.
+:::
+
 3.  **Object-based image analysis (OBIA)**
 
 ![(GISGeography, 2014)](https://gisgeography.com/wp-content/uploads/2014/06/object-based-diagram.png)
 
-Segmentation algorithms: Multi-resolution segmentation in [**eCognition**](http://www.ecognition.com/); The segment mean shift tool in [**ArcGIS**](https://www.arcgis.com/) \> different methods to classify objects (shape; texture; spectral; geographic context; nearest neighbor)
+Object-based image classification (more in [Week7](https://yichienchen99.github.io/CASA0023_LD/7_classification2.html#obia))
 
-Scale: object-based.. (groups pixels into representative vector shapes/objects)
-
-::: {.callout-important appearance="simple"}
-✔️: Esp. good for **high spatial resolution image** by avoiding the noisiness in the outputs of pixel-based methods, more like human in processing patterns. Because OBIA used both spectral and contextual information, it had higher accuracy compared to pixel-based methods (when comparing high and medium spatial resolution imagery) [@weih]. \> gaining popularity due to increasingly amount of high-resolution data available! More in next chapter..
-:::
+:   A method integrating image segmentation with classification algorithms to group pixels together into meaningful objects/vector shapes.
 
 ### Overfitting (of trees)
 
-> have leaves with one pixel value.. Large difference between predicted values and true value (= high bias = oversimplified model); High variability of a model for a given point (= high variance = not generalize enough)
+Overfitting
 
-#### 2 methods to balance bias and variance
+:   This happens when a model is trained on a limited dataset that is **not representative of the full range of possible inputs**, resulting in a model that performs well on the training data but poorly on new, unseen data.
+
+    It can also occur when a model is too complex and includes too many parameters, resulting in a model that is too closely tailored to the training data and **unable to generalize**. This is often referred to as "memorizing" the training data rather than learning from it. This will result in leaves on the decision tree having one value..
+
+-   Large difference between predicted values and true value (= high bias = oversimplified model);
+
+-   High variability of a model for a given point (= high variance = not generalize enough)
+
+[![Variance and Bias (Singh, 2018)](image/var_bia.png)](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)
+
+#### 2 methods to balance bias and variance (regularization) 
 
 1.  [Limit the minimum number of pixels in leaves]{.underline} (usually 20 pixels) = top-down, easier to perform, but less mathematically sound.
 2.  [Weakest link pruning with tree score]{.underline} (find the weakest link and delete it) = bottom-up.
@@ -66,6 +98,8 @@ Scale: object-based.. (groups pixels into representative vector shapes/objects)
     -   Repeat 10 times the above train and test split (using different data combinations) \> find the alpha with lowest SSR across 10 repetitions
 
     -   Apply this final alpha to the whole data
+
+Cross-validation in [Week7](https://yichienchen99.github.io/CASA0023_LD/7_classification2.html#cross-validation) can also be conducted to assess the performance of the model to new data.
 
 ### Question
 
@@ -95,6 +129,8 @@ Scale: object-based.. (groups pixels into representative vector shapes/objects)
 
 Classification of EO imagery allows extracting (and predicting) patterns/land cover from the data. This supports analysis on LULC, urban expansion, urban green space, illegal logging, forest fire, etc.
 
+Image classification workflow: DN/reflectance of imagery \> (some fieldwork / Google Earth selection of training land cover type data \>) being divided based on similarities/closeness to each other using different forms of classifiers/algorithms \> revealing/predicting the LULC of the Earth surface \> testing accuracy \> being used for further analysis / practical applications in assisting decision making.
+
 ### CART & Random Forest
 
 As done in the practical, the Sentinel data is classified using CART and RF. When selecting training data (selecting land cover geometries as variables), the false inference on the landuse and the inclusion of other land cover type in the geometry may add noise to the prediction, hence lowering the accuracy. Also, mentioned in the practical, when splitting the data into training and testing (for accuracy testing), the pixels of the selected geometries should be used, rather than the geometry that may add more noise to the results.
@@ -113,6 +149,8 @@ Comparing two outputs visually, RF captures the difference in high and low urban
 
 \[Context / application\] The country's agricultural productivity highly influence its economy. However, the data on agricultural statistics is manually collected by government employees from farmers' declaration. The data could be unreliable [@ustuner2015] and labour-intensive, being not cost-effective for the government. Hence, methods like applying image classification on remote sensing data could provide viable, up-to-data and reliable information for sustainable crop management and planning. Before putting into practice, the sensitivity / reliability of the methods is tested through comparing between different models and within SVM using different parameters and kernels. The best combination of parameter and kernel will be used to inform decisions.
 
+From the ground truth map, different crop types usually looks similar to human eyes while obtaining different reflectance. Hence, field works would be required to collect in-situ point data using GPS and Google Earth ancillary data could be the additional data source with experts opinions [@ustuner2015].
+
 ![(Ustuner, Sanli and Dixon, 2015)](image/classified_rapideye.png)
 
 \[Result / recommendation\] The above output shows highest accuracy selections (compared to results from other models with different error penalty in the same kernel) of four different kernels from SVM + the result from MLC. Kappa for MS9 = 0.8209, MR5 = 0.8222, ML11 = 0.8223, MP9 = 0.8411. \>\> Recommendation from the authors: optimum parameters for SVM should be analyzed in detail before choosing one for best classification result.
@@ -121,22 +159,18 @@ Another study by [@pal2005] suggests that SVM (using pair-wise comparison for mu
 
 ## Reflection
 
--   Which classifier to choose when performing image classification?
+To choose classifier, things to consider include:
 
-    -   Reference to literature on relevant themes might hint the direction.
+-   Reference to literature on relevant themes might hint the direction.
 
-    -   Performing/comparing different classifiers might just be within several lines of code in GEE. (but.. Does the accuracy means everything? Choosing the one with highest accuracy might not be reproducible in the sense that different regions/time of year/giving new data could yield varying results?)
+-   Performing/comparing different classifiers might just be within several lines of code in GEE. (but.. Does the accuracy means everything? Choosing the one with highest accuracy might not be reproducible in the sense that different regions/time of year/giving new data could yield varying results?)
 
-    -   The choice of classifier depends on the **intended outcomes** and the **data quality** [@pragati212020; @lanenok2015].
+-   The choice of classifier depends on the **intended outcomes** and the **data quality** [@pragati212020; @lanenok2015].
 
-        1.  \> SVM \> sparse data & binary classification & non-linear data (faster and better results, gives [distance]{.underline} to boundary)
+    1.  \> SVM \> sparse data & binary classification & non-linear data (faster and better results, gives [distance]{.underline} to boundary)
 
-        2.  \> RF \> numerical and categorical features & multi-class (gives probability of belonging to class)
+    2.  \> RF \> numerical and categorical features & multi-class (gives probability of belonging to class)
 
-        3.  \> MLC (parametric) \> assuming normally distributed data (not common in LULC data \> may results in lower accuracy)
+    3.  \> MLC (parametric) \> assuming normally distributed data (not common in LULC data \> may results in lower accuracy)
 
--   Image classification workflow: DN/reflectance of imagery \> (some fieldwork / Google Earth selection of training land cover type data \>) being divided based on similarities/closeness to each other using different forms of classifiers/algorithms \> revealing/predicting the LULC of the Earth surface \> testing accuracy \> being used for further analysis / practical applications in assisting decision making
-
--   It seems like performing classification requires some knowledge on the study area's land cover, especially classifying detailed land cover like agricultural landuse. From the ground truth map, different crop types usually looks similar to human eyes while obtaining different reflectance. Hence, field works would be required to collect in-situ point data using GPS and Google Earth ancillary data could be the additional data source with experts opinions [@ustuner2015].
-
--   Advancement in sensors increases the possibility of recording more data in the imagery, leading to better accuracy in predictions (RedEdge band in RapidEye for example).
+Classification is valuable for urban planning mainly since its ability to identify LULC. As mentioned in previous weeks, LULC can be used to identify urban areas/growth, UHI, biodiversity and green space and flooding. It can be used in the ex-ante policy appraisal, identifying areas of improvements. Since it has information on different time series, EO data is also effective in evaluating policy outcomes / ex-post impact assessment, whereas census or other quantitative data might be constrained by the time scale and difference in sampling.

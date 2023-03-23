@@ -3,15 +3,17 @@ title: "Classification 2"
 bibliography: references.bib
 ---
 
-## Summary
+[Week7: 28&2/Feb&Mar/2024]{.underline}
 
-This week lecture continues to explain and evaluate other classification methods (object-based and sub-pixel) and accuracy assessment of classification outcomes. Two pre-classified models are discussed in the application section.
+This week lecture continues to explain and evaluate other classification methods beyond pixel-level (object-based and sub-pixel) and accuracy assessment of classification outcomes. Two pre-classified models are discussed in the application section.
+
+## Summary
 
 ### OBIA
 
 Critique on pixel-based classification: **Spatial autocorrelation** (test/train) may influence the outcome of accuracy assessment (Tobler 1^st^ Law). If not consider SA -- model would be too good / high accuracy. SA could be solved by:
 
-1.  applying [distance filter](https://developers.google.com/earth-engine/guides/classification)/metrics or Moran's I to the test / train data
+1.  applying [distance filter](https://developers.google.com/earth-engine/guides/classification)/metrics or Moran's I to the test/train data
 
 2.  or classify the image through **Object-based image analysis (OBIA)**.
 
@@ -23,11 +25,33 @@ Two **parameters** for OBIA:
 
 The output would be features of the objects (e.g. mean of the pixel values) that look like art rather than imagery. OBIA is originally applied in medical and surgery (e.g. cancer detection).
 
-### Sub-pixel
+Segmentation algorithms: Multi-resolution segmentation in [**eCognition**](http://www.ecognition.com/); The segment mean shift tool in [**ArcGIS**](https://www.arcgis.com/) \> different methods to classify objects (shape; texture; spectral; geographic context; nearest neighbor)
 
-Fraction of selected features per pixel \> spectrally pure end-members
+::: {.callout-tip style="color: green" appearance="minimal"}
+Esp. good for **high spatial resolution image** by avoiding the noisiness in the outputs of pixel-based methods, more like human in processing patterns (and hence more detailed information). Because OBIA used both spectral and contextual information, it had higher accuracy compared to pixel-based methods (when comparing high and medium spatial resolution imagery) [@weih]. \> gaining popularity due to increasingly amount of high-resolution data available! More in next chapter.. Similar to supervised classification, it is also flexible in dealing with different datasets.
+:::
 
-Cons: difficult to assess accuracy (no test/train split) \> harden
+::: {.callout-important style="color: red" appearance="minimal"}
+Segmentation can be time-consuming, computationally intensive and require some relevant knowledge. It can be biased depending on the algorithms and parameters used to define object.
+:::
+
+### Sub-pixel analysis
+
+Sub-pixel analysis 
+
+:   The composition of pixels at a sub-pixel scale / the fraction of selected features (endmember) per pixel
+
+Endmember
+
+:    The pure spectral signatures of each land cover class
+
+::: {.callout-tip style="color: green" appearance="minimal"}
+This technique may improve the accuracy of LULC classification. Due to its fine scale, detailed LC information and changes can be detected. Heterogeneity in LULC within pixel can be better classified.
+:::
+
+::: {.callout-important style="color: red" appearance="minimal"}
+Difficult to assess accuracy (due to no test/train split and accuracy depends on endmember identification) \> harden. Also, the outcomes are sensitive to the spatial resolution of imagery and better outcomes depend on the high quality data input with low noise and high radiometric resolution.
+:::
 
 **Applications** on pollution detection and % of vegetation
 
@@ -41,25 +65,22 @@ Cons: difficult to assess accuracy (no test/train split) \> harden
 
 Random sampling \> test/train \> model output \> test output \> matrix
 
-**PA (producer accuracy)**: $\frac{TP}{TP+FN}$ == recall / sensitivity (correctly classified pixel vs. ground truth data)
+PA (producer accuracy) 
+
+:   $\frac{TP}{TP+FN}$ == recall / sensitivity (correctly classified pixel vs. ground truth data)
 
 -   High PA: Low FN and High FP: e.g. predicted urban but actually other land cover type
-
-<!-- -->
-
 -   Error of omission = 100-PA
 
-**UA (user accuracy)**: $\frac{TP}{TP+FP}$ == precision (correctly classified pixel vs. same class pixels as classified)
+UA (user accuracy)
+
+:   $\frac{TP}{TP+FP}$ == precision (correctly classified pixel vs. same class pixels as classified)
 
 -   High UA: High FN and Low FP: e.g. predicted other but actually urban
-
-<!-- -->
-
 -   Error of commission = 100-UA
 
 **OA (overall accuracy)**: (TP+FP+FN+TN)
 
-::: {.callout-important appearance="simple"}
 PA and UA never both good: model with Low FN and Low FP does not exist. Since data is not balanced, changes in **decision threshold** of classification may vary the outcomes. Increasing FP (more predicted positive) \> UA worsens \> FN reduces \> PA improves. The matrix are related and may change together. The trade-offs between the two make the ideal situation with high PA and high UA impossible.
 
 Hence, one of them would be more important than the other under different scenarios and the one with higher relevance to the problem should be picked when analyzing accuracy and designing the model [@wilber]:
@@ -67,7 +88,6 @@ Hence, one of them would be more important than the other under different scenar
 -   Recall/PA is important when we believe False Negatives are more important than False Positives (e.g. our problem of cancer detection).
 
 -   Precision/UA is important when we believe False Positives are more important than False Negatives (e.g. spam detection).
-:::
 
 #### F1 score
 
@@ -77,13 +97,11 @@ F1 score
 
 ![(Wilber, 2022)](image/accuracy_tradeoff.png)
 
-When PA and UA are similarly well-performed, the F1 and Accuracy are also highest.
+When PA and UA are similarly well-performed, the F1 and OA are also highest (when decision boundary threshold = 0.50-0.58).
 
-Critiques on F1 score:
-
--   Not considering TN
-
--   Assuming UA and PA equally important
+::: {.callout-important style="color: red" appearance="minimal"}
+Not considering TN & Assuming UA and PA equally important
+:::
 
 > Other matrix to assess accuracy: calibration, popular diagnostic tools (specificity, likelihood ratios, etc.), expectation frameworks, Receiver Operating Characteristic Curve (ROC), Area Under the Receiver Operator Characteristic Curve (AUROC) (popular for binomial model).
 
@@ -97,11 +115,9 @@ Kappa coefficient
 
     $p_e$: expected cases correctly classified by chance
 
-Critiques on Kappa coefficient:
-
--   different definitions by authors in terms of good Kappa
-
--   different accuracy can have different ranges of kappa
+::: {.callout-important style="color: red" appearance="minimal"}
+Different definitions by authors in terms of good Kappa & Different accuracy can have different ranges of kappa
+:::
 
 #### Cross validation
 
@@ -111,18 +127,15 @@ Repeated selection (resampling by bootstrapping): to compute the sampling variab
 
 Find the average of different scenarios to test how generalisable the model is
 
-Critique on averaging accuracy:
-
--   Randomly distributed points for testing may have spatial autocorrelation with nearby training data \> influencing overestimating the accuracy / overfitting the model.
+::: {.callout-important style="color: red" appearance="minimal"}
+Randomly distributed points for testing may have spatial autocorrelation with nearby training data \> influencing overestimating the accuracy / overfitting the model.
+:::
 
 **Spatial cross validation**
 
 To mitigate issue with Spatial autocorrelation in Cross validation, randomly distributed clusters of points (clustering through Moran's I, DBSCAN, Distance metrics..) are selected for testing [@lovelace2019].
 
 -   reference data are also split into subsets like in cross validation but the number of subsets can vary (*k*-fold) [@karasiak2022].
-
-<!-- -->
-
 -   k-fold \> random sample \> \> best values of C and gamma for SVM \> fold \>\> ML3 IN R \> GEE not good at data analysis but for remote sensing data
 
 ![(Lovelace et al., 2019)](image/SCV.png)
@@ -143,10 +156,6 @@ Selecting data for training / testing / accuracy:
 \>\> reproducible (same model for different years data) == (choose land that not change to much --  pseudo-invariant features) / (manual selection of ROI) / (choose same parcel/feature from different years = generalizable) == no fixed rules
 :::
 
-### Question
-
-1.  What's the neighborhood size (shouldn't it be 100 if its 2\*seed size)? When calculating std, why max size should be the same as NS?
-
 ## Application
 
 Below are some examples of pre-classified data that could be imported in GEE.
@@ -155,27 +164,29 @@ Below are some examples of pre-classified data that could be imported in GEE.
 
 -   [GEE data catalog](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_DYNAMICWORLD_V1)
 
--   Near real time data at 10m resolution (Sentinel-2 with 2-5 days revisit)
+Process: World / region / biomes \> experts / non-experts to label training pixels (5x5) \> pre-processing (\> TOA \> rotate \> band math/ratioing) \> normalisation (log) \> classification (CNN)
 
--   Process: World / region / biomes \> experts / non-experts to label training pixels (5x5) \> pre-processing (\> TOA \> rotate \> band math/ratioing) \> normalisation (log) \> classification (CNN)
+::: {.callout-tip style="color: green" appearance="minimal"}
+Near real time data at 10m resolution (Sentinel-2 with 2-5 days revisit)
+:::
 
--   Critique: Blobbing -- since ppl/users train data + CNN (deep learning, moving window of filtering..)
+::: {.callout-important style="color: red" appearance="minimal"}
+Blobbing -- since ppl/users train data + CNN (deep learning, moving window of filtering..)
+:::
 
--   Weird: worse the resolution of sentinel
-
--   Accuracy (confusion matrix, but...)
-
-### [Google open building data](https://sites.research.google/open-buildings/)
+### Google open building data
 
 -   [GEE data catalog](https://developers.google.com/earth-engine/datasets/catalog/GOOGLE_Research_open-buildings_v2_polygons)
 
--   50cm high-resolution
+[This dataset](https://sites.research.google/open-buildings/) includes building info like outlines, footprints on the ground, confidence score (on if this is a building / accuracy), the centroid of the building (not having info like building typology, address, and other details beyond geometry).
 
--   Currently constrains to Africa, South Asia and South-East Asia locations
+::: {.callout-tip style="color: green" appearance="minimal"}
+50cm high-resolution
+:::
 
--   Include building info like outlines, footprints on the ground, confidence score (on if this is a building / accuracy), the centroid of the building. (not having info like building typology, address, and other details beyond geometry.)
-
-#### Application
+::: {.callout-important style="color: red" appearance="minimal"}
+Currently constrains to Africa, South Asia and South-East Asia locations
+:::
 
 Thoughts on applications suggested by developers:
 
@@ -204,3 +215,7 @@ The performance of open building data can be accessed from the confidence score.
 ![(Sirko et al, 2021)](image/open.png)
 
 ## Reflection
+
+Accuracy of LULC classification is essential for analysis. Various factors may contribute to the accuracy of model outputs. The quality of ground truth data could be improved in future development through novel channels like Dynamic World deploying crowdsourcing knowledge. High-resolution information from unmanned aerial vehicles can be used as the source.
+
+In terms of urban planning, the information on Earth's surface is sometimes not enough. A site with LULC being classified as urban land does not help the planners to identify which specific land use it is (although nightlight data can be used to imply some retail/high streets). Although land use maps are available from OSM or Digimap for example, those maps/data are usually incompatible with GEE or other processing software. Hence, it would be more powerful if the EO data can obtain land use information like offices, housing, etc. This may be done by scrapping/accessing planning application documents, or using crowdsourcing data and Google Maps, or analyzing the time people use those buildings. (Nevertheless, this might be too complicated and not worth the effort, compared to adding EO data (like air pollution) to the land use map as different layers, which already exist). Planners could use this information to refine planning guidance and masterplan. For instance, areas suffering from UHI could be assessed by land use to give further interventions. Residential land may require measures on passive cooling esp. at night while offices/retail areas may focus on daytime energy-saving appliances and effective sharing/co-working space. Public space and the private realm can also be identified with land use information, hence differentiating the interventions that could be taken.

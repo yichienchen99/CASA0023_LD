@@ -3,9 +3,11 @@ title: "Policy"
 bibliography: references.bib
 ---
 
-## Summary & Application
+[Week4: 31&2/Jan&Feb/2024]{.underline}
 
 The lecture this week shows a range of policy relevant to remote sensing techniques, from urban heat island to air pollution to disaster response. The following summary will detail London's policy response to Urban Heat Island effect and how can EO data be incorporated into the strategic planning and solve the current challenges. London Green Belt will be the focus in this entry but admittedly it can be a less effective/direct solution to tackle increasing temperature in the city.
+
+## Summary & Application
 
 ### Policy Challenge in London
 

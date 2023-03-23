@@ -2,8 +2,10 @@
 title: "Sensor-WorldView3"
 ---
 
-## Summary, Application and Reflection
+[Week2: 17&19/Jan/2024]{.underline}
 
 This week two new document types (Xaringan presentation and Qaurto Book) are introduced. Both are effective in making digital communication neat and manageable.
+
+## Summary, Application and Reflection
 
 A Xaringan presentation [A basic introduction on WorldView-3](https://yichienchen99.github.io/CASA0023_wk2_presentation/) is produced and this diary itself is a Quarto Book.

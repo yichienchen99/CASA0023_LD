@@ -3,9 +3,11 @@ title: "Corrections"
 bibliography: references.bib
 ---
 
-## Summary
+[Week3: 24&26/Jan/2024]{.underline}
 
 Corrections and enhancement are the two main concepts in this week's teaching. They are the pre-processing of EO data to ensure the data used in the classification/analysis is consistent and usable.
+
+## Summary
 
 ### Corrections
 

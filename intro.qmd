@@ -1,4 +1,10 @@
-# Content {.unnumbered}
+---
+title: "Content"
+---
+
+### In this diary, {.unnumbered}
+
+Each chapter is the content taught in the corresponding week:
 
 1.  Introduction
     -   Remote sensing data intro / sensors / resolutions (using QGIS/SNAP/R)
@@ -14,20 +20,28 @@
     -   Object-based, sub-pixel, accuracy assessment
 8.  Temperature
 
-### Structure (of each chapter)
+### In each chapter,
 
--   Summary:
+There will be a summary of key concepts learnt in lecture or practical in that week (!= all the contents but those that are more interesting/useful/powerful (personally)).
 
-    -   Content summary (outputs from the practical, small code chunks with relevant explanation and flow charts)
+-   Content summary (outputs from the practical, small code chunks with relevant explanation and flow charts)
 
-        -   ✔️&❌: indicate Pros and Cons of specific idea / concept / object...
+-   ::: {.callout-tip style="color: green;" appearance="minimal"}
+    = Benefits of data, policy or methods
+    :::
 
-    -   Questions (data, methods, or applications)
+-   ::: {.callout-important style="color: red;" appearance="minimal"}
+    = Limitations of data, policy or methods
+    :::
 
--   Applications:
+-   ::: {.callout-note style="color: blue;" appearance="minimal"}
+    = Potential future development
+    :::
 
-    -   Application of data / concepts / methods in literature / policy (largely sourced from weekly reading).
+-   Questions on data, policy or methods (but mostly on practicals) and answers to them.
 
--   Reflection:
+A section of applications will follow, focusing on weekly reading but sometimes expanding to wider literature based on interests.
 
-    -   A personal reflection on the presented content (e.g. what was interesting, why and why might the data or tools presented this week be useful in the future to you or perhaps they won't be useful but something similar might be)
+Finally, there will be a personal reflection on the presented content. This section will include what was interesting (to my planning knowledge) and why (e.g. why the content presented this week will be useful in the future).
+
+Happy reading!

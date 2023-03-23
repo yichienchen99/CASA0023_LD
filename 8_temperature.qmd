@@ -3,9 +3,11 @@ title: "Temperature"
 bibliography: references.bib
 ---
 
-## Summary
+[Week8: 7&9/Mar/2024]{.underline}
 
 This week's lecture goes into the application of remote sensing data on urban temperature / Urban Heat Island (UHI) mitigation (mentioned under week 4 policy section of this learning diary as well) through several policy case studies in different cities/countries. This section will elaborate UHI impacts and some limitations of related policies.
+
+## Summary
 
 ### UHI and its impacts
 
