@@ -17,3 +17,47 @@ Her recent 2-week (but super productive!) work shadowing in summer 2022 with AEC
 Email: zcfther\@ucl.ac.uk
 
 [GitHub](https://github.com/yichienchen99)
+
+### In this diary, {.unnumbered}
+
+Each chapter is the content taught in the corresponding week:
+
+1.  Introduction
+    -   Remote sensing data intro / sensors / resolutions (using QGIS/SNAP/R)
+2.  Sensor - WorldView3
+3.  Corrections
+    -   Corrections / Enhancements (using R)
+4.  Policy
+5.  GEE
+    -   Filter/reduce/map (using GEE)
+6.  Classification
+    -   Pixel-based (supervised and unsupervised)
+7.  Classification 2
+    -   Object-based, sub-pixel, accuracy assessment
+8.  Temperature
+
+### In each chapter,
+
+There will be a summary of key concepts learnt in lecture or practical in that week (!= all the contents but those that are more interesting/useful/powerful (personally)).
+
+-   Content summary (outputs from the practical, small code chunks with relevant explanation and flow charts)
+
+-   ::: {.callout-tip style="color: green;" appearance="minimal"}
+    = Benefits of data, policy or methods
+    :::
+
+-   ::: {.callout-important style="color: red;" appearance="minimal"}
+    = Limitations of data, policy or methods
+    :::
+
+-   = Potential future development
+
+-   Questions on data, policy or methods (but mostly on practicals) and answers to them.
+
+A section of applications will follow, focusing on weekly reading but sometimes expanding to wider literature based on interests.
+
+Finally, there will be a personal reflection on the presented content. This section will include what was interesting (to my planning knowledge) and why (e.g. why the content presented this week will be useful in the future).
+
+Happy reading!
+
+~Please\ do\ report\ an\ issue\ if\ something\ is\ wrong/misunderstood\ to\ support\ my\ learning\ process!\ Thanks!~

@@ -11,7 +11,9 @@ This week multiple techniques for classification are learnt. The content this we
 
 Human is good at finding patterns in imagery while computers are not. The patterns / land cover types are useful for analysis, but it is tedious to digitize huge amount of data manually. Hence, the task is given to the computers (being more accurate and faster), extracting patterns from remote sensing data. Decision trees replicate human decisions on detecting patterns and making conclusions based on given information (expert system!). Multiple methods based on decision trees are developed to classify remote sensing image!
 
-> Image classification: Segregate pixels of a remote sensing image into groups of similar spectral character / spectral categorical classification.
+Image classification
+
+:   Segregate pixels of a remote sensing image into groups of similar spectral character / spectral categorical classification.
 
 ### 3 types of image classification
 
@@ -21,7 +23,7 @@ Human is good at finding patterns in imagery while computers are not. The patter
 
 Unsupervised image classification
 
-:    A method of categorizing data [without any prior knowledge of the data \[main difference with supervised classification\]]{.underline}, based solely on the inherent structure of the image itself (i.e. No ground truth examples are provided to the training algorithm / not know information on class, except the number of class).
+:   A method of categorizing data [without any prior knowledge of the data \[main difference with supervised classification\]]{.underline}, based solely on the inherent structure of the image itself (i.e. No ground truth examples are provided to the training algorithm / not know information on class, except the number of class).
 
 Process: Clustering algorithm: K-means; ISODATA \> number of clusters \[Fewer clusters have more resembling pixels within groups. More clusters increase the variability within groups. [@gisgeography2014]\] \> manually assign land cover classes to each cluster
 
@@ -37,7 +39,7 @@ The output may be **harder to interpret**, requiring further analysis to underst
 
 ![(GISGeography, 2014)](https://gisgeography.com/wp-content/uploads/2014/06/supervised-diagram.png)
 
-Supervised image classification 
+Supervised image classification
 
 :   A method of categorizing data based on a training dataset of labeled examples.
 
@@ -85,7 +87,7 @@ Overfitting
 
 [![Variance and Bias (Singh, 2018)](image/var_bia.png)](https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229)
 
-#### 2 methods to balance bias and variance (regularization) 
+#### 2 methods to balance bias and variance (regularization)
 
 1.  [Limit the minimum number of pixels in leaves]{.underline} (usually 20 pixels) = top-down, easier to perform, but less mathematically sound.
 2.  [Weakest link pruning with tree score]{.underline} (find the weakest link and delete it) = bottom-up.

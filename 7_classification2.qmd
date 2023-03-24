@@ -37,13 +37,13 @@ Segmentation can be time-consuming, computationally intensive and require some r
 
 ### Sub-pixel analysis
 
-Sub-pixel analysis 
+Sub-pixel analysis
 
 :   The composition of pixels at a sub-pixel scale / the fraction of selected features (endmember) per pixel
 
 Endmember
 
-:    The pure spectral signatures of each land cover class
+:   The pure spectral signatures of each land cover class
 
 ::: {.callout-tip style="color: green" appearance="minimal"}
 This technique may improve the accuracy of LULC classification. Due to its fine scale, detailed LC information and changes can be detected. Heterogeneity in LULC within pixel can be better classified.
@@ -65,7 +65,7 @@ Difficult to assess accuracy (due to no test/train split and accuracy depends on
 
 Random sampling \> test/train \> model output \> test output \> matrix
 
-PA (producer accuracy) 
+PA (producer accuracy)
 
 :   $\frac{TP}{TP+FN}$ == recall / sensitivity (correctly classified pixel vs. ground truth data)
 
@@ -140,21 +140,11 @@ To mitigate issue with Spatial autocorrelation in Cross validation, randomly dis
 
 ![(Lovelace et al., 2019)](image/SCV.png)
 
-::: {.callout-tip appearance="simple"}
-mlr3 to split data for spatial CV:
+-   mlr3 to split data for spatial CV: 3 stages: 1) **task**: data specification (including response and predictor variables) and the model type (such as regression or classification). 2) **learner** defines the specific learning algorithm that is applied to the created task. 3) **resampling** approach assesses the predictive performance of the model, i.e., its ability to generalize to new data. Detailed example see [@lovelace2019].
 
-3 stages: 1) **task**: data specification (including response and predictor variables) and the model type (such as regression or classification). 2) **learner** defines the specific learning algorithm that is applied to the created task. 3) **resampling** approach assesses the predictive performance of the model, i.e., its ability to generalize to new data.
+-   **Leave one out** (for everything except one point) -- more extreme / computationally extensive
 
-Detailed example see [@lovelace2019].
-:::
-
-**Leave one out** (for everything except one point) -- more extreme / computationally extensive
-
-::: {.callout-important appearance="simple"}
-Selecting data for training / testing / accuracy:
-
-\>\> reproducible (same model for different years data) == (choose land that not change to much --  pseudo-invariant features) / (manual selection of ROI) / (choose same parcel/feature from different years = generalizable) == no fixed rules
-:::
+-   Selecting data for training / testing / accuracy: aim to be reproducible (same model for different years data) by choosing land that not change to much (pseudo-invariant features) / manual selection of ROI / choose same parcels/features from different years to make the model generalizable. There is no fixed rule on this.
 
 ## Application
 

@@ -42,61 +42,75 @@ London Green Belt
 Rough workflow:
 
 1.  Analyse spatial and temporal patterns of urban growth and loss of greenspace.
-2.  Investigate the quality of GB and open greenspace. (since it is found that densification of existing urban areas and development of inner-city brownfield sites are the main source of land use change, instead of expansion to GB which is controlled by GB policies in 2000 [@acompar2017])
+2.  Investigate the quality of GB and open greenspace. (since it is found that densification of existing urban areas and development of inner-city brownfield sites are the main source of land use change, instead of expansion to GB which is controlled by GB policies in 2000 [@langsdale2017])
 
 To see the boundary of GB (land cover / land use changes):
 
--   **Sentinel** --\> classification (veg vs land) (e.g. a supervised classifier (Random Forest). [@acompar2017]
+-   **Landsat/Sentinel** --\> classification (veg vs land) (e.g. a supervised classifier (Random Forest) mentioned in Week7). [@langsdale2017]
 
-To measure heat vulnerability / temperature through LST:
+-   May mask the boundary of GB to further analysis changes in % of vegetation.
 
--   ✔️1) strong correlations between LST and air temperature;
+    ![(Langsdale, 2017)](image/London_LULC.png)
 
--   ✔️2) Compared to other measures such as air and surface temperature values taken at meteorological stations with coarse spatial resolution, satellite imagery derived LST presents data at higher spatial resolutions, thereby enabling comparisons among different neighborhoods.
-
--   ❌1) does not fully capture the set of micrometeorological conditions that factor into human thermal comfort or heat stress;
-
--   ❌2) Some of the images might be covered by clouds, which could seriously affect LST estimates. =\> limit the data to only clear-sky images
+To measure heat vulnerability / temperature through Land Surface Temperature (LST):
 
 -   **MOD11A2** **Level-3 MODIS Land Surface Temperature and Emissivity (LST/E) 8-day products (1-km resolution)** [@chen2022]
 
-    -   ❌ Spatial resolution of 1-km might be too broad for land use analysis.. so may require downscaling (could be achieved based on the inverse relationship between LST and NDVI)
+    ::: {.callout-important style="color: red" appearance="minimal"}
+    Spatial resolution of 1-km might be too broad for land use analysis.. so may require downscaling (could be achieved based on the inverse relationship between LST and NDVI)
+    :::
 
 -   **ECOSTRESS Land Surface Temperature and Emissivity products** [@li2022]
 
-    -   ✔️ Fine-scaled atmospherically-corrected imagery throughout diurnal cycles at a 70m spatial resolution base on MODIS data, which allows the estimation of daytime and nighttime LSTs.
+    ::: {.callout-tip style="color: green" appearance="minimal"}
+    Fine-scaled atmospherically-corrected imagery throughout diurnal cycles at a 70m spatial resolution base on MODIS data, which allows the estimation of daytime and nighttime LSTs.
+    :::
 
 -   **SOLWEIG:** localised temperature modelling[@maclachlan2021]
 
-    -   Requirement: Elevation (EO: OSM+ CSIRO) + Land cover data (EO: OSM+ CSIRO) + Meteorological data (air temperature, relative humidity, barometric pressure, wind speed, wind direction, and downward shortwave radiation) (e.g. Perth International Airport weather station)
+    Requirement: Elevation (EO: OSM+ CSIRO) + Land cover data (EO: OSM+ CSIRO) + Meteorological data (air temperature, relative humidity, barometric pressure, wind speed, wind direction, and downward shortwave radiation) (e.g. Perth International Airport weather station)
 
-    -   ✔️ 1) compare temperature dynamics within low- and high-density urban areas;
+    ::: {.callout-tip style="color: green" appearance="minimal"}
+    Compare temperature dynamics within low- and high-density urban areas;
 
-    -   ✔️ 2) use as a basis for assessing a planned redevelopment and how optimizing tree placement relative to modeled temperature values could assist in mitigating localized UHI impacts.
+    Use as a basis for assessing a planned redevelopment and how optimizing tree placement relative to modeled temperature values could assist in mitigating localized UHI impacts.
+    :::
 
-    -   ❌ Owing to these data frequently being unavailable in a spatially continuous form (e.g., raster data), the input required for SOLWEIG is often limited to point data, acquired from weather stations.
+    ::: {.callout-important style="color: red" appearance="minimal"}
+    Owing to these data frequently being unavailable in a spatially continuous form (e.g., raster data), the input required for SOLWEIG is often limited to point data, acquired from weather stations.
+    :::
+
+Overall, using LST to quantify urban heat has pros and cons -
+
+::: {.callout-tip style="color: green" appearance="minimal"}
+Strong correlations between LST and air temperature;
+
+Compared to other measures such as air and surface temperature values taken at meteorological stations with coarse spatial resolution, satellite imagery derived LST presents data at higher spatial resolutions, thereby enabling comparisons among different neighborhoods.
+:::
+
+::: {.callout-important style="color: red" appearance="minimal"}
+Does not fully capture the set of micro-meteorological conditions that factor into human thermal comfort or heat stress;
+
+Some of the images might be covered by clouds, which could seriously affect LST estimates. =\> limit the data to only clear-sky images
+:::
 
 ### Linkages to global goals
 
 The [**2030 Agenda for Sustainable Development**]{.underline} tied "sustainable cities and communities" to both safety and resilience (SDG 11)
 
-The United Nation [**New Urban Agenda**]{.underline} highlighted cities' importance to
+The United Nation [[**New Urban Agenda**]{.underline}](https://habitat3.org/the-new-urban-agenda/) highlighted cities' importance to
 
 -   \(g\) Adopt and implement disaster risk reduction and management, reduce vulnerability, build resilience and responsiveness to natural and human-made hazards and foster mitigation of and adaptation to climate change;
 
 -   \(h\) Protect, conserve, restore and promote their ecosystems, water, natural habitats and biodiversity, minimize their environmental impact and change to sustainable consumption and production patterns.
 
--   <https://habitat3.org/the-new-urban-agenda/>
-
-The United Nation [**World Cities Report:**]{.underline} fostering nature-based solutions and ecosystem services (5.4);
+The United Nation [[**World Cities Report**]{.underline}](https://unhabitat.org/sites/default/files/2022/06/wcr_2022.pdf)[**:**]{.underline} fostering nature-based solutions and ecosystem services (5.4);
 
 -   NBSs are promising in the context of halting biodiversity loss and restoring urban ecosystem services in economically viable ways
 
 -   The International Union for Conservation of Nature (IUCN) defines **NBSs** as "actions to protect, sustainably manage, and restore (create) natural or modified ecosystems" that simultaneously address social challenges, providing both human well-being and biodiversity benefits.
 
 -   NBSs are aligned with the United Nations 2030 Agenda for Sustainable Development
-
--   <https://unhabitat.org/sites/default/files/2022/06/wcr_2022.pdf>
 
 ### Advancing local, national and global approach
 
@@ -126,9 +140,12 @@ Global
 
 ## Reflection
 
-This section will list the lessons learnt from the policy and remote sensing data application.
+This section will list some lessons learnt from the policy and remote sensing data application.
 
--   Remote sensing data can be used effectively to reduce the labor-intensive work / 3-Ds work (e.g. physically surveying and collecting data) and to some extent increase the accuracy of data collection.
--   National and global higher level policies and goals tend to be more generic and vague in terms of the solutions and approaches to reach the stated visions. Local policy and guidance, complying the higher level policies, tend to consider the contextual attributes. Thus, it can sometimes be difficult to provide one-size-fit-all solutions in local policy (and academic papers). Nevertheless, the case studies and more detailed guidelines may help in this context (from city planning perspective but many not for other themes like ecology and forestry), as well as the provision of tools and methods like the one on optimization of tree placement.
--   Some challenges might not be under the control of the city. For instance, Green Belt is beyond the London metropolitan boundary and extend to wider areas. The regulation and effective maintenance might require collaboration from different local authorities. Plus majority of the land on Green Belt is privately owned..
--   When writing papers, the recommendations / long-term solutions on how to reach the policy goals should be proposed in addition to the findings from the data.
+Remote sensing data can be used effectively to reduce the labor-intensive work / 3-Ds work (e.g. physically surveying and collecting data) and to some extent increase the accuracy of data collection.
+
+National and global higher level policies and goals tend to be more generic and vague in terms of the solutions and approaches to reach the stated visions. Local policy and guidance, complying the higher level policies, tend to consider the contextual attributes. Thus, it can sometimes be difficult to provide one-size-fit-all solutions in local policy (and academic papers). Nevertheless, the case studies and more detailed guidelines may help in this context (from city planning perspective but many not for other themes like ecology and forestry), as well as the provision of tools and methods like the one on optimization of tree placement.
+
+Some challenges might not be under the control of the city. For instance, Green Belt is beyond the London metropolitan boundary and extend to wider areas. The regulation and effective maintenance might require collaboration from different local authorities. Plus majority of the land on Green Belt is privately owned..
+
+When writing papers, the recommendations / long-term solutions on how to reach the policy goals should be proposed in addition to the findings from the data.

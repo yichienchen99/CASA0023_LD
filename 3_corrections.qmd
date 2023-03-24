@@ -81,6 +81,8 @@ Atmospheric corrections
 
 ::: {.callout-tip style="color: green" appearance="minimal"}
 The accuracy and quality of imagery will be improved to represent the true spectral information of the features.
+
+> 'Atmospheric correction is arguably the most important part of the pre-processing of satellite remotely sensed data.' [@hadjimitsis2010]
 :::
 
 ::: {.callout-important style="color: red" appearance="minimal"}
@@ -171,7 +173,7 @@ Illumination
 
     $L_T$: radiance (DN to TOA) from sloped terrain
 
-Zenith 
+Zenith
 
 :   $θ_O$ : The solar zenith angle is the zenith angle of the sun, i.e., the angle between the sun's rays and the vertical direction. Solar zenith angle is normally used in combination with the solar azimuth angle to determine the position of the Sun as observed from a given location on the surface of the Earth.
 
@@ -229,6 +231,10 @@ Techniques include -
 
     2nd order co-occurrence: ✔️classification improvement and additional info (to other bands), can then be used in PCA
 
+    ::: {.callout-note style="color: blue" appearance="minimal"}
+    In the future development, texture analysis can be expanded into 3D data to distinguish vertical structure of land surface.
+    :::
+
 6.  Fusion: combine bands of multiple images of the same area or scene from different sensors or at different times (or layers from texture analysis), to create a single, high-quality image.
 
     ::: {.callout-tip style="color: green" appearance="minimal"}
@@ -245,8 +251,12 @@ The historical maps/plans were drawn by hands. Those maps were digitized through
 
 [![Redlining historic map corrections](image/redlining.png)](https://dsl.richmond.edu/panorama/redlining/#loc=11/42.366/-71.262&city=cambridge-ma)
 
+Atmospheric correction (and also other methods) should be used when needed. This method is especially important in cases with multi-temporal images. The degree of importance also depend on the aim of the outcomes. For instance in agricultural cases, different vegetation indices may react differently to the atmospheric effects, hence resulting in different sensitivity to atmospheric corrections [@hadjimitsis2010]. The author calculated the mean values of the vegetation indices DVI, NDVI, SAVI, MSAVI and SARVI, for Akrotiri-Zakaki area, south Cyprus, consisting of citrus fruit trees, before and after the atmospheric correction (Fig below). A mean difference of 18% for the NDVI was recorded before and after the darkest pixel method was applied. Since NDVI has been widely used to several applications especially for agricultural monitoring, the mean difference of 18% between the atmospheric and non-atmospheric corrected values has a significant meaning. Before interpreting the outputs (e.g. growth patterns, evaporation, etc.), the pre-processing methods should be understood in all analysis to avoid mis-interpretation.
+
+![(Hadjimitsis, et al., 2010)](image/Atmospheric_correction.png)
+
 ## Reflection
 
 Different methods of corrections are interlinked, finding some reference points/signatures to rectify the image. The detailed processes (like regressions and data collection methods) are difficult to digest (probably because not being practiced) while the software is available for corrections.
 
-In the future development, the enhancement/like texture analysis can be expanded into 3D data to distinguish vertical structure of land surface.
+Although indices like NDVI mentioned above are widely used, the full information contained in remote sensing data is simplified (into 2 bands in the case of NDVI). Plus, some literature does not open the methodology, data and software [@wellmann2020]. Those factors hinder the smooth collaboration between different actors. Full deployment and integration of remote sensing and urban governance could be enhanced through better knowledge and organisation of data, greater involvement of academic and non-academics from different disciplines and regions, and to legitimate/actually utilize the techniques in policy making and environmental impact assessments.

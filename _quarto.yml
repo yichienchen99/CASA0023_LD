@@ -18,7 +18,6 @@ book:
   repo-actions: [edit, issue]
   chapters:
     - index.qmd
-    - intro.qmd
     - 1_intro.qmd
     - 2_portfolio.qmd
     - 3_corrections.qmd
@@ -28,7 +27,6 @@ book:
     - 7_classification2.qmd
     - 8_temperature.qmd
     - summary.qmd
-    - dictionary.qmd
     - references.qmd
   favicon: "image/favicon.ico"	
 
