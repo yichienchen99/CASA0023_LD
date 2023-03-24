@@ -11,209 +11,242 @@ Corrections and enhancement are the two main concepts in this week's teaching. T
 
 ### Corrections
 
-#### Geometric Corrections
+4 types of corrections are Geometric, Atmospheric, Topographic and Radiometric.
 
--   To reduce geometric distortion
+#### Geometric corrections
 
--   Off-Nadir -\> Nadir
+Geometric corrections
 
-Ground central point: GCP
+:   A process to adjust the imagery to correct distortions caused by sensor or terrain with reference to the [ground central points (GCPs)]{.underline}, to ensure the true location of features on Earth's surface, usually, making **off-nadir** (the sensor is tilted at an angle to the Earth's surface, which can result in distortions in the image due to parallax effects) to **nadir** (an image acquired with the imaging sensor pointing straight down, perpendicular to the Earth's surface. The nadir angle =0 degrees).
 
-:   A ground control point (GCP) is a location on the surface of the Earth (e.g., a road intersection) that can be identified on the imagery and located accurately on a map.
+    Requirement: same resolution (resampling) and same CRS (reprojecting).
 
-    (Objects (e.g. building) on the image that do not move, as the reference point of corrections.)
+::: {.callout-tip style="color: green" appearance="minimal"}
+This is especially useful for ancient/historic data that is tilted for certain reasons (see Application section). Correction also improves the data accuracy (esp. important for applications requiring precision like land use mapping, crop monitoring, and disaster management), consistency (that is required for long-term/longitudinal analysis) and allows easier interpretation and analysis (for fusion/overlay, etc. ).
+:::
 
--   Coordinates of each GCP -\> linear regression
+::: {.callout-important style="color: red" appearance="minimal"}
+Nevertheless, slight limitations of corrections should be carefully catered for. Some data might be lost and resolution may be reduced after correction. Errors might occur with inaccurate reference data. \> To reduce error, the number of GCPs can be increased.
+:::
 
--   Reduce error \<- increase GCP
+Ground central point
 
--   Requirement for corrections:
+:   A ground control point (GCP) is a location on the surface of the Earth (e.g., a road intersection) that can be identified on the imagery and located accurately on a map. (Objects (e.g. building) on the image that do not move, as the reference point of corrections.) - correction is basically doing linear regression to the coordination of GCPs.
 
-    1.  same resolution (resampling)
-    2.  same CRS (reprojecting)
+Image-to-map rectification
 
-1.  Image-to-map rectification (rectify remotely sensed data to a standard map projection)
-2.  Image-to-image registration (remotely sensed data used in conjunction with other spatial information in a GIS)
+:   rectify remotely sensed data to a standard map projection
 
--   Forward (input-to-output) mapping
+Image-to-image registration
 
-    Forward mapping
+:   remotely sensed data used in conjunction with other spatial information in a GIS
 
-    :   X: original image -\> Y: target image
+Forward mapping
 
-    -   ✔️rectify the location of discrete coordinates found along a linear feature such as a road in a vector map
+:   X: original image -\> Y: target image (input-to-output)
 
-    -   ❌possibility of points outside 'gold standard' (the rectified/targeted image) -\> output matrix pixel with no output value
+    ::: {.callout-tip style="color: green" appearance="minimal"}
+    rectify the location of discrete coordinates found along a linear feature such as a road in a vector map
+    :::
 
--   Inverse (output-to-input) mapping
+    ::: {.callout-important style="color: red" appearance="minimal"}
+    possibility of points outside 'gold standard' (the rectified/targeted image) -\> output matrix pixel with no output value
+    :::
 
-    Backward mapping
+Backward mapping
 
-    :   X: target image -\> Y: original image
+:   X: target image -\> Y: original image (output-to-input)
 
-    ✔️ use points on 'gold standard' to match point on original data
+    ::: {.callout-tip style="color: green" appearance="minimal"}
+    use points on 'gold standard' to match point on original data
+    :::
 
 [![Forward and inverse mapping (Jensen, 2015)](image/geometriccorrection.png)](%5B@jensen2015%5D)
 
--   Moisaicking
+Mosaicking
 
-    Mosaicking
+:   Moisaicking is the process of combining multiple adjacent images into a single seamless composite. Two techniques are -
 
-    :   Moisaicking is the process of combining multiple images into a single seamless composite image.
+    1.  Cut-line feathering: cut the images along a common defined boundary line/object and blend them together \> usually output is in a sharper transition \> Applied in cases wihen a clear boundary / discontinuity between images (e.g. road/river)
 
-    -   cut-line feathering: offset the edge of images by certain distance
+    2.  Edge feathering: offset the edge of images by certain distance through filter or algorithm \> usually output transition is more gradual and smoother \> Applied in cases when a gradual transition exist in images (e.g. forest/agricultural land)
 
-    -   edge feathering: specify objects (e.g. roads/rivers) as edge
-
-#### Practical: Merging imagery
-
-Although Kinmen County is rather a small area, covered sufficiently within one tile of the Landsat imagery, another adjacent tile would be chosen to practice merging.
+Finally, the corrected image is resampled to create a new image that accurately reflects the true location and orientation of features on the ground.
 
 #### Atmospheric Corrections
 
--   To mitigate the effect of scattering and absorption & to avoid loss of reflectance & signiture extension thorough space and time [@jensen2015]
+Atmospheric corrections
 
--   Point Spread Function
+:   A process to mitigate the effect of atmospheric interference (haze, scattering and absorption) & to avoid loss of reflectance & signature extension thorough space and time [@jensen2015]. This method requires some knowledge of the atmospheric condition and sensors.
 
-    Point Spread Function
+::: {.callout-tip style="color: green" appearance="minimal"}
+The accuracy and quality of imagery will be improved to represent the true spectral information of the features.
+:::
 
-    :   Measured and modeled point spread functions (PSF) of sensor systems indicate that a significant portion of the recorded signal of each pixel of a satellite image originates from outside the area represented by that pixel. This hinders the ability to derive surface information from satellite images on a per-pixel basis [@huang2002].
+::: {.callout-important style="color: red" appearance="minimal"}
+Similar to geometric correction, the data loss may be the minor drawback of this technique, particularly in the case of thin clouds or high aerosol concentrations.
+:::
 
--   Relative
+Point Spread Function
 
--   1\) to normalize the intensities among the different bands within a single-date remotely sensed image, and 2) to normalize the intensities of bands of remote sensor data in multiple dates of imagery to a standard scene selected by the analyst.
+:   Measured and modeled point spread functions (PSF) of sensor systems indicate that a significant portion of the recorded signal of each pixel of a satellite image originates from outside the area represented by that pixel. This hinders the ability to derive surface information from satellite images on a per-pixel basis [@huang2002].
 
-    1.  Dark object subtraction (DOS)
+Relative
 
-        ❌ assuming unusual brightness of darkest pixel as atmosphere
+:   1\) to normalize the intensities among the different bands within a single-date remotely sensed image, and 2) to normalize the intensities of bands of remote sensor data in multiple dates of imagery to a standard scene selected by the analyst.
 
-    2.  Multiple-date image normalization using regression
+    Difference to Absolute atmospheric correction: does not require atmospheric data but instead relies on the comparison of images acquired at different times or from different sensors, assuming the relative differences in reflectance between different areas of an image remain constant over time (those changes are due to atmospheric interference).
+
+    ::: {.callout-tip style="color: green" appearance="minimal"}
+    Good for cases when the atmospheric data is unavailable or when absolute techniques are not feasible..
+    :::
+
+    ::: {.callout-important style="color: red" appearance="minimal"}
+    can be less accurate than absolute ones (esp. in regions with variable atmospheric conditions or terrain).
+    :::
+
+    Two techniques are -
+
+    1.  Dark object subtraction (DOS): identify and subtract the digital number of dark object (like shadow not reflecting light) in the imagery from that of other features (at pixel level). Hence, the reflectance due to surface features is kept.
+
+        ::: {.callout-important style="color: red" appearance="minimal"}
+        This technique has some limitations - it assumes unusual brightness of darkest pixel as atmosphere and the dark object reflects no light, which might not be true in all cases. Plus, not all imagery have identifiable dark objects.
+        :::
+
+    2.  Multiple-date image normalization using regression: divide the reflectance values in each pixel by a value (mean/median reflectance of a group of pixels in that image).
 
         -   Pseudo-Invariant Features (PIFs) selection = radiometric GCP
 
         -   Requirements of PIF: 1) little changes through time; 2) similar elevation as other land in scene; 3) minimal vegetation; 4) in a relatively flat area.
 
-        Use middle of years, Y: base image
+Absolute
 
--   Absolute
+:   Estimates the atmospheric properties and removes their influence from measured values to get true surface reflectance.
 
-    ❌ High data requirement (fieldwork/...); High software requirement (costy)
+    Requirement: atmospheric data obtained at the time of image acquisition
 
-    ✔️Digital counts in satellite / aircraft image data -\> scaled surface reflectance
+    ::: {.callout-important style="color: red" appearance="minimal"}
+    High input data requirement like temperature, humidity, air pressure, sensor and sun angels, albedo, emissivity (through fieldwork/meteorological data sources)
 
-    1.  Empirical Line Calibration (ELC)
-        -   Requirements:
+    High software requirement (costy)
+    :::
 
-            1.  Two or more areas in the scene with different albedos (e.g., one bright target such as sand and one dark target such as a deep, nonturbid water body) & as homogeneous as possible \<- difficult.
-            2.  Sensor calibration coefficients
-            3.  Radiative transfer code (knowledge of sensor spectral profile & atmospheric properties at the time of data collection) [@jensen2015]
+    ::: {.callout-tip style="color: green" appearance="minimal"}
+    Accounting the actual atmospheric conditions at the time of data acquisition, this method is usually more accurate than the relative ones (but not always necessary/practical!).
+
+    Digital counts in satellite / aircraft image data -\> scaled surface reflectance
+    :::
+
+    1.  Empirical Line Calibration (ELC): establish a linear regression model to convert the digital numbers of the unknown pixels to actual physical units.
+
+        Requirements:
+
+        1.  Two or more areas in the scene with different albedos (e.g., one bright target such as sand and one dark target such as a deep, nonturbid water body) & as homogeneous as possible \<- difficult.
+        2.  Sensor calibration coefficients
+        3.  Radiative transfer code (knowledge of sensor spectral profile & atmospheric properties at the time of data collection) [@jensen2015]
+
+        ::: {.callout-important style="color: red" appearance="minimal"}
+        Its accuracy depends on the reference data \> require representative data with a range of surface types and conditions. It also assumes atmospheric conditions are uniform.
+        :::
 
 #### Topographic Corrections (Orthorectification)
 
--   To remove topographically induced illumination variation
+Topographic corrections
 
-    Illumination
+:   A process to remove the effects of topographically induced illumination variation, which is usually conducted after atmospheric corrections (not always needed). (The amount and angle of solor illumination may vary due to topo. variations, affecting the measured values.)
 
-    :   the cosine of the incident solar angle, thus representing the proportion of the direct solar radiation hitting a pixel.
+    Requirements: sensor geometry & elevation model
 
--   Requirements: sensor geometry & elevation model
+    ::: {.callout-important style="color: red" appearance="minimal"}
+    not considering diffuse skylight / light reflected from surrounding mountainsides
+    :::
 
--   Should be done after atmospheric corrections
+Illumination
 
--   Cosine Function: $LH=LT\frac{cosθO}{cosi}$
+:   The cosine of the incident solar angle, thus representing the proportion of the direct solar radiation hitting a pixel.
 
-    Zenith
+    Cosine Function: $L_H = L_T*\frac{cosθ_O}{cosi}$
 
-    :   The solar zenith angle is the zenith angle of the sun, i.e., the angle between the sun's rays and the vertical direction. Solar zenith angle is normally used in combination with the solar azimuth angle to determine the position of the Sun as observed from a given location on the surface of the Earth.
+    $i$: Sun's incidence angle - cosine of the angle between the solar zenith and the normal line of the slope (smaller cos i -\> greater over-correction [@jensen2015])
 
-    Azimuth
+    $L_T$: radiance (DN to TOA) from sloped terrain
 
-    :   The solar azimuth angle is the azimuth (horizontal angle with respect to north) of the Sun's position.
+Zenith 
+
+:   $θ_O$ : The solar zenith angle is the zenith angle of the sun, i.e., the angle between the sun's rays and the vertical direction. Solar zenith angle is normally used in combination with the solar azimuth angle to determine the position of the Sun as observed from a given location on the surface of the Earth.
+
+Azimuth
+
+:   The solar azimuth angle is the azimuth (horizontal angle with respect to north) of the Sun's position.
 
 ![Zenith angle and cosine function (Jensen, 2015)](image/cosinefunction.png){width="300"}
 
--   ❌ not considering diffuse skylight / light reflected from surrounding mountainsides
-
--   smaller cos i -\> greater over-correction [@jensen2015]
-
 #### Radiometric Calibrations
 
--   Digital number of each pixel = raw, unitless
+Radiometric calibrations
 
--   Regression = unit
+:   A process to convert the raw and unitless digital numbers of pixel to radiance/reflectance that is comparable and can be used to analyze Earth's surface, removing atmospheric noise.
 
--   Reflectance (BOA) = comparable
+    -   TOA radiance -\> TOA reflectance: no light
 
--   TOA radiance -\> TOA reflectance = no light
+    -   Surface reflectance: no light, no atmosphere
 
--   Surface reflectance = no light, no atmosphere
+    -   Hemispherical reflectance (e.g. in Labs)
 
--   Hemispherical reflectance (e.g. in Labs)
-
--   Apparent reflectance
+    -   Apparent reflectance
 
 ### Enhancement
 
-#### Feathering / joining
+This is the process to improve visual quality of imagery to highlight feature of interest.
 
--   GEE: median
+::: {.callout-important style="color: red" appearance="minimal"}
+Caution: please avoid over-enhancement which may cause false interpretation. \> require careful selection of methods.
+:::
 
--   surface reflectance data not comparable -\> standardization, normalization
+Techniques include -
 
-#### Image Enhancement
+1.  Contract enhancement (e.g. done in QGIS in wk1): adjusting the range of pixel values in an image to span the full dynamic range.
 
-1.  Contract enhancement (QGIS)
+    ::: {.callout-tip style="color: green" appearance="minimal"}
+    This does not change the data, but the display, and improves the visual contrast/detail of image.
+    :::
 
-    ✔️ not changing data, but the display
+2.  Ratioing: divide / compare bands with each other, normalized surface reflectance. E.g. Normalised Difference Vegetation Index (NDVI).
 
-2.  Ratioing
+    ::: {.callout-tip style="color: green" appearance="minimal"}
+    identify a certain landscape feature
+    :::
 
-    divide / compare bands with each other, normalized surface reflectance
+3.  Filtering: enhance specific features of interest. E.g. edge detection filters - sharpen the edges of features; smoothing filters - reduce noise or blur.
 
-    ✔️ identify a certain landscape feature
+4.  PCA: combine a large number of layers within datasets of the same spatial resolution.
 
-    Example: Normalised Difference Vegetation Index (NDVI)
-
-3.  Filtering
-
-4.  PCA
-
-5.  Texture analysis
+5.  Texture analysis: quantify spatial patterns/arrangements of pixel values in an imagery.
 
     1st order occurrence: ✔️classification
 
     Edge of building enhanced via 1st order variance
 
-    2nd order co-occurrence: ✔️classification improvement and additional info (to other bands)
+    2nd order co-occurrence: ✔️classification improvement and additional info (to other bands), can then be used in PCA
 
-    can then be used in PCA
+6.  Fusion: combine bands of multiple images of the same area or scene from different sensors or at different times (or layers from texture analysis), to create a single, high-quality image.
 
-6.  Fusion
+    ::: {.callout-tip style="color: green" appearance="minimal"}
+    This method can improve resolution, color balance, and detail of an image.
+    :::
 
-    Combine bands from different sensors / texture analysis layer
-
-    Resampling - different pixel/location
-
-    -   Decision
-
-    -   Object
-
-    -   Image
-
-        Pan sharpen: for better visualization
-
-### Question
+    Pan-sharpening: fuse multispectral imagery with [a panchromatic image (capturing all the visible wavelengths of light as a single grayscale image, with detailed information about the shape, size, and texture of features on the ground)]{.underline} of higher spatial resolution to increase the spatial resolution of the former whilst preserving its spectral information.
 
 ## Application
 
-### Corrections
+Geometric Corrections: [Redlining in the US](https://dsl.richmond.edu/panorama/redlining/#loc=11/42.366/-71.262&city=cambridge-ma).
 
-1.  Geometric Corrections: [Redlining in the US](https://dsl.richmond.edu/panorama/redlining/#loc=11/42.366/-71.262&city=cambridge-ma).
+The historical maps/plans were drawn by hands. Those maps were digitized through geometric corrections, allowing the research/manipulation of this database on housing policy relating to socio-economic wellbeing and zoning.
 
-    The historical maps/plans were drawn by hands. Those maps were digitized through geometric corrections, allowing the research/manipulation of this database on housing policy relating to socio-economic wellbeing and zoning.
-
-    [![Redlining historic map corrections](image/redlining.png)](https://dsl.richmond.edu/panorama/redlining/#loc=11/42.366/-71.262&city=cambridge-ma)
+[![Redlining historic map corrections](image/redlining.png)](https://dsl.richmond.edu/panorama/redlining/#loc=11/42.366/-71.262&city=cambridge-ma)
 
 ## Reflection
 
 Different methods of corrections are interlinked, finding some reference points/signatures to rectify the image. The detailed processes (like regressions and data collection methods) are difficult to digest (probably because not being practiced) while the software is available for corrections.
+
+In the future development, the enhancement/like texture analysis can be expanded into 3D data to distinguish vertical structure of land surface.

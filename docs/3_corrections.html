@@ -107,7 +107,7 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/yichienchen99/CASA0023_LD"><i class="bi bi-github" role="img" aria-label="Source Code">
+    <a class="nav-link" href="https://github.com/yichienchen99/CASA0023_LD"><i class="bi bi-github" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -217,12 +217,8 @@ div.csl-indent {
   <ul class="collapse">
   <li><a href="#corrections" id="toc-corrections" class="nav-link" data-scroll-target="#corrections"><span class="toc-section-number">4.1.1</span>  Corrections</a></li>
   <li><a href="#enhancement" id="toc-enhancement" class="nav-link" data-scroll-target="#enhancement"><span class="toc-section-number">4.1.2</span>  Enhancement</a></li>
-  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question"><span class="toc-section-number">4.1.3</span>  Question</a></li>
   </ul></li>
-  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="toc-section-number">4.2</span>  Application</a>
-  <ul class="collapse">
-  <li><a href="#corrections-1" id="toc-corrections-1" class="nav-link" data-scroll-target="#corrections-1"><span class="toc-section-number">4.2.1</span>  Corrections</a></li>
-  </ul></li>
+  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="toc-section-number">4.2</span>  Application</a></li>
   <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection"><span class="toc-section-number">4.3</span>  Reflection</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/yichienchen99/CASA0023_LD/edit/main/3_corrections.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/yichienchen99/CASA0023_LD/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -253,224 +249,361 @@ div.csl-indent {
 <h2 data-number="4.1" class="anchored" data-anchor-id="summary"><span class="header-section-number">4.1</span> Summary</h2>
 <section id="corrections" class="level3" data-number="4.1.1">
 <h3 data-number="4.1.1" class="anchored" data-anchor-id="corrections"><span class="header-section-number">4.1.1</span> Corrections</h3>
+<p>4 types of corrections are Geometric, Atmospheric, Topographic and Radiometric.</p>
 <section id="geometric-corrections" class="level4" data-number="4.1.1.1">
-<h4 data-number="4.1.1.1" class="anchored" data-anchor-id="geometric-corrections"><span class="header-section-number">4.1.1.1</span> Geometric Corrections</h4>
-<ul>
-<li><p>To reduce geometric distortion</p></li>
-<li><p>Off-Nadir -&gt; Nadir</p></li>
-</ul>
+<h4 data-number="4.1.1.1" class="anchored" data-anchor-id="geometric-corrections"><span class="header-section-number">4.1.1.1</span> Geometric corrections</h4>
 <dl>
-<dt>Ground central point: GCP</dt>
+<dt>Geometric corrections</dt>
 <dd>
-<p>A ground control point (GCP) is a location on the surface of the Earth (e.g., a road intersection) that can be identified on the imagery and located accurately on a map.</p>
-<p>(Objects (e.g.&nbsp;building) on the image that do not move, as the reference point of corrections.)</p>
+<p>A process to adjust the imagery to correct distortions caused by sensor or terrain with reference to the <u>ground central points (GCPs)</u>, to ensure the true location of features on Earth’s surface, usually, making <strong>off-nadir</strong> (the sensor is tilted at an angle to the Earth’s surface, which can result in distortions in the image due to parallax effects) to <strong>nadir</strong> (an image acquired with the imaging sensor pointing straight down, perpendicular to the Earth’s surface. The nadir angle =0 degrees).</p>
+<p>Requirement: same resolution (resampling) and same CRS (reprojecting).</p>
 </dd>
 </dl>
-<ul>
-<li><p>Coordinates of each GCP -&gt; linear regression</p></li>
-<li><p>Reduce error &lt;- increase GCP</p></li>
-<li><p>Requirement for corrections:</p>
-<ol type="1">
-<li>same resolution (resampling)</li>
-<li>same CRS (reprojecting)</li>
-</ol></li>
-</ul>
-<ol type="1">
-<li>Image-to-map rectification (rectify remotely sensed data to a standard map projection)</li>
-<li>Image-to-image registration (remotely sensed data used in conjunction with other spatial information in a GIS)</li>
-</ol>
-<ul>
-<li><p>Forward (input-to-output) mapping</p>
+<div class="callout-tip callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: green">
+<p>This is especially useful for ancient/historic data that is tilted for certain reasons (see Application section). Correction also improves the data accuracy (esp.&nbsp;important for applications requiring precision like land use mapping, crop monitoring, and disaster management), consistency (that is required for long-term/longitudinal analysis) and allows easier interpretation and analysis (for fusion/overlay, etc. ).</p>
+</div>
+</div>
+</div>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: red">
+<p>Nevertheless, slight limitations of corrections should be carefully catered for. Some data might be lost and resolution may be reduced after correction. Errors might occur with inaccurate reference data. &gt; To reduce error, the number of GCPs can be increased.</p>
+</div>
+</div>
+</div>
 <dl>
+<dt>Ground central point</dt>
+<dd>
+<p>A ground control point (GCP) is a location on the surface of the Earth (e.g., a road intersection) that can be identified on the imagery and located accurately on a map. (Objects (e.g.&nbsp;building) on the image that do not move, as the reference point of corrections.) - correction is basically doing linear regression to the coordination of GCPs.</p>
+</dd>
+<dt>Image-to-map rectification</dt>
+<dd>
+<p>rectify remotely sensed data to a standard map projection</p>
+</dd>
+<dt>Image-to-image registration</dt>
+<dd>
+<p>remotely sensed data used in conjunction with other spatial information in a GIS</p>
+</dd>
 <dt>Forward mapping</dt>
 <dd>
-<p>X: original image -&gt; Y: target image</p>
+<p>X: original image -&gt; Y: target image (input-to-output)</p>
+<div class="callout-tip callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: green">
+<p>rectify the location of discrete coordinates found along a linear feature such as a road in a vector map</p>
+</div>
+</div>
+</div>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: red">
+<p>possibility of points outside ‘gold standard’ (the rectified/targeted image) -&gt; output matrix pixel with no output value</p>
+</div>
+</div>
+</div>
 </dd>
-</dl>
-<ul>
-<li><p>✔️rectify the location of discrete coordinates found along a linear feature such as a road in a vector map</p></li>
-<li><p>❌possibility of points outside ‘gold standard’ (the rectified/targeted image) -&gt; output matrix pixel with no output value</p></li>
-</ul></li>
-<li><p>Inverse (output-to-input) mapping</p>
-<dl>
 <dt>Backward mapping</dt>
 <dd>
-<p>X: target image -&gt; Y: original image</p>
+<p>X: target image -&gt; Y: original image (output-to-input)</p>
+<div class="callout-tip callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: green">
+<p>use points on ‘gold standard’ to match point on original data</p>
+</div>
+</div>
+</div>
 </dd>
 </dl>
-<p>✔️ use points on ‘gold standard’ to match point on original data</p></li>
-</ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="[@jensen2015]"><img src="image/geometriccorrection.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Forward and inverse mapping (Jensen, 2015)</figcaption><p></p>
 </figure>
 </div>
-<ul>
-<li><p>Moisaicking</p>
 <dl>
 <dt>Mosaicking</dt>
 <dd>
-<p>Moisaicking is the process of combining multiple images into a single seamless composite image.</p>
+<p>Moisaicking is the process of combining multiple adjacent images into a single seamless composite. Two techniques are -</p>
+<ol type="1">
+<li><p>Cut-line feathering: cut the images along a common defined boundary line/object and blend them together &gt; usually output is in a sharper transition &gt; Applied in cases wihen a clear boundary / discontinuity between images (e.g.&nbsp;road/river)</p></li>
+<li><p>Edge feathering: offset the edge of images by certain distance through filter or algorithm &gt; usually output transition is more gradual and smoother &gt; Applied in cases when a gradual transition exist in images (e.g.&nbsp;forest/agricultural land)</p></li>
+</ol>
 </dd>
 </dl>
-<ul>
-<li><p>cut-line feathering: offset the edge of images by certain distance</p></li>
-<li><p>edge feathering: specify objects (e.g.&nbsp;roads/rivers) as edge</p></li>
-</ul></li>
-</ul>
+<p>Finally, the corrected image is resampled to create a new image that accurately reflects the true location and orientation of features on the ground.</p>
 </section>
-<section id="practical-merging-imagery" class="level4" data-number="4.1.1.2">
-<h4 data-number="4.1.1.2" class="anchored" data-anchor-id="practical-merging-imagery"><span class="header-section-number">4.1.1.2</span> Practical: Merging imagery</h4>
-<p>Although Kinmen County is rather a small area, covered sufficiently within one tile of the Landsat imagery, another adjacent tile would be chosen to practice merging.</p>
-</section>
-<section id="atmospheric-corrections" class="level4" data-number="4.1.1.3">
-<h4 data-number="4.1.1.3" class="anchored" data-anchor-id="atmospheric-corrections"><span class="header-section-number">4.1.1.3</span> Atmospheric Corrections</h4>
-<ul>
-<li><p>To mitigate the effect of scattering and absorption &amp; to avoid loss of reflectance &amp; signiture extension thorough space and time <span class="citation" data-cites="jensen2015">(<a href="references.html#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span></p></li>
-<li><p>Point Spread Function</p>
+<section id="atmospheric-corrections" class="level4" data-number="4.1.1.2">
+<h4 data-number="4.1.1.2" class="anchored" data-anchor-id="atmospheric-corrections"><span class="header-section-number">4.1.1.2</span> Atmospheric Corrections</h4>
+<dl>
+<dt>Atmospheric corrections</dt>
+<dd>
+<p>A process to mitigate the effect of atmospheric interference (haze, scattering and absorption) &amp; to avoid loss of reflectance &amp; signature extension thorough space and time <span class="citation" data-cites="jensen2015">(<a href="references.html#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span>. This method requires some knowledge of the atmospheric condition and sensors.</p>
+</dd>
+</dl>
+<div class="callout-tip callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: green">
+<p>The accuracy and quality of imagery will be improved to represent the true spectral information of the features.</p>
+</div>
+</div>
+</div>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: red">
+<p>Similar to geometric correction, the data loss may be the minor drawback of this technique, particularly in the case of thin clouds or high aerosol concentrations.</p>
+</div>
+</div>
+</div>
 <dl>
 <dt>Point Spread Function</dt>
 <dd>
 <p>Measured and modeled point spread functions (PSF) of sensor systems indicate that a significant portion of the recorded signal of each pixel of a satellite image originates from outside the area represented by that pixel. This hinders the ability to derive surface information from satellite images on a per-pixel basis <span class="citation" data-cites="huang2002">(<a href="references.html#ref-huang2002" role="doc-biblioref">Huang et al. 2002</a>)</span>.</p>
 </dd>
-</dl></li>
-<li><p>Relative</p></li>
-<li><p>1) to normalize the intensities among the different bands within a single-date remotely sensed image, and 2) to normalize the intensities of bands of remote sensor data in multiple dates of imagery to a standard scene selected by the analyst.</p>
+<dt>Relative</dt>
+<dd>
+<p>1) to normalize the intensities among the different bands within a single-date remotely sensed image, and 2) to normalize the intensities of bands of remote sensor data in multiple dates of imagery to a standard scene selected by the analyst.</p>
+<p>Difference to Absolute atmospheric correction: does not require atmospheric data but instead relies on the comparison of images acquired at different times or from different sensors, assuming the relative differences in reflectance between different areas of an image remain constant over time (those changes are due to atmospheric interference).</p>
+<div class="callout-tip callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: green">
+<p>Good for cases when the atmospheric data is unavailable or when absolute techniques are not feasible..</p>
+</div>
+</div>
+</div>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: red">
+<p>can be less accurate than absolute ones (esp.&nbsp;in regions with variable atmospheric conditions or terrain).</p>
+</div>
+</div>
+</div>
+<p>Two techniques are -</p>
 <ol type="1">
-<li><p>Dark object subtraction (DOS)</p>
-<p>❌ assuming unusual brightness of darkest pixel as atmosphere</p></li>
-<li><p>Multiple-date image normalization using regression</p>
+<li><p>Dark object subtraction (DOS): identify and subtract the digital number of dark object (like shadow not reflecting light) in the imagery from that of other features (at pixel level). Hence, the reflectance due to surface features is kept.</p>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: red">
+<p>This technique has some limitations - it assumes unusual brightness of darkest pixel as atmosphere and the dark object reflects no light, which might not be true in all cases. Plus, not all imagery have identifiable dark objects.</p>
+</div>
+</div>
+</div></li>
+<li><p>Multiple-date image normalization using regression: divide the reflectance values in each pixel by a value (mean/median reflectance of a group of pixels in that image).</p>
 <ul>
 <li><p>Pseudo-Invariant Features (PIFs) selection = radiometric GCP</p></li>
 <li><p>Requirements of PIF: 1) little changes through time; 2) similar elevation as other land in scene; 3) minimal vegetation; 4) in a relatively flat area.</p></li>
-</ul>
-<p>Use middle of years, Y: base image</p></li>
-</ol></li>
-<li><p>Absolute</p>
-<p>❌ High data requirement (fieldwork/…); High software requirement (costy)</p>
-<p>✔️Digital counts in satellite / aircraft image data -&gt; scaled surface reflectance</p>
+</ul></li>
+</ol>
+</dd>
+<dt>Absolute</dt>
+<dd>
+<p>Estimates the atmospheric properties and removes their influence from measured values to get true surface reflectance.</p>
+<p>Requirement: atmospheric data obtained at the time of image acquisition</p>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: red">
+<p>High input data requirement like temperature, humidity, air pressure, sensor and sun angels, albedo, emissivity (through fieldwork/meteorological data sources)</p>
+<p>High software requirement (costy)</p>
+</div>
+</div>
+</div>
+<div class="callout-tip callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: green">
+<p>Accounting the actual atmospheric conditions at the time of data acquisition, this method is usually more accurate than the relative ones (but not always necessary/practical!).</p>
+<p>Digital counts in satellite / aircraft image data -&gt; scaled surface reflectance</p>
+</div>
+</div>
+</div>
 <ol type="1">
-<li>Empirical Line Calibration (ELC)
-<ul>
-<li><p>Requirements:</p>
+<li><p>Empirical Line Calibration (ELC): establish a linear regression model to convert the digital numbers of the unknown pixels to actual physical units.</p>
+<p>Requirements:</p>
 <ol type="1">
 <li>Two or more areas in the scene with different albedos (e.g., one bright target such as sand and one dark target such as a deep, nonturbid water body) &amp; as homogeneous as possible &lt;- difficult.</li>
 <li>Sensor calibration coefficients</li>
 <li>Radiative transfer code (knowledge of sensor spectral profile &amp; atmospheric properties at the time of data collection) <span class="citation" data-cites="jensen2015">(<a href="references.html#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span></li>
-</ol></li>
-</ul></li>
-</ol></li>
-</ul>
+</ol>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: red">
+<p>Its accuracy depends on the reference data &gt; require representative data with a range of surface types and conditions. It also assumes atmospheric conditions are uniform.</p>
+</div>
+</div>
+</div></li>
+</ol>
+</dd>
+</dl>
 </section>
-<section id="topographic-corrections-orthorectification" class="level4" data-number="4.1.1.4">
-<h4 data-number="4.1.1.4" class="anchored" data-anchor-id="topographic-corrections-orthorectification"><span class="header-section-number">4.1.1.4</span> Topographic Corrections (Orthorectification)</h4>
-<ul>
-<li><p>To remove topographically induced illumination variation</p>
+<section id="topographic-corrections-orthorectification" class="level4" data-number="4.1.1.3">
+<h4 data-number="4.1.1.3" class="anchored" data-anchor-id="topographic-corrections-orthorectification"><span class="header-section-number">4.1.1.3</span> Topographic Corrections (Orthorectification)</h4>
 <dl>
+<dt>Topographic corrections</dt>
+<dd>
+<p>A process to remove the effects of topographically induced illumination variation, which is usually conducted after atmospheric corrections (not always needed). (The amount and angle of solor illumination may vary due to topo. variations, affecting the measured values.)</p>
+<p>Requirements: sensor geometry &amp; elevation model</p>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: red">
+<p>not considering diffuse skylight / light reflected from surrounding mountainsides</p>
+</div>
+</div>
+</div>
+</dd>
 <dt>Illumination</dt>
 <dd>
-<p>the cosine of the incident solar angle, thus representing the proportion of the direct solar radiation hitting a pixel.</p>
+<p>The cosine of the incident solar angle, thus representing the proportion of the direct solar radiation hitting a pixel.</p>
+<p>Cosine Function: <span class="math inline">\(L_H = L_T*\frac{cosθ_O}{cosi}\)</span></p>
+<p><span class="math inline">\(i\)</span>: Sun’s incidence angle - cosine of the angle between the solar zenith and the normal line of the slope (smaller cos i -&gt; greater over-correction <span class="citation" data-cites="jensen2015">(<a href="references.html#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span>)</p>
+<p><span class="math inline">\(L_T\)</span>: radiance (DN to TOA) from sloped terrain</p>
 </dd>
-</dl></li>
-<li><p>Requirements: sensor geometry &amp; elevation model</p></li>
-<li><p>Should be done after atmospheric corrections</p></li>
-<li><p>Cosine Function: <span class="math inline">\(LH=LT\frac{cosθO}{cosi}\)</span></p>
-<dl>
 <dt>Zenith</dt>
 <dd>
-<p>The solar zenith angle is the zenith angle of the sun, i.e., the angle between the sun’s rays and the vertical direction. Solar zenith angle is normally used in combination with the solar azimuth angle to determine the position of the Sun as observed from a given location on the surface of the Earth.</p>
+<p><span class="math inline">\(θ_O\)</span> : The solar zenith angle is the zenith angle of the sun, i.e., the angle between the sun’s rays and the vertical direction. Solar zenith angle is normally used in combination with the solar azimuth angle to determine the position of the Sun as observed from a given location on the surface of the Earth.</p>
 </dd>
 <dt>Azimuth</dt>
 <dd>
 <p>The solar azimuth angle is the azimuth (horizontal angle with respect to north) of the Sun’s position.</p>
 </dd>
-</dl></li>
-</ul>
+</dl>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="image/cosinefunction.png" class="img-fluid figure-img" width="300"></p>
 <p></p><figcaption class="figure-caption">Zenith angle and cosine function (Jensen, 2015)</figcaption><p></p>
 </figure>
 </div>
-<ul>
-<li><p>❌ not considering diffuse skylight / light reflected from surrounding mountainsides</p></li>
-<li><p>smaller cos i -&gt; greater over-correction <span class="citation" data-cites="jensen2015">(<a href="references.html#ref-jensen2015" role="doc-biblioref">Jensen 2015</a>)</span></p></li>
-</ul>
 </section>
-<section id="radiometric-calibrations" class="level4" data-number="4.1.1.5">
-<h4 data-number="4.1.1.5" class="anchored" data-anchor-id="radiometric-calibrations"><span class="header-section-number">4.1.1.5</span> Radiometric Calibrations</h4>
+<section id="radiometric-calibrations" class="level4" data-number="4.1.1.4">
+<h4 data-number="4.1.1.4" class="anchored" data-anchor-id="radiometric-calibrations"><span class="header-section-number">4.1.1.4</span> Radiometric Calibrations</h4>
+<dl>
+<dt>Radiometric calibrations</dt>
+<dd>
+<p>A process to convert the raw and unitless digital numbers of pixel to radiance/reflectance that is comparable and can be used to analyze Earth’s surface, removing atmospheric noise.</p>
 <ul>
-<li><p>Digital number of each pixel = raw, unitless</p></li>
-<li><p>Regression = unit</p></li>
-<li><p>Reflectance (BOA) = comparable</p></li>
-<li><p>TOA radiance -&gt; TOA reflectance = no light</p></li>
-<li><p>Surface reflectance = no light, no atmosphere</p></li>
+<li><p>TOA radiance -&gt; TOA reflectance: no light</p></li>
+<li><p>Surface reflectance: no light, no atmosphere</p></li>
 <li><p>Hemispherical reflectance (e.g.&nbsp;in Labs)</p></li>
 <li><p>Apparent reflectance</p></li>
 </ul>
+</dd>
+</dl>
 </section>
 </section>
 <section id="enhancement" class="level3" data-number="4.1.2">
 <h3 data-number="4.1.2" class="anchored" data-anchor-id="enhancement"><span class="header-section-number">4.1.2</span> Enhancement</h3>
-<section id="feathering-joining" class="level4" data-number="4.1.2.1">
-<h4 data-number="4.1.2.1" class="anchored" data-anchor-id="feathering-joining"><span class="header-section-number">4.1.2.1</span> Feathering / joining</h4>
-<ul>
-<li><p>GEE: median</p></li>
-<li><p>surface reflectance data not comparable -&gt; standardization, normalization</p></li>
-</ul>
-</section>
-<section id="image-enhancement" class="level4" data-number="4.1.2.2">
-<h4 data-number="4.1.2.2" class="anchored" data-anchor-id="image-enhancement"><span class="header-section-number">4.1.2.2</span> Image Enhancement</h4>
+<p>This is the process to improve visual quality of imagery to highlight feature of interest.</p>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: red">
+<p>Caution: please avoid over-enhancement which may cause false interpretation. &gt; require careful selection of methods.</p>
+</div>
+</div>
+</div>
+<p>Techniques include -</p>
 <ol type="1">
-<li><p>Contract enhancement (QGIS)</p>
-<p>✔️ not changing data, but the display</p></li>
-<li><p>Ratioing</p>
-<p>divide / compare bands with each other, normalized surface reflectance</p>
-<p>✔️ identify a certain landscape feature</p>
-<p>Example: Normalised Difference Vegetation Index (NDVI)</p></li>
-<li><p>Filtering</p></li>
-<li><p>PCA</p></li>
-<li><p>Texture analysis</p>
+<li><p>Contract enhancement (e.g.&nbsp;done in QGIS in wk1): adjusting the range of pixel values in an image to span the full dynamic range.</p>
+<div class="callout-tip callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: green">
+<p>This does not change the data, but the display, and improves the visual contrast/detail of image.</p>
+</div>
+</div>
+</div></li>
+<li><p>Ratioing: divide / compare bands with each other, normalized surface reflectance. E.g. Normalised Difference Vegetation Index (NDVI).</p>
+<div class="callout-tip callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: green">
+<p>identify a certain landscape feature</p>
+</div>
+</div>
+</div></li>
+<li><p>Filtering: enhance specific features of interest. E.g. edge detection filters - sharpen the edges of features; smoothing filters - reduce noise or blur.</p></li>
+<li><p>PCA: combine a large number of layers within datasets of the same spatial resolution.</p></li>
+<li><p>Texture analysis: quantify spatial patterns/arrangements of pixel values in an imagery.</p>
 <p>1st order occurrence: ✔️classification</p>
 <p>Edge of building enhanced via 1st order variance</p>
-<p>2nd order co-occurrence: ✔️classification improvement and additional info (to other bands)</p>
-<p>can then be used in PCA</p></li>
-<li><p>Fusion</p>
-<p>Combine bands from different sensors / texture analysis layer</p>
-<p>Resampling - different pixel/location</p>
-<ul>
-<li><p>Decision</p></li>
-<li><p>Object</p></li>
-<li><p>Image</p>
-<p>Pan sharpen: for better visualization</p></li>
-</ul></li>
+<p>2nd order co-occurrence: ✔️classification improvement and additional info (to other bands), can then be used in PCA</p></li>
+<li><p>Fusion: combine bands of multiple images of the same area or scene from different sensors or at different times (or layers from texture analysis), to create a single, high-quality image.</p>
+<div class="callout-tip callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container" style="color: green">
+<p>This method can improve resolution, color balance, and detail of an image.</p>
+</div>
+</div>
+</div>
+<p>Pan-sharpening: fuse multispectral imagery with <u>a panchromatic image (capturing all the visible wavelengths of light as a single grayscale image, with detailed information about the shape, size, and texture of features on the ground)</u> of higher spatial resolution to increase the spatial resolution of the former whilst preserving its spectral information.</p></li>
 </ol>
-</section>
-</section>
-<section id="question" class="level3" data-number="4.1.3">
-<h3 data-number="4.1.3" class="anchored" data-anchor-id="question"><span class="header-section-number">4.1.3</span> Question</h3>
 </section>
 </section>
 <section id="application" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="application"><span class="header-section-number">4.2</span> Application</h2>
-<section id="corrections-1" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="corrections-1"><span class="header-section-number">4.2.1</span> Corrections</h3>
-<ol type="1">
-<li><p>Geometric Corrections: <a href="https://dsl.richmond.edu/panorama/redlining/#loc=11/42.366/-71.262&amp;city=cambridge-ma">Redlining in the US</a>.</p>
+<p>Geometric Corrections: <a href="https://dsl.richmond.edu/panorama/redlining/#loc=11/42.366/-71.262&amp;city=cambridge-ma">Redlining in the US</a>.</p>
 <p>The historical maps/plans were drawn by hands. Those maps were digitized through geometric corrections, allowing the research/manipulation of this database on housing policy relating to socio-economic wellbeing and zoning.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="https://dsl.richmond.edu/panorama/redlining/#loc=11/42.366/-71.262&amp;city=cambridge-ma"><img src="image/redlining.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">Redlining historic map corrections</figcaption><p></p>
 </figure>
-</div></li>
-</ol>
-</section>
+</div>
 </section>
 <section id="reflection" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="reflection"><span class="header-section-number">4.3</span> Reflection</h2>
 <p>Different methods of corrections are interlinked, finding some reference points/signatures to rectify the image. The detailed processes (like regressions and data collection methods) are difficult to digest (probably because not being practiced) while the software is available for corrections.</p>
+<p>In the future development, the enhancement/like texture analysis can be expanded into 3D data to distinguish vertical structure of land surface.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography" style="display: none">
