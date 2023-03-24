@@ -1,11 +1,11 @@
 # Summary
 
-By the end of this module, concepts and techniques on processing and analyzing remote sensing data are learnt. EO data could be an effective source of understanding urban system (like LULC and changes across time). However, some barriers do exist and could be figured out in future years / possibly have been solved already (such as the difficulty in monitoring the verticality of high density urban space).
+By the end of this module, i've learnt various concepts and techniques on processing and analyzing remote sensing data. EO data could be an effective source of understanding urban system (e.g. through LULC) and its changes across time). However, some barriers do exist and could be figured out in future years / possibly have been solved already (like the difficulty in identifing the feature of verticality of high density urban space).
 
-More importantly, how to involve the EO data into the city planning to solve urban challenges have been practiced through group work. Our group work focuses on *heatwave monitoring and early-warning for slum population in Ahmedabad, India* ([Presentation](https://jtej22.github.io/casa0075/#1) & [GitHub repo](https://github.com/jtej22/casa0075), with contribution from Atsumi, Eunyoung, Josiah, Yifei and myself).
+More importantly, how to involve the EO data into the city planning to solve urban challenges have been practiced in groupwork. Our group project focuses on *heatwave monitoring and early-warning for slum population in Ahmedabad, India* ([Presentation](https://jtej22.github.io/casa0075/#1) & [GitHub repo](https://github.com/jtej22/casa0075), with contribution from Atsumi, Eunyoung, Josiah, Yifei and myself).
 
 This is the end of this learning diary. Thanks for reading!
 
 -- END --
 
-~As\ it\ is\ an\ iterative\ and\ continuous\ learning\ process,\ this\ diary\ may\ be\ subject\ to\ be\ amended\ or\ added\ with\ new\ chapters.~
+~As\ it\ is\ an\ iterative\ and\ continuous\ learning\ process,\ this\ diary\ may\ be\ subject\ to\ amendment/addition\ of\ original\ content.~

@@ -50,7 +50,9 @@ There will be a summary of key concepts learnt in lecture or practical in that w
     = Limitations of data, policy or methods
     :::
 
--   = Potential future development
+-   ::: {.callout-note style="color: blue" appearance="minimal"}
+    = Potential future development
+    :::
 
 -   Questions on data, policy or methods (but mostly on practicals) and answers to them.
 
